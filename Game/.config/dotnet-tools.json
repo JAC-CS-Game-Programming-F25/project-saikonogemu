@@ -2,10 +2,10 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "dotnet-mgcb": {
-      "version": "3.8.4.1",
+    "dotnet-mgcb-editor": {
+      "version": "3.8.0.1641",
       "commands": [
-        "mgcb"
+        "mgcb-editor"
       ]
     }
   }
