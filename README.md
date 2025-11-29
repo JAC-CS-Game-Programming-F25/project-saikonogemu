@@ -136,23 +136,23 @@ All images are personally made. Below are the dice spritesheets I made for this 
 
 #### Die (You as the player)
 
-![Die](./Game/Content/Images/player_dice.png)
+![Die](./Game/Content/Images/Dice/player_dice.png)
 
 #### Dash (When Die is dashing)
 
-![Dash](./Game/Content/Images/player_dash_dice.png)
+![Dash](./Game/Content/Images/Dice/player_dash_dice.png)
 
 #### Ascension (When at level 9 / Die is phasing)
 
-![Ascension](./Game/Content/Images/player_ascension_dice.png)
+![Ascension](./Game/Content/Images/Dice/player_ascension_dice.png)
 
 #### Target Dice (Controlled)
 
-![Target](./Game/Content/Images/target_dice.png)
+![Target](./Game/Content/Images/Dice/target_dice.png)
 
 #### Enemy Dice (Corrupted)
 
-![Enemy](./Game/Content/Images/enemy_dice.png)
+![Enemy](./Game/Content/Images/Dice/enemy_dice.png)
 
 #### ✏️ Fonts
 
