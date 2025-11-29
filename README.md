@@ -1,117 +1,165 @@
-# Final Project
+# Die: The Rolling Dice Game
 
--   [ ] Read the [project requirements](https://vikramsinghmtl.github.io/420-5P6-Game-Programming/project/requirements).
--   [ ] Replace the sample proposal below with the one for your game idea.
--   [ ] Get the proposal greenlit by Vik.
--   [ ] Place any assets in `assets/` and remember to update `src/config.json`.
--   [ ] Decide on a height and width inside `src/globals.js`. The height and width will most likely be determined based on the size of the assets you find.
--   [ ] Start building the individual components of your game, constantly referring to the proposal you wrote to keep yourself on track.
--   [ ] Good luck, you got this!
-
----
-
-# Sample Proposal - Pokémon the Trading Card Game
-
-> [!note]
-> This was taken from a project I did in university so the scope is **much** larger than what I'm expecting from you in terms of number of features!
+Welcome to Die! This game is a heavily improved remake of the original hit game [DIE](https://tnaz.itch.io/die) make for GMTK 2022. It offers enhanced features, a new 2d art style, and more!
 
 ## ✒️ Description
 
-In this turn-based battle card game, players assume the role of a Pokémon trainer and use their Pokémon to battle their opponent's Pokémon. Players play Pokémon to the field and attack their opponent's Pokémon. A Pokémon that has sustained enough damage is Knocked Out, and the player who knocked it out draws a Prize card. There are usually six Prize cards, and the primary win condition is to draw all of them. Other ways to win are by knocking out all the Pokémon the opponent has on the field so that the opponent has none left, or if at the beginning of their opponent's turn there are no cards left to draw in the opponent's deck.
+In this combat round marathon you will traverse 9 distinct levels in order to achieve ascension. Players will play as a newly freed die and will attempt to liberate its brethren while avoiding the Corrupted. The land of dice is a land of balance. The Corrupted keep the Controlled in check, preventing one from ascending and keeping the world from being destroyed. This game is the legend of Die, the rolling die who saved it all. Or well... tried to. In the many timelines of Die, there were times of failure. Times when Die lost all his dots and became one with those he despises. Will your time be different? Will you achieve ascension?
 
 ## 🕹️ Gameplay
 
-Players begin by having one player select heads or tails, and the other flips a coin; the winner of the coin flip will decide who goes first or second. The player going first cannot attack their first turn, unless the card says otherwise. (Dice may be used in place of coins, with even numbers representing heads and odd numbers representing tails). Players then shuffle their decks and draw seven cards, then play one Basic Pokémon onto the field. This Pokémon is known as the Active Pokémon and is usually the one that attacks and receives damage. If a player does not have any Basic Pokémon, they must shuffle and draw a new hand, and the opponent may draw one additional card. Once both players have at least one Basic Pokémon, they can play up to five more Basic Pokémon onto their "Bench" (representing the maximum-carry limit of six from the video games). Players then take the top six cards of their deck and place them to the side as Prize Cards. Play then begins with the player who won the coin flip.
+Players begin in Level 1 with the ability to move Die around the lush Dietopia plains by using `ARROW KEYS`. The goal is for them to liberate all the Controlled. In simpler terms, they must collide with the Green Dice in order to reduce their dots to 0, "liberating" them from existence. Players must avoid the Corrupted, the Red Dice, while navigating through the level. Colliding with a Corrupted will strip a dot away, but also weaken the Corrupted itself, making it lose a dot, since you will absorb some of its Corrupted essence.
 
-Play alternates between players who may take several actions during their turn, including playing new Basic Pokémon, evolving their Pokémon, playing Trainer cards and Energy cards, and using Pokémon Abilities. A player may also retreat their Active Pokémon, switching the Active Pokémon with one on the Bench. At the end of their turn, a player may use one of their Active Pokémon's attacks, provided the prerequisite amount and types of Energy are attached to that Pokémon. Effects from that attack are then activated and damage may be placed on the Defending Pokémon; some attacks simply have effects but do not do damage. Damage may be modified depending on whether the defender has a weakness or a resistance to the attacker's Pokémon type. If the final damage exceeds the defending Pokémon's HP, it is Knocked Out, and the active player takes a prize card and ends their turn.
+Level 2 is where Die makes his first step towards ascension and learns the ability to manipulate time around him. This allows the player to use the new dash ability by hitting the `Z` key, allowing for a burst of motion in a direction. Players will be able to test out this new dash ability in the much larger Dietopia pits, while chasing a larger selection of Controlled.
 
-This implementation of _Pokémon the Trading Card Game_ is a single player experience with an AI. The game is played primarily with the mouse to interact with the cards and general GUI. The players can optionally hit `M` on their keyboard to mute all game sounds.
+With Die becoming more unstable, he is now able to phase as of Level 3, the Dietopia rock deposits. Phasing allows the player to go "through" anything inside the bounds of the map by clicking the `X` key. Unfortunately, Die's unstable state causes him to lose his touch of phasing rather quickly, also requiring a period of time to recharge. Due to new developments, security has been increased and more Corrupted are patrolling.
+
+Levels 4, 5, and 6 follow the story of Die as he progresses through the Dietopia desert, factory, and frosted wasteland. Featuring larger maps with different designs, more Corrupted, and more Controlled, drastically changing the difficulty of the game.
+
+Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where Die has achieved catastrophic levels of destruction. Level 7 Dustopia starts to tear between cold and hot. Following this level, in level 8 the player will complete the ending of the world, having the world crumble into magma. Finally Die will ascend and will exist in the void, where the player will conquer the nightmares of Die in one last fight. During these levels, the player will receive 1 extra dot at the start of each level due to Die nearing his ascension. The game will be hard, but not impossible.
 
 ## 📃 Requirements
 
-> [!note]
-> This was a web project so that's why you'll see requirements about logging in and uploading data which for you is irrelevant. Focus more on the requirements describing actions taken for gameplay.
-
-1. The user shall register to be able to login.
-2. The user shall login to be able to play a game.
-3. The user shall upload a valid deck file.
-4. The user shall upload a valid cards file.
-5. The user shall upload a valid abilities file.
-6. The user shall select which deck they will use in the game.
-7. The user shall select which deck the AI will use in the game.
-8. The system shall "flip a coin" to decide which player goes first.
-9. The system shall shuffle the user's deck.
-10. The system shall draw the top 7 cards from the user's deck.
-11. If the user does not have a Basic Pokémon in their hand the system shall "mulligan" until they do.
-12. Upon each mulligan, the AI shall draw a card.
-13. The user shall put one of their Basic Pokémon face down as their Active Pokémon.
-14. The user shall put up to 5 more Basic Pokémon face down on their Bench.
-15. Upon a new turn, the system shall draw a card from the deck of the current player.
-16. Upon a new turn, the system shall place the drawn card in the hand of the current player.
-17. The user shall put (up to 5 total) Basic Pokémon cards from their hand onto their Bench.
-18. The user shall Evolve their Pokémon as many times as they choose.
-19. The user shall attach an Energy card from their hand to one of their Pokémon once per turn.
-20. The user shall play Trainer cards (as many as they want, but only one Supporter card and one Stadium card per turn).
-21. The user shall Retreat their Active Pokémon once per turn.
-22. The user shall use as many Abilities as they choose.
-23. The user shall attack the opponent's Active Pokémon.
-24. After a player attacks, the system shall end their turn and start their opponent's turn.
-25. The system shall execute any "special conditions" after a turn is over.
-26. The user shall pick a Victory Card when the opposing Active Pokémon dies.
+1. The player can move Die using the `ARROW KEYS`.
+2. The player can use a dash by clicking the `Z` key.
+3. Dashing can only be done again after a cooldown.
+4. The player can phase for a small period of time by clicking the `X` key.
+5. Phasing can only be done again after a cooldown.
+6. Dashing is unlocked at level 2 and phasing is unlocked at level 3.
+7. The player can access settings by hitting the `ESC` key or by clicking on settings in the startup page before a new run.
+8. Settings are persistent.
+9. Can adjust sound in settings.
+10. Can set game resolution in settings.
+11. Can set controls in settings.
+12. On levels 7, 8, and 9 the player will receive a new dot if not already at max.
+13. Every level changes to the appropriate level layout and generates the proper enemies and targets.
+14. The player can collide with the targets, reducing the life of the target.
+15. Once a target's health reaches 0, it dies.
+16. The player takes damage if it collides with an enemy.
+17. Colliding with an enemy also reduces its life.
+18. If an enemy reaches 0 life it dies.
+19. The player must complete the run in 1 sitting.
+20. Reaching 0 lives results in losing the game.
+21. Completing level 9 results in winning the game.
 
 ### 🤖 State Diagram
 
-> [!note]
-> Remember that you'll need diagrams for not only game states but entity states as well.
+#### Game State Diagram
 
-![State Diagram](./assets/images/StateDiagram.png)
+![Game State Diagram](./Game/Content/Images/Diagrams/GamePlayStateDiagram.png)
+
+#### Dice State Diagram
+
+![Dice State Diagram](./Game/Content/Images/Diagrams/DiceStateDiagram.png)
+
+#### Player Dice State Diagram
+
+![Player Dice State Diagram](./Game/Content/Images/Diagrams/PlayerDiceStateDiagram.png)
 
 ### 🗺️ Class Diagram
 
-![Class Diagram](./assets/images/ClassDiagram.png)
+#### Dice Class Diagram
+
+![Dice Class Diagram](./Game/Content/Images/Diagrams/DiceClassDiagram.png)
 
 ### 🧵 Wireframes
 
-> [!note]
-> Your wireframes don't have to be super polished. They can even be black/white and hand drawn. I'm just looking for a rough idea about what you're visualizing.
+#### Main Menu
 
-![Main Menu](./assets/images/Main-Menu.png)
+![Main Menu](./Game/Content/Images/Wireframes/MainMenu.png)
 
--   _Let's Play_ will navigate to the main game.
--   _Upload Cards_ will navigation to the forms for uploading and parsing the data files for the game.
--   _Change Log_ will navigate the user to a page with a list of features/changes that have been implemented throughout the development of the game.
+- **Play**: will start the game.
+- **Settings**: will allow the player to ajust their settings before the game starts.
+- **Quit**: will exit the game nicely :D
 
-![Game Board](./assets/images/Game-Board.png)
+#### Game Over (You lose)
 
-We want to keep the GUI as simple and clear as possible by having cards with relevant images to act as a way for the user to intuitively navigate the game. We want to implement a layout that would look like as if one were playing a match of the Pokémon Trading Card Game with physical cards in real life. Clicking on any of the cards will reveal that card's details to the player.
+![Game Over](./Game/Content/Images/Wireframes/GameOver.png)
+
+- **Play**: will restart the game.
+- **Quit**: will exit the game nicely :D
+
+#### You Win
+
+![You Win](./Game/Content/Images/Wireframes/YouWin.png)
+
+- **Play**: will restart the game.
+- **Quit**: will exit the game nicely :D
+
+#### Gameboads
+
+For the gameboards, they are all designed using Tiled off of my tilesheets for each level. Here they are below.
+
+#### Level 1
+
+![Level1](./Game/Content/Images/Levels/PNG/level1.png)
+
+#### Level 2
+
+![Level2](./Game/Content/Images/Levels/PNG/level2.png)
+
+#### Level 3
+
+![Level3](./Game/Content/Images/Levels/PNG/level3.png)
+
+#### Level 4
+
+![Level4](./Game/Content/Images/Levels/PNG/level4.png)
+
+#### Level 5
+
+![Level5](./Game/Content/Images/Levels/PNG/level5.png)
+
+#### Level 6
+
+![Level6](./Game/Content/Images/Levels/PNG/level6.png)
+
+#### Level 7
+
+![Level7](./Game/Content/Images/Levels/PNG/level7.png)
+
+#### Level 8
+
+![Level8](./Game/Content/Images/Levels/PNG/level8.png)
+
+#### Level 9
+
+![Level9](./Game/Content/Images/Levels/PNG/level9.png)
 
 ### 🎨 Assets
 
-We used [app.diagrams.net](https://app.diagrams.net/) to create the wireframes. Wireframes are the equivalent to the skeleton of a web app since they are used to describe the functionality of the product and the users experience.
-
-We plan on following trends already found in other trading card video games, such as Pokémon Trading Card Game Online, Hearthstone, Magic the Gathering Arena, and Gwent.
-
-The GUI will be kept simple and playful, as to make sure the game is easy to understand what each component does and is, as well as light hearted to keep to the Pokémon theme.
+The goal is to make this game be my sole creation while respecting the atmosphere of 2d top down pixel art games. To achieve this, 95% of assets of any sort will be made by me. This being said, things like fonts I will be using ones from online that are copyright free. Attributions will be made accordingly.
 
 #### 🖼️ Images
 
--   Most images will be used from the well known community driven wikipedia site, [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page).
--   Especially their [Trading Card Game section](<https://bulbapedia.bulbagarden.net/wiki/Full_Art_card_(TCG)>).
+All images are personally made. Below are the dice spritesheets I made for this game.
+
+#### Die (You as the player)
+
+![Die](./Game/Content/Images/player_dice.png)
+
+#### Dash (When Die is dashing)
+
+![Dash](./Game/Content/Images/player_dash_dice.png)
+
+#### Ascension (When at level 9 / Die is phasing)
+
+![Ascension](./Game/Content/Images/player_ascension_dice.png)
+
+#### Target Dice (Controlled)
+
+![Target](./Game/Content/Images/target_dice.png)
+
+#### Enemy Dice (Corrupted)
+
+![Enemy](./Game/Content/Images/enemy_dice.png)
 
 #### ✏️ Fonts
 
-For fonts, a simple sans-serif like Roboto will look quite nice. It's a font that is legible, light on storage size, and fun to keep with the theme we're going for. We also used a more cartoonish Pokemon font for the title screen.
+For fonts, I'm using a copyright free font (has a liscence permitting the use of this font for any means, in any capacity) found on itch.io.
 
--   [Pokemon](https://www.dafont.com/pokemon.font)
--   [Roboto](https://fonts.google.com/specimen/Roboto)
+[PeaberryBase](https://emhuo.itch.io/peaberry-pixel-font)
 
 #### 🔊 Sounds
 
-All sounds were taken from [freesound.org](https://freesound.org) for the actions pertaining to cards.
-
--   [Shuffle cards](https://freesound.org/people/VKProduktion/sounds/217502/)
--   [Flip card](https://freesound.org/people/Splashdust/sounds/84322/)
-
-### 📚 References
-
--   [Pokemon Rulebook](http://assets.pokemon.com/assets/cms2/pdf/trading-card-game/rulebook/xy8-rulebook-en.pdf)
+I've not decided if I will be making all the music or not. Sound Effects will be made by me. This section will be updated appropriately.
