@@ -44,23 +44,31 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 
 ### 🤖 State Diagram
 
-#### Game State Diagram
+#### Scene State Diagram
 
-![Game State Diagram](./Game/Content/Images/Diagrams/GamePlayStateDiagram.png)
+![Scene State Diagram](./Game/Content/Images/Diagrams/SceneStateDiagram.png)
 
 #### Dice State Diagram
 
 ![Dice State Diagram](./Game/Content/Images/Diagrams/DiceStateDiagram.png)
 
-#### Player Dice State Diagram
-
-![Player Dice State Diagram](./Game/Content/Images/Diagrams/PlayerDiceStateDiagram.png)
-
 ### 🗺️ Class Diagram
+
+#### Scene Class Diagram
+
+![Scene Class Diagram](./Game/Content/Images/Diagrams/SceneClassDiagram.png)
+
+#### State Class Diagram
+
+![State Class Diagram](./Game/Content/Images/Diagrams/StateClassDiagram.png)
 
 #### Dice Class Diagram
 
 ![Dice Class Diagram](./Game/Content/Images/Diagrams/DiceClassDiagram.png)
+
+#### Settings Class Diagram
+
+![Settings Class Diagram](./Game/Content/Images/Diagrams/SettingsClassDiagram.png)
 
 ### 🧵 Wireframes
 
@@ -70,6 +78,24 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 
 - **Play**: will start the game.
 - **Settings**: will allow the player to ajust their settings before the game starts.
+- **Quit**: will exit the game nicely :D
+
+#### Pause Menu
+
+![Pause Menu](./Game/Content/Images/Wireframes/PauseMenu.png)
+
+- **Audio**: slider to adjust the audio.
+- **Graphics**: will allow the player to ajust their graphics.
+- **Controls**: allows the player to ajust their controls.
+- **Save**: will save changes to settings.
+- **Back**: will exit settings.
+
+#### Settings
+
+![Pause Menu](./Game/Content/Images/Wireframes/Settings.png)
+
+- **Resume**: will resume the game.
+- **Settings**: will allow the player to ajust their settings during the game.
 - **Quit**: will exit the game nicely :D
 
 #### Game Over (You lose)
@@ -163,3 +189,9 @@ For fonts, I'm using a copyright free font (has a liscence permitting the use of
 #### 🔊 Sounds
 
 I've not decided if I will be making all the music or not. Sound Effects will be made by me. This section will be updated appropriately.
+
+#### 📚 Libraries
+
+I'm using the [Monogame](https://docs.monogame.net/articles/index.html) library to help with general game stuff, such as running the game, dealing with graphics, and providing data types such as Vector2.
+
+I'm also using [Pleasing](https://github.com/franknorton/Pleasing) for tweening and easing, since it would take way too long to implement a fully indepth one needed for this game.
