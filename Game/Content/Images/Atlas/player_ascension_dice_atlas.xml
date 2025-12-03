@@ -1,5 +1,478 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:ns="Microsoft.Xna.Framework">
-  <Asset Type="Object">
-  </Asset>
-</XnaContent>
+<TextureAtlas>
+    <Texture>Images/Dice/player_ascension_dice</Texture>
+
+    <!--The regions of the textures in the texture-->
+    <Regions>
+        <!--Start | Player Ascension Dice Horizontal-->
+        <!--Player Ascension Dice with 1 Dot Horizontal-->
+        <Region name="player_ascension_dice_dot1_horizontal_frame1" x="0" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_horizontal_frame2" x="192" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_horizontal_frame3" x="448" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_horizontal_frame4" x="576" y="0" width="32" height="32" />
+
+        <!--Player Ascension Dice with 2 Dots Horizontal-->
+        <Region name="player_ascension_dice_dot2_horizontal_frame1" x="0" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_horizontal_frame2" x="192" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_horizontal_frame3" x="448" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_horizontal_frame4" x="576" y="48" width="32" height="32" />
+
+        <!--Player Ascension Dice with 3 Dots Horizontal-->
+        <Region name="player_ascension_dice_dot3_horizontal_frame1" x="0" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_horizontal_frame2" x="192" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_horizontal_frame3" x="448" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_horizontal_frame4" x="576" y="96" width="32" height="32" />
+
+        <!--Player Ascension Dice with 4 Dots Horizontal-->
+        <Region name="player_ascension_dice_dot4_horizontal_frame1" x="0" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_horizontal_frame2" x="192" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_horizontal_frame3" x="448" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_horizontal_frame4" x="576" y="144" width="32" height="32" />
+
+        <!--Player Ascension Dice with 5 Dots Horizontal-->
+        <Region name="player_ascension_dice_dot5_horizontal_frame1" x="0" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_horizontal_frame2" x="192" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_horizontal_frame3" x="448" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_horizontal_frame4" x="576" y="192" width="32" height="32" />
+
+        <!--Player Ascension Dice with 6 Dots Horizontal-->
+        <Region name="player_ascension_dice_dot6_horizontal_frame1" x="0" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_horizontal_frame2" x="192" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_horizontal_frame3" x="448" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_horizontal_frame4" x="576" y="240" width="32" height="32" />
+        <!--End | Player Ascension Dice Horizontal-->
+
+
+        <!--Start | Player Ascension Dice Vertical-->
+        <!--Player Ascension Dice with 1 Dot Vertical-->
+        <Region name="player_ascension_dice_dot1_vertical_frame1" x="32" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_vertical_frame2" x="224" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_vertical_frame3" x="416" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_vertical_frame4" x="608" y="0" width="32" height="32" />
+
+        <!--Player Ascension Dice with 2 Dots Vertical-->
+        <Region name="player_ascension_dice_dot2_vertical_frame1" x="32" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_vertical_frame2" x="224" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_vertical_frame3" x="416" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_vertical_frame4" x="608" y="48" width="32" height="32" />
+
+        <!--Player Ascension Dice with 3 Dots Vertical-->
+        <Region name="player_ascension_dice_dot3_vertical_frame1" x="32" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_vertical_frame2" x="224" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_vertical_frame3" x="416" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_vertical_frame4" x="608" y="96" width="32" height="32" />
+
+        <!--Player Ascension Dice with 4 Dots Vertical-->
+        <Region name="player_ascension_dice_dot4_vertical_frame1" x="32" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_vertical_frame2" x="224" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_vertical_frame3" x="416" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_vertical_frame4" x="608" y="144" width="32" height="32" />
+
+        <!--Player Ascension Dice with 5 Dots Vertical-->
+        <Region name="player_ascension_dice_dot5_vertical_frame1" x="32" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_vertical_frame2" x="224" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_vertical_frame3" x="416" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_vertical_frame4" x="608" y="192" width="32" height="32" />
+
+        <!--Player Ascension Dice with 6 Dots Vertical-->
+        <Region name="player_ascension_dice_dot6_vertical_frame1" x="32" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_vertical_frame2" x="224" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_vertical_frame3" x="416" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_vertical_frame4" x="608" y="240" width="32" height="32" />
+        <!--End | Player Ascension Dice Vertical-->
+
+
+        <!--Start | Player Ascension Dice Negative Diagonal-->
+        <!--Player Ascension Dice with 1 Dot Negative Diagonal-->
+        <Region name="player_ascension_dice_dot1_negative_diagonal_frame1" x="64" y="0" width="42" height="42" />
+        <Region name="player_ascension_dice_dot1_negative_diagonal_frame2" x="256" y="0" width="42" height="42" />
+        <Region name="player_ascension_dice_dot1_negative_diagonal_frame3" x="448" y="0" width="42" height="42" />
+        <Region name="player_ascension_dice_dot1_negative_diagonal_frame4" x="640" y="0" width="42" height="42" />
+
+        <!--Player Ascension Dice with 2 Dots Negative Diagonal-->
+        <Region name="player_ascension_dice_dot2_negative_diagonal_frame1" x="64" y="48" width="42" height="42" />
+        <Region name="player_ascension_dice_dot2_negative_diagonal_frame2" x="256" y="48" width="42" height="42" />
+        <Region name="player_ascension_dice_dot2_negative_diagonal_frame3" x="448" y="48" width="42" height="42" />
+        <Region name="player_ascension_dice_dot2_negative_diagonal_frame4" x="640" y="48" width="42" height="42" />
+
+        <!--Player Ascension Dice with 3 Dots Negative Diagonal-->
+        <Region name="player_ascension_dice_dot3_negative_diagonal_frame1" x="64" y="96" width="42" height="42" />
+        <Region name="player_ascension_dice_dot3_negative_diagonal_frame2" x="256" y="96" width="42" height="42" />
+        <Region name="player_ascension_dice_dot3_negative_diagonal_frame3" x="448" y="96" width="42" height="42" />
+        <Region name="player_ascension_dice_dot3_negative_diagonal_frame4" x="640" y="96" width="42" height="42" />
+
+        <!--Player Ascension Dice with 4 Dots Negative Diagonal-->
+        <Region name="player_ascension_dice_dot4_negative_diagonal_frame1" x="64" y="144" width="42" height="42" />
+        <Region name="player_ascension_dice_dot4_negative_diagonal_frame2" x="256" y="144" width="42" height="42" />
+        <Region name="player_ascension_dice_dot4_negative_diagonal_frame3" x="448" y="144" width="42" height="42" />
+        <Region name="player_ascension_dice_dot4_negative_diagonal_frame4" x="640" y="144" width="42" height="42" />
+
+        <!--Player Ascension Dice with 5 Dots Negative Diagonal-->
+        <Region name="player_ascension_dice_dot5_negative_diagonal_frame1" x="64" y="192" width="42" height="42" />
+        <Region name="player_ascension_dice_dot5_negative_diagonal_frame2" x="256" y="192" width="42" height="42" />
+        <Region name="player_ascension_dice_dot5_negative_diagonal_frame3" x="448" y="192" width="42" height="42" />
+        <Region name="player_ascension_dice_dot5_negative_diagonal_frame4" x="640" y="192" width="42" height="42" />
+
+        <!--Player Ascension Dice with 6 Dots Negative Diagonal-->
+        <Region name="player_ascension_dice_dot6_negative_diagonal_frame1" x="64" y="240" width="42" height="42" />
+        <Region name="player_ascension_dice_dot6_negative_diagonal_frame2" x="256" y="240" width="42" height="42" />
+        <Region name="player_ascension_dice_dot6_negative_diagonal_frame3" x="448" y="240" width="42" height="42" />
+        <Region name="player_ascension_dice_dot6_negative_diagonal_frame4" x="640" y="240" width="42" height="42" />
+        <!--End | Player Ascension Dice Negative Diagonal-->
+
+
+        <!--Start | Player Ascension Dice Positive Diagonal-->
+        <!--Player Ascension Dice with 1 Dot Positive Diagonal-->
+        <Region name="player_ascension_dice_dot1_positive_diagonal_frame1" x="112" y="0" width="42" height="42" />
+        <Region name="player_ascension_dice_dot1_positive_diagonal_frame2" x="304" y="0" width="42" height="42" />
+        <Region name="player_ascension_dice_dot1_positive_diagonal_frame3" x="496" y="0" width="42" height="42" />
+        <Region name="player_ascension_dice_dot1_positive_diagonal_frame4" x="688" y="0" width="42" height="42" />
+
+        <!--Player Ascension Dice with 2 Dots Positive Diagonal-->
+        <Region name="player_ascension_dice_dot2_positive_diagonal_frame1" x="112" y="48" width="42" height="42" />
+        <Region name="player_ascension_dice_dot2_positive_diagonal_frame2" x="304" y="48" width="42" height="42" />
+        <Region name="player_ascension_dice_dot2_positive_diagonal_frame3" x="496" y="48" width="42" height="42" />
+        <Region name="player_ascension_dice_dot2_positive_diagonal_frame4" x="688" y="48" width="42" height="42" />
+
+        <!--Player Ascension Dice with 3 Dots Positive Diagonal-->
+        <Region name="player_ascension_dice_dot3_positive_diagonal_frame1" x="112" y="96" width="42" height="42" />
+        <Region name="player_ascension_dice_dot3_positive_diagonal_frame2" x="304" y="96" width="42" height="42" />
+        <Region name="player_ascension_dice_dot3_positive_diagonal_frame3" x="496" y="96" width="42" height="42" />
+        <Region name="player_ascension_dice_dot3_positive_diagonal_frame4" x="688" y="96" width="42" height="42" />
+
+        <!--Player Ascension Dice with 4 Dots Positive Diagonal-->
+        <Region name="player_ascension_dice_dot4_positive_diagonal_frame1" x="112" y="144" width="42" height="42" />
+        <Region name="player_ascension_dice_dot4_positive_diagonal_frame2" x="304" y="144" width="42" height="42" />
+        <Region name="player_ascension_dice_dot4_positive_diagonal_frame3" x="496" y="144" width="42" height="42" />
+        <Region name="player_ascension_dice_dot4_positive_diagonal_frame4" x="688" y="144" width="42" height="42" />
+
+        <!--Player Ascension Dice with 5 Dots Positive Diagonal-->
+        <Region name="player_ascension_dice_dot5_positive_diagonal_frame1" x="112" y="192" width="42" height="42" />
+        <Region name="player_ascension_dice_dot5_positive_diagonal_frame2" x="304" y="192" width="42" height="42" />
+        <Region name="player_ascension_dice_dot5_positive_diagonal_frame3" x="496" y="192" width="42" height="42" />
+        <Region name="player_ascension_dice_dot5_positive_diagonal_frame4" x="688" y="192" width="42" height="42" />
+
+        <!--Player Ascension Dice with 6 Dots Positive Diagonal-->
+        <Region name="player_ascension_dice_dot6_positive_diagonal_frame1" x="112" y="240" width="42" height="42" />
+        <Region name="player_ascension_dice_dot6_positive_diagonal_frame2" x="304" y="240" width="42" height="42" />
+        <Region name="player_ascension_dice_dot6_positive_diagonal_frame3" x="496" y="240" width="42" height="42" />
+        <Region name="player_ascension_dice_dot6_positive_diagonal_frame4" x="688" y="240" width="42" height="42" />
+        <!--End | Player Ascension Dice Positive Diagonal-->
+
+
+        <!--Start | Player Ascension Dice Transformation-->
+        <!--Player Ascension Dice with 1 Dot Transformation-->
+        <Region name="player_ascension_dice_dot1_transformation_frame1" x="160" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_transformation_frame2" x="352" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_transformation_frame3" x="544" y="0" width="32" height="32" />
+        <Region name="player_ascension_dice_dot1_transformation_frame4" x="736" y="0" width="32" height="32" />
+
+        <!--Player Ascension Dice with 2 Dots Transformation-->
+        <Region name="player_ascension_dice_dot2_transformation_frame1" x="160" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_transformation_frame2" x="352" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_transformation_frame3" x="544" y="48" width="32" height="32" />
+        <Region name="player_ascension_dice_dot2_transformation_frame4" x="736" y="48" width="32" height="32" />
+
+        <!--Player Ascension Dice with 3 Dots Transformation-->
+        <Region name="player_ascension_dice_dot3_transformation_frame1" x="160" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_transformation_frame2" x="352" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_transformation_frame3" x="544" y="96" width="32" height="32" />
+        <Region name="player_ascension_dice_dot3_transformation_frame4" x="736" y="96" width="32" height="32" />
+
+        <!--Player Ascension Dice with 4 Dots Transformation-->
+        <Region name="player_ascension_dice_dot4_transformation_frame1" x="160" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_transformation_frame2" x="352" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_transformation_frame3" x="544" y="144" width="32" height="32" />
+        <Region name="player_ascension_dice_dot4_transformation_frame4" x="736" y="144" width="32" height="32" />
+
+        <!--Player Ascension Dice with 5 Dots Transformation-->
+        <Region name="player_ascension_dice_dot5_transformation_frame1" x="160" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_transformation_frame2" x="352" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_transformation_frame3" x="544" y="192" width="32" height="32" />
+        <Region name="player_ascension_dice_dot5_transformation_frame4" x="736" y="192" width="32" height="32" />
+
+        <!--Player Ascension Dice with 6 Dots Transformation-->
+        <Region name="player_ascension_dice_dot6_transformation_frame1" x="160" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_transformation_frame2" x="352" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_transformation_frame3" x="544" y="240" width="32" height="32" />
+        <Region name="player_ascension_dice_dot6_transformation_frame4" x="736" y="240" width="32" height="32" />
+        <!--End | Player Ascension Dice Transformation-->
+
+
+        <!--Start | Player Ascension Dice Death-->
+        <!--Player Ascension Dice Death-->
+        <Region name="player_ascension_dice_death_frame1" x="0" y="288" width="32" height="32" />
+        <Region name="player_ascension_dice_death_frame2" x="192" y="288" width="32" height="32" />
+        <Region name="player_ascension_dice_death_frame3" x="448" y="288" width="32" height="32" />
+        <Region name="player_ascension_dice_death_frame4" x="576" y="288" width="32" height="32" />
+        <!--End | Player Ascension Dice Death-->
+    </Regions>
+
+    <!--The combinations of regions into animations-->
+    <Animations>
+        <!--Start | Player Ascension Dice Horizontal Animation-->
+        <!--Player Ascension Dice with 1 Dot Horizontal Animation-->
+        <Animation name="player_ascension_dice_dot1_horizontal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot1_horizontal_frame1" />
+            <Frame region="player_ascension_dice_dot1_horizontal_frame2" />
+            <Frame region="player_ascension_dice_dot1_horizontal_frame3" />
+            <Frame region="player_ascension_dice_dot1_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 2 Dot Horizontal Animation-->
+        <Animation name="player_ascension_dice_dot2_horizontal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot2_horizontal_frame1" />
+            <Frame region="player_ascension_dice_dot2_horizontal_frame2" />
+            <Frame region="player_ascension_dice_dot2_horizontal_frame3" />
+            <Frame region="player_ascension_dice_dot2_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 3 Dot Horizontal Animation-->
+        <Animation name="player_ascension_dice_dot3_horizontal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot3_horizontal_frame1" />
+            <Frame region="player_ascension_dice_dot3_horizontal_frame2" />
+            <Frame region="player_ascension_dice_dot3_horizontal_frame3" />
+            <Frame region="player_ascension_dice_dot3_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 4 Dot Horizontal Animation-->
+        <Animation name="player_ascension_dice_dot4_horizontal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot4_horizontal_frame1" />
+            <Frame region="player_ascension_dice_dot4_horizontal_frame2" />
+            <Frame region="player_ascension_dice_dot4_horizontal_frame3" />
+            <Frame region="player_ascension_dice_dot4_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 5 Dot Horizontal Animation-->
+        <Animation name="player_ascension_dice_dot5_horizontal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot5_horizontal_frame1" />
+            <Frame region="player_ascension_dice_dot5_horizontal_frame2" />
+            <Frame region="player_ascension_dice_dot5_horizontal_frame3" />
+            <Frame region="player_ascension_dice_dot5_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 6 Dot Horizontal Animation-->
+        <Animation name="player_ascension_dice_dot6_horizontal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot6_horizontal_frame1" />
+            <Frame region="player_ascension_dice_dot6_horizontal_frame2" />
+            <Frame region="player_ascension_dice_dot6_horizontal_frame3" />
+            <Frame region="player_ascension_dice_dot6_horizontal_frame4" />
+        </Animation>
+        <!--End | Player Ascension Dice Horizontal Animation-->
+
+
+        <!--Start | Player Ascension Dice Vertical Animation-->
+        <!--Player Ascension Dice with 1 Dot Vertical Animation-->
+        <Animation name="player_ascension_dice_dot1_vertical_animation" delay="150">
+            <Frame region="player_ascension_dice_dot1_vertical_frame1" />
+            <Frame region="player_ascension_dice_dot1_vertical_frame2" />
+            <Frame region="player_ascension_dice_dot1_vertical_frame3" />
+            <Frame region="player_ascension_dice_dot1_vertical_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 2 Dot Vertical Animation-->
+        <Animation name="player_ascension_dice_dot2_vertical_animation" delay="150">
+            <Frame region="player_ascension_dice_dot2_vertical_frame1" />
+            <Frame region="player_ascension_dice_dot2_vertical_frame2" />
+            <Frame region="player_ascension_dice_dot2_vertical_frame3" />
+            <Frame region="player_ascension_dice_dot2_vertical_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 3 Dot Vertical Animation-->
+        <Animation name="player_ascension_dice_dot3_vertical_animation" delay="150">
+            <Frame region="player_ascension_dice_dot3_vertical_frame1" />
+            <Frame region="player_ascension_dice_dot3_vertical_frame2" />
+            <Frame region="player_ascension_dice_dot3_vertical_frame3" />
+            <Frame region="player_ascension_dice_dot3_vertical_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 4 Dot Vertical Animation-->
+        <Animation name="player_ascension_dice_dot4_vertical_animation" delay="150">
+            <Frame region="player_ascension_dice_dot4_vertical_frame1" />
+            <Frame region="player_ascension_dice_dot4_vertical_frame2" />
+            <Frame region="player_ascension_dice_dot4_vertical_frame3" />
+            <Frame region="player_ascension_dice_dot4_vertical_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 5 Dot Vertical Animation-->
+        <Animation name="player_ascension_dice_dot5_vertical_animation" delay="150">
+            <Frame region="player_ascension_dice_dot5_vertical_frame1" />
+            <Frame region="player_ascension_dice_dot5_vertical_frame2" />
+            <Frame region="player_ascension_dice_dot5_vertical_frame3" />
+            <Frame region="player_ascension_dice_dot5_vertical_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 6 Dot Vertical Animation-->
+        <Animation name="player_ascension_dice_dot6_vertical_animation" delay="150">
+            <Frame region="player_ascension_dice_dot6_vertical_frame1" />
+            <Frame region="player_ascension_dice_dot6_vertical_frame2" />
+            <Frame region="player_ascension_dice_dot6_vertical_frame3" />
+            <Frame region="player_ascension_dice_dot6_vertical_frame4" />
+        </Animation>
+        <!--End | Player Ascension Dice Vertical Animation-->
+
+        
+        <!--Start | Player Ascension Dice Negative Diagonal Animation-->
+        <!--Player Ascension Dice with 1 Dot Negative Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot1_negative_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot1_negative_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot1_negative_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot1_negative_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot1_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 2 Dot Negative Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot2_negative_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot2_negative_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot2_negative_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot2_negative_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot2_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 3 Dot Negative Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot3_negative_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot3_negative_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot3_negative_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot3_negative_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot3_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 4 Dot Negative Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot4_negative_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot4_negative_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot4_negative_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot4_negative_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot4_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 5 Dot Negative Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot5_negative_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot5_negative_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot5_negative_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot5_negative_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot5_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 6 Dot Negative Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot6_negative_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot6_negative_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot6_negative_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot6_negative_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot6_negative_diagonal_frame4" />
+        </Animation>
+        <!--End | Player Ascension Dice Negative Diagonal Animation-->
+
+
+        <!--Start | Player Ascension Dice Positive Diagonal Animation-->
+        <!--Player Ascension Dice with 1 Dot Positive Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot1_positive_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot1_positive_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot1_positive_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot1_positive_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot1_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 2 Dot Positive Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot2_positive_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot2_positive_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot2_positive_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot2_positive_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot2_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 3 Dot Positive Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot3_positive_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot3_positive_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot3_positive_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot3_positive_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot3_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 4 Dot Positive Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot4_positive_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot4_positive_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot4_positive_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot4_positive_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot4_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 5 Dot Positive Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot5_positive_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot5_positive_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot5_positive_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot5_positive_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot5_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 6 Dot Positive Diagonal Animation-->
+        <Animation name="player_ascension_dice_dot6_positive_diagonal_animation" delay="150">
+            <Frame region="player_ascension_dice_dot6_positive_diagonal_frame1" />
+            <Frame region="player_ascension_dice_dot6_positive_diagonal_frame2" />
+            <Frame region="player_ascension_dice_dot6_positive_diagonal_frame3" />
+            <Frame region="player_ascension_dice_dot6_positive_diagonal_frame4" />
+        </Animation>
+        <!--End | Player Ascension Dice Positive Diagonal Animation-->
+
+
+        <!--Start | Player Ascension Dice Transformation Animation-->
+        <!--Player Ascension Dice with 1 Dot Transformation Animation-->
+        <Animation name="player_ascension_dice_dot1_transformation_animation" delay="150">
+            <Frame region="player_ascension_dice_dot1_transformation_frame1" />
+            <Frame region="player_ascension_dice_dot1_transformation_frame2" />
+            <Frame region="player_ascension_dice_dot1_transformation_frame3" />
+            <Frame region="player_ascension_dice_dot1_transformation_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 2 Dot Transformation Animation-->
+        <Animation name="player_ascension_dice_dot2_transformation_animation" delay="150">
+            <Frame region="player_ascension_dice_dot2_transformation_frame1" />
+            <Frame region="player_ascension_dice_dot2_transformation_frame2" />
+            <Frame region="player_ascension_dice_dot2_transformation_frame3" />
+            <Frame region="player_ascension_dice_dot2_transformation_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 3 Dot Transformation Animation-->
+        <Animation name="player_ascension_dice_dot3_transformation_animation" delay="150">
+            <Frame region="player_ascension_dice_dot3_transformation_frame1" />
+            <Frame region="player_ascension_dice_dot3_transformation_frame2" />
+            <Frame region="player_ascension_dice_dot3_transformation_frame3" />
+            <Frame region="player_ascension_dice_dot3_transformation_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 4 Dot Transformation Animation-->
+        <Animation name="player_ascension_dice_dot4_transformation_animation" delay="150">
+            <Frame region="player_ascension_dice_dot4_transformation_frame1" />
+            <Frame region="player_ascension_dice_dot4_transformation_frame2" />
+            <Frame region="player_ascension_dice_dot4_transformation_frame3" />
+            <Frame region="player_ascension_dice_dot4_transformation_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 5 Dot Transformation Animation-->
+        <Animation name="player_ascension_dice_dot5_transformation_animation" delay="150">
+            <Frame region="player_ascension_dice_dot5_transformation_frame1" />
+            <Frame region="player_ascension_dice_dot5_transformation_frame2" />
+            <Frame region="player_ascension_dice_dot5_transformation_frame3" />
+            <Frame region="player_ascension_dice_dot5_transformation_frame4" />
+        </Animation>
+
+        <!--Player Ascension Dice with 6 Dot Transformation Animation-->
+        <Animation name="player_ascension_dice_dot6_transformation_animation" delay="150">
+            <Frame region="player_ascension_dice_dot6_transformation_frame1" />
+            <Frame region="player_ascension_dice_dot6_transformation_frame2" />
+            <Frame region="player_ascension_dice_dot6_transformation_frame3" />
+            <Frame region="player_ascension_dice_dot6_transformation_frame4" />
+        </Animation>
+        <!--End | Player Ascension Dice Transformation Animation-->
+
+
+        <!--Start | Player Ascension Dice Death Animation-->
+        <!--Player Ascension Dice Death Animation-->
+        <Animation name="player_ascension_dice_death_animation" delay="300">
+            <Frame region="player_ascension_dice_death_frame1" />
+            <Frame region="player_ascension_dice_death_frame2" />
+            <Frame region="player_ascension_dice_death_frame3" />
+            <Frame region="player_ascension_dice_death_frame4" />
+        </Animation>
+        <!--End | Player Ascension Death Animation-->
+    </Animations>
+</TextureAtlas>

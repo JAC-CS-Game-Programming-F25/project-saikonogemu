@@ -65,4 +65,14 @@ public class Animation
     }
 
     #endregion Constructors
+
+    #region Methods
+    /// <summary>
+    /// Reverse the animation by swapping the order of the frames.
+    /// </summary>
+    public void ReverseAnimation()
+    {
+        Frames.Reverse();
+    }
+    #endregion Methods
 }

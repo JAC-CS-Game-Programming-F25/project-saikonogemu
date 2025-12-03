@@ -9,7 +9,7 @@ public class Game1 : Core
 {
 #region Constructors
 
-    public Game1() : base("DieTheRollingDiceGame", 512, 256, false) { }
+    public Game1() : base("DieTheRollingDiceGame", 512, 256, true) { }
 
     #endregion Constructors
 

@@ -13,15 +13,15 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Fonts/PeaberryBase.ttf
-/copy:Fonts/PeaberryBase.ttf
-
 #begin Fonts/peaberrybase_font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/peaberrybase_font.spritefont
+
+#begin Fonts/PeaberryBase.ttf
+/copy:Fonts/PeaberryBase.ttf
 
 #begin Images/Atlas/enemy_dice_atlas.xml
 /copy:Images/Atlas/enemy_dice_atlas.xml
@@ -97,4 +97,43 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Dice/target_dice.png
+
+#begin Images/Tiles/level_tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Tiles/level_tiles.png
+
+#begin Images/Levels/XML/level1.xml
+/copy:Images/Levels/XML/level1.xml
+
+#begin Images/Levels/XML/level2.xml
+/copy:Images/Levels/XML/level2.xml
+
+#begin Images/Levels/XML/level3.xml
+/copy:Images/Levels/XML/level3.xml
+
+#begin Images/Levels/XML/level4.xml
+/copy:Images/Levels/XML/level4.xml
+
+#begin Images/Levels/XML/level5.xml
+/copy:Images/Levels/XML/level5.xml
+
+#begin Images/Levels/XML/level6.xml
+/copy:Images/Levels/XML/level6.xml
+
+#begin Images/Levels/XML/level7.xml
+/copy:Images/Levels/XML/level7.xml
+
+#begin Images/Levels/XML/level8.xml
+/copy:Images/Levels/XML/level8.xml
+
+#begin Images/Levels/XML/level9.xml
+/copy:Images/Levels/XML/level9.xml
 

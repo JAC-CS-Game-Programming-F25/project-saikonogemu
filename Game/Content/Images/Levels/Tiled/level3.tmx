@@ -3,7 +3,7 @@
  <editorsettings>
   <export target="../Levels/level3.xml" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../3-mario-BrandonBoros/config/level_tiles.tsx"/>
+ <tileset firstgid="1" source="../../Tiles/level_tiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
 67,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,68,0,0,0,0,0,0,0,0,0,

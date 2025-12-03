@@ -59,6 +59,10 @@ public class GameScene : Scene
 
         // TODO: Initialize player, initialize enemies, initialize targets. Use dice factory.
 
+        // FIXME: Move to Level
+        _tilemap = Tilemap.FromFile(Content, "Images/Levels/XML/level4.xml");
+        _tilemap.Scale = new Vector2(1.0f, 1.0f);
+
         // TODO: Start game scene song here.
     }
 
@@ -84,9 +88,9 @@ public class GameScene : Scene
 
         // Draws the tilemap (we want to see it even if paused).
         // TODO: draw tilemap
-        //_tilemap.Draw(Core.SpriteBatch);
+        _tilemap.Draw(Core.SpriteBatch);
 
-        player.Draw(Core.SpriteBatch, Vector2.Zero);
+        //player.Draw(Core.SpriteBatch, Vector2.Zero);
 
         // Ends the drawing.
         Core.SpriteBatch.End();
@@ -102,8 +106,8 @@ public class GameScene : Scene
         // FIXME: This will be moved to the DiceStates.
         // Player Dice
         TextureAtlas playerTextureAtlas = TextureAtlas.FromFile(Content, "Images/Atlas/player_dice_atlas.xml");
-        player = playerTextureAtlas.CreateAnimatedSprite("player_dice_death_animation", 1);
-        player.Scale = new Vector2(4.0f, 4.0f);
+        player = playerTextureAtlas.CreateAnimatedSprite("player_dice_dot6_positive_diagonal_animation");
+        player.Scale = new Vector2(2.0f, 2.0f);
 
         // Target Dice
         //TextureAtlas targetTextureAtlas = TextureAtlas.FromFile(Content, "Images/Atlas/target_dice_atlas.xml");

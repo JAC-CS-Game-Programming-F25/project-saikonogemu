@@ -111,5 +111,12 @@ public class AnimatedSprite : Sprite
         }
     }
 
+    /// <summary>
+    /// Reverse the animation by swapping the order of the frames.
+    /// </summary>
+    public void ReverseAnimation()
+    {
+        Animation.ReverseAnimation();
+    }
     #endregion Public Methods
 }

@@ -35,7 +35,7 @@ public class Tilemap
     #region Fields
 
     private readonly Tileset _tileset;
-    private readonly int[] _tiles;
+    private readonly int?[] _tiles;
     private readonly bool[] _collidable;
 
     #endregion Fields
@@ -89,7 +89,7 @@ public class Tilemap
         Columns = columns;
         Count = Columns * Rows;
         Scale = Vector2.One;
-        _tiles = new int[Count];
+        _tiles = new int?[Count];
         _collidable = new bool[Count];
     }
 
@@ -104,10 +104,10 @@ public class Tilemap
     /// <param name="index">The index of the tile in this tilemap.</param>
     /// <param name="tilesetID">The tileset id of the tile from the tileset to use.</param>
     /// <param name="collidable">Whether the tile is collidable, default is false.</param>
-    public void SetTile(int index, int tilesetID, bool collidable = false)
+    public void SetTile(int index, int? tilesetID, bool collidable = false)
     {
         _tiles[index] = tilesetID;
-        _collidable[index] = collidable;
+        _collidable[index] = collidable && tilesetID.HasValue;
     }
 
     /// <summary>
@@ -130,7 +130,8 @@ public class Tilemap
     /// <returns>The texture region of the tile from this tilemap at the specified index.</returns>
     public TextureRegion GetTile(int index)
     {
-        return _tileset.GetTile(_tiles[index]);
+        int? id = _tiles[index];
+        return id is null or < 0 ? null : _tileset.GetTile(id.Value) ;
     }
 
     /// <summary>
@@ -176,8 +177,12 @@ public class Tilemap
     {
         for (int i = 0; i < Count; i++)
         {
-            int tileSetIndex = _tiles[i];
-            TextureRegion tile = _tileset.GetTile(tileSetIndex);
+            int? tileSetIndex = _tiles[i];
+
+            if (tileSetIndex == null || tileSetIndex < 0)
+                continue;
+
+            TextureRegion tile = _tileset.GetTile(tileSetIndex.Value);
 
             int x = i % Columns;
             int y = i / Columns;
@@ -345,7 +350,10 @@ public class Tilemap
                 for (int column = 0; column < columnCount; column++)
                 {
                     // Get the tileset index for this location
-                    int tilesetIndex = int.Parse(columns[column]);
+                    int tilesetIndex = int.Parse(columns[column]) - 1;
+
+                    if (tilesetIndex < 0)
+                        continue;
 
                     // Get the texture region of that tile from the tileset
                     TextureRegion region = tileset.GetTile(tilesetIndex);
