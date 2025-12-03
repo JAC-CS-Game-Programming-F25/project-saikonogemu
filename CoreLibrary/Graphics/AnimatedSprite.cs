@@ -25,6 +25,8 @@ public class AnimatedSprite : Sprite
 {
     #region Fields
 
+    private int _currentCycle = 0;
+    private readonly int _totalCycles;
     private int _currentFrame;
     private TimeSpan _elapsed;
     private Animation _animation;
@@ -61,9 +63,11 @@ public class AnimatedSprite : Sprite
     /// using the specified animation.
     /// </summary>
     /// <param name="animation">The animation to assign to this sprite.</param>
-    public AnimatedSprite(Animation animation)
+    /// <param name="totalCycles">The amount of times you want the animation to run. Default is the max possible.</param>
+    public AnimatedSprite(Animation animation, int totalCycles = int.MaxValue)
     {
         Animation = animation;
+        _totalCycles = totalCycles;
     }
 
     #endregion Constructors
@@ -77,6 +81,10 @@ public class AnimatedSprite : Sprite
     /// <param name="gameTime">A snapshot of the game's timing values.</param>
     public void Update(GameTime gameTime)
     {
+        // Exits if we hit the cycle limit.
+        if (_currentCycle >= _totalCycles)
+            return;
+
         // Accumulate elapsed time.
         _elapsed += gameTime.ElapsedGameTime;
 
@@ -89,6 +97,12 @@ public class AnimatedSprite : Sprite
             // Loop back to the start of the animation if we've reached the end.
             if (_currentFrame >= _animation.Frames.Count)
             {
+                _currentCycle++;
+
+                // Exits if we hit the cycle limit.
+                if (_currentCycle >= _totalCycles)
+                    return;
+
                 _currentFrame = 0;
             }
 

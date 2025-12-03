@@ -1,2 +1,2 @@
-﻿using var game = new Die__The_Rolling_Dice_Game.Game1();
+﻿using var game = new DieTheRollingDiceGame.Game1();
 game.Run();

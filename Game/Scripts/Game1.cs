@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Die__The_Rolling_Dice_Game;
+namespace DieTheRollingDiceGame;
 
 public class Game1 : Core
 {
@@ -21,7 +21,8 @@ public class Game1 : Core
         base.Initialize();
 
         // Start the game with the title scene.
-        //ChangeScene(new GameScene());
+        // TODO:  Change to be title screen.
+        ChangeScene(new GameScene());
     }
 
     protected override void LoadContent() { }

@@ -151,10 +151,13 @@ public class TextureAtlas
     /// <summary>
     /// Creates a new animated sprite using an animation from this texture atlas.
     /// </summary>
-    public AnimatedSprite CreateAnimatedSprite(string animationName)
+    /// <param name="animationName">The name of the animation.</param>
+    /// <param name="totalCycles">The amount of times you want the animation to run. Default is the max possible.</param>
+    /// <returns>Returns a new Animated Sprite.</returns>
+    public AnimatedSprite CreateAnimatedSprite(string animationName, int totalCycles = int.MaxValue)
     {
         Animation animation = GetAnimation(animationName);
-        return new AnimatedSprite(animation);
+        return new AnimatedSprite(animation, totalCycles);
     }
 
     #endregion Factory Methods

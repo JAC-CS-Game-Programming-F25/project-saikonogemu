@@ -13,12 +13,30 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Fonts/game_font.spritefont
+#begin Fonts/PeaberryBase.ttf
+/copy:Fonts/PeaberryBase.ttf
+
+#begin Fonts/peaberrybase_font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/game_font.spritefont
+/build:Fonts/peaberrybase_font.spritefont
+
+#begin Images/Atlas/enemy_dice_atlas.xml
+/copy:Images/Atlas/enemy_dice_atlas.xml
+
+#begin Images/Atlas/player_ascension_dice_atlas.xml
+/copy:Images/Atlas/player_ascension_dice_atlas.xml
+
+#begin Images/Atlas/player_dash_dice_atlas.xml
+/copy:Images/Atlas/player_dash_dice_atlas.xml
+
+#begin Images/Atlas/player_dice_atlas.xml
+/copy:Images/Atlas/player_dice_atlas.xml
+
+#begin Images/Atlas/target_dice_atlas.xml
+/copy:Images/Atlas/target_dice_atlas.xml
 
 #begin Images/Dice/enemy_dice.png
 /importer:TextureImporter

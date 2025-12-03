@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>Images/Dice/player_dice</Texture>
+
+    <!--The regions of the textures in the texture-->
+    <Regions>
+        <!--Start | Player Dice Horizontal-->
+        <!--Player Dice with 1 Dot Horizontal-->
+        <Region name="player_dice_dot1_horizontal_frame1" x="0" y="0" width="32" height="32" />
+        <Region name="player_dice_dot1_horizontal_frame2" x="160" y="0" width="32" height="32" />
+        <Region name="player_dice_dot1_horizontal_frame3" x="320" y="0" width="32" height="32" />
+        <Region name="player_dice_dot1_horizontal_frame4" x="480" y="0" width="32" height="32" />
+
+        <!--Player Dice with 2 Dots Horizontal-->
+        <Region name="player_dice_dot2_horizontal_frame1" x="0" y="48" width="32" height="32" />
+        <Region name="player_dice_dot2_horizontal_frame2" x="160" y="48" width="32" height="32" />
+        <Region name="player_dice_dot2_horizontal_frame3" x="320" y="48" width="32" height="32" />
+        <Region name="player_dice_dot2_horizontal_frame4" x="480" y="48" width="32" height="32" />
+
+        <!--Player Dice with 3 Dots Horizontal-->
+        <Region name="player_dice_dot3_horizontal_frame1" x="0" y="96" width="32" height="32" />
+        <Region name="player_dice_dot3_horizontal_frame2" x="160" y="96" width="32" height="32" />
+        <Region name="player_dice_dot3_horizontal_frame3" x="320" y="96" width="32" height="32" />
+        <Region name="player_dice_dot3_horizontal_frame4" x="480" y="96" width="32" height="32" />
+
+        <!--Player Dice with 4 Dots Horizontal-->
+        <Region name="player_dice_dot4_horizontal_frame1" x="0" y="144" width="32" height="32" />
+        <Region name="player_dice_dot4_horizontal_frame2" x="160" y="144" width="32" height="32" />
+        <Region name="player_dice_dot4_horizontal_frame3" x="320" y="144" width="32" height="32" />
+        <Region name="player_dice_dot4_horizontal_frame4" x="480" y="144" width="32" height="32" />
+
+        <!--Player Dice with 5 Dots Horizontal-->
+        <Region name="player_dice_dot5_horizontal_frame1" x="0" y="192" width="32" height="32" />
+        <Region name="player_dice_dot5_horizontal_frame2" x="160" y="192" width="32" height="32" />
+        <Region name="player_dice_dot5_horizontal_frame3" x="320" y="192" width="32" height="32" />
+        <Region name="player_dice_dot5_horizontal_frame4" x="480" y="192" width="32" height="32" />
+
+        <!--Player Dice with 6 Dots Horizontal-->
+        <Region name="player_dice_dot6_horizontal_frame1" x="0" y="240" width="32" height="32" />
+        <Region name="player_dice_dot6_horizontal_frame2" x="160" y="240" width="32" height="32" />
+        <Region name="player_dice_dot6_horizontal_frame3" x="320" y="240" width="32" height="32" />
+        <Region name="player_dice_dot6_horizontal_frame4" x="480" y="240" width="32" height="32" />
+        <!--End | Player Dice Horizontal-->
+
+
+        <!--Start | Player Dice Vertical-->
+        <!--Player Dice with 1 Dot Vertical-->
+        <Region name="player_dice_dot1_vertical_frame1" x="32" y="0" width="32" height="32" />
+        <Region name="player_dice_dot1_vertical_frame2" x="192" y="0" width="32" height="32" />
+        <Region name="player_dice_dot1_vertical_frame3" x="352" y="0" width="32" height="32" />
+        <Region name="player_dice_dot1_vertical_frame4" x="512" y="0" width="32" height="32" />
+
+        <!--Player Dice with 2 Dots Vertical-->
+        <Region name="player_dice_dot2_vertical_frame1" x="32" y="48" width="32" height="32" />
+        <Region name="player_dice_dot2_vertical_frame2" x="192" y="48" width="32" height="32" />
+        <Region name="player_dice_dot2_vertical_frame3" x="352" y="48" width="32" height="32" />
+        <Region name="player_dice_dot2_vertical_frame4" x="512" y="48" width="32" height="32" />
+
+        <!--Player Dice with 3 Dots Vertical-->
+        <Region name="player_dice_dot3_vertical_frame1" x="32" y="96" width="32" height="32" />
+        <Region name="player_dice_dot3_vertical_frame2" x="192" y="96" width="32" height="32" />
+        <Region name="player_dice_dot3_vertical_frame3" x="352" y="96" width="32" height="32" />
+        <Region name="player_dice_dot3_vertical_frame4" x="512" y="96" width="32" height="32" />
+
+        <!--Player Dice with 4 Dots Vertical-->
+        <Region name="player_dice_dot4_vertical_frame1" x="32" y="144" width="32" height="32" />
+        <Region name="player_dice_dot4_vertical_frame2" x="192" y="144" width="32" height="32" />
+        <Region name="player_dice_dot4_vertical_frame3" x="352" y="144" width="32" height="32" />
+        <Region name="player_dice_dot4_vertical_frame4" x="512" y="144" width="32" height="32" />
+
+        <!--Player Dice with 5 Dots Vertical-->
+        <Region name="player_dice_dot5_vertical_frame1" x="32" y="192" width="32" height="32" />
+        <Region name="player_dice_dot5_vertical_frame2" x="192" y="192" width="32" height="32" />
+        <Region name="player_dice_dot5_vertical_frame3" x="352" y="192" width="32" height="32" />
+        <Region name="player_dice_dot5_vertical_frame4" x="512" y="192" width="32" height="32" />
+
+        <!--Player Dice with 6 Dots Vertical-->
+        <Region name="player_dice_dot6_vertical_frame1" x="32" y="240" width="32" height="32" />
+        <Region name="player_dice_dot6_vertical_frame2" x="192" y="240" width="32" height="32" />
+        <Region name="player_dice_dot6_vertical_frame3" x="352" y="240" width="32" height="32" />
+        <Region name="player_dice_dot6_vertical_frame4" x="512" y="240" width="32" height="32" />
+        <!--End | Player Dice Vertical-->
+
+
+        <!--Start | Player Dice Negative Diagonal-->
+        <!--Player Dice with 1 Dot Negative Diagonal-->
+        <Region name="player_dice_dot1_negative_diagonal_frame1" x="64" y="0" width="42" height="42" />
+        <Region name="player_dice_dot1_negative_diagonal_frame2" x="224" y="0" width="42" height="42" />
+        <Region name="player_dice_dot1_negative_diagonal_frame3" x="384" y="0" width="42" height="42" />
+        <Region name="player_dice_dot1_negative_diagonal_frame4" x="544" y="0" width="42" height="42" />
+
+        <!--Player Dice with 2 Dots Negative Diagonal-->
+        <Region name="player_dice_dot2_negative_diagonal_frame1" x="64" y="48" width="42" height="42" />
+        <Region name="player_dice_dot2_negative_diagonal_frame2" x="224" y="48" width="42" height="42" />
+        <Region name="player_dice_dot2_negative_diagonal_frame3" x="384" y="48" width="42" height="42" />
+        <Region name="player_dice_dot2_negative_diagonal_frame4" x="544" y="48" width="42" height="42" />
+
+        <!--Player Dice with 3 Dots Negative Diagonal-->
+        <Region name="player_dice_dot3_negative_diagonal_frame1" x="64" y="96" width="42" height="42" />
+        <Region name="player_dice_dot3_negative_diagonal_frame2" x="224" y="96" width="42" height="42" />
+        <Region name="player_dice_dot3_negative_diagonal_frame3" x="384" y="96" width="42" height="42" />
+        <Region name="player_dice_dot3_negative_diagonal_frame4" x="544" y="96" width="42" height="42" />
+
+        <!--Player Dice with 4 Dots Negative Diagonal-->
+        <Region name="player_dice_dot4_negative_diagonal_frame1" x="64" y="144" width="42" height="42" />
+        <Region name="player_dice_dot4_negative_diagonal_frame2" x="224" y="144" width="42" height="42" />
+        <Region name="player_dice_dot4_negative_diagonal_frame3" x="384" y="144" width="42" height="42" />
+        <Region name="player_dice_dot4_negative_diagonal_frame4" x="544" y="144" width="42" height="42" />
+
+        <!--Player Dice with 5 Dots Negative Diagonal-->
+        <Region name="player_dice_dot5_negative_diagonal_frame1" x="64" y="192" width="42" height="42" />
+        <Region name="player_dice_dot5_negative_diagonal_frame2" x="224" y="192" width="42" height="42" />
+        <Region name="player_dice_dot5_negative_diagonal_frame3" x="384" y="192" width="42" height="42" />
+        <Region name="player_dice_dot5_negative_diagonal_frame4" x="544" y="192" width="42" height="42" />
+
+        <!--Player Dice with 6 Dots Negative Diagonal-->
+        <Region name="player_dice_dot6_negative_diagonal_frame1" x="64" y="240" width="42" height="42" />
+        <Region name="player_dice_dot6_negative_diagonal_frame2" x="224" y="240" width="42" height="42" />
+        <Region name="player_dice_dot6_negative_diagonal_frame3" x="384" y="240" width="42" height="42" />
+        <Region name="player_dice_dot6_negative_diagonal_frame4" x="544" y="240" width="42" height="42" />
+        <!--End | Player Dice Negative Diagonal-->
+
+
+        <!--Start | Player Dice Positive Diagonal-->
+        <!--Player Dice with 1 Dot Positive Diagonal-->
+        <Region name="player_dice_dot1_positive_diagonal_frame1" x="112" y="0" width="42" height="42" />
+        <Region name="player_dice_dot1_positive_diagonal_frame2" x="272" y="0" width="42" height="42" />
+        <Region name="player_dice_dot1_positive_diagonal_frame3" x="432" y="0" width="42" height="42" />
+        <Region name="player_dice_dot1_positive_diagonal_frame4" x="592" y="0" width="42" height="42" />
+
+        <!--Player Dice with 2 Dots Positive Diagonal-->
+        <Region name="player_dice_dot2_positive_diagonal_frame1" x="112" y="48" width="42" height="42" />
+        <Region name="player_dice_dot2_positive_diagonal_frame2" x="272" y="48" width="42" height="42" />
+        <Region name="player_dice_dot2_positive_diagonal_frame3" x="432" y="48" width="42" height="42" />
+        <Region name="player_dice_dot2_positive_diagonal_frame4" x="592" y="48" width="42" height="42" />
+
+        <!--Player Dice with 3 Dots Positive Diagonal-->
+        <Region name="player_dice_dot3_positive_diagonal_frame1" x="112" y="96" width="42" height="42" />
+        <Region name="player_dice_dot3_positive_diagonal_frame2" x="272" y="96" width="42" height="42" />
+        <Region name="player_dice_dot3_positive_diagonal_frame3" x="432" y="96" width="42" height="42" />
+        <Region name="player_dice_dot3_positive_diagonal_frame4" x="592" y="96" width="42" height="42" />
+
+        <!--Player Dice with 4 Dots Positive Diagonal-->
+        <Region name="player_dice_dot4_positive_diagonal_frame1" x="112" y="144" width="42" height="42" />
+        <Region name="player_dice_dot4_positive_diagonal_frame2" x="272" y="144" width="42" height="42" />
+        <Region name="player_dice_dot4_positive_diagonal_frame3" x="432" y="144" width="42" height="42" />
+        <Region name="player_dice_dot4_positive_diagonal_frame4" x="592" y="144" width="42" height="42" />
+
+        <!--Player Dice with 5 Dots Positive Diagonal-->
+        <Region name="player_dice_dot5_positive_diagonal_frame1" x="112" y="192" width="42" height="42" />
+        <Region name="player_dice_dot5_positive_diagonal_frame2" x="272" y="192" width="42" height="42" />
+        <Region name="player_dice_dot5_positive_diagonal_frame3" x="432" y="192" width="42" height="42" />
+        <Region name="player_dice_dot5_positive_diagonal_frame4" x="592" y="192" width="42" height="42" />
+
+        <!--Player Dice with 6 Dots Positive Diagonal-->
+        <Region name="player_dice_dot6_positive_diagonal_frame1" x="112" y="240" width="42" height="42" />
+        <Region name="player_dice_dot6_positive_diagonal_frame2" x="272" y="240" width="42" height="42" />
+        <Region name="player_dice_dot6_positive_diagonal_frame3" x="432" y="240" width="42" height="42" />
+        <Region name="player_dice_dot6_positive_diagonal_frame4" x="592" y="240" width="42" height="42" />
+        <!--End | Player Dice Positive Diagonal-->
+
+
+        <!--Start | Player Dice Death-->
+        <!--Player Dice Death-->
+        <Region name="player_dice_death_frame1" x="0" y="288" width="32" height="32" />
+        <Region name="player_dice_death_frame2" x="160" y="288" width="32" height="32" />
+        <Region name="player_dice_death_frame3" x="320" y="288" width="32" height="32" />
+        <Region name="player_dice_death_frame4" x="480" y="288" width="32" height="32" />
+        <!--End | Player Dice Death-->
+    </Regions>
+
+    <!--The combinations of regions into animations-->
+    <Animations>
+        <!--Start | Player Dice Horizontal Animation-->
+        <!--Player Dice with 1 Dot Horizontal Animation-->
+        <Animation name="player_dice_dot1_horizontal_animation" delay="150">
+            <Frame region="player_dice_dot1_horizontal_frame1" />
+            <Frame region="player_dice_dot1_horizontal_frame2" />
+            <Frame region="player_dice_dot1_horizontal_frame3" />
+            <Frame region="player_dice_dot1_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 2 Dot Horizontal Animation-->
+        <Animation name="player_dice_dot2_horizontal_animation" delay="150">
+            <Frame region="player_dice_dot2_horizontal_frame1" />
+            <Frame region="player_dice_dot2_horizontal_frame2" />
+            <Frame region="player_dice_dot2_horizontal_frame3" />
+            <Frame region="player_dice_dot2_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 3 Dot Horizontal Animation-->
+        <Animation name="player_dice_dot3_horizontal_animation" delay="150">
+            <Frame region="player_dice_dot3_horizontal_frame1" />
+            <Frame region="player_dice_dot3_horizontal_frame2" />
+            <Frame region="player_dice_dot3_horizontal_frame3" />
+            <Frame region="player_dice_dot3_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 4 Dot Horizontal Animation-->
+        <Animation name="player_dice_dot4_horizontal_animation" delay="150">
+            <Frame region="player_dice_dot4_horizontal_frame1" />
+            <Frame region="player_dice_dot4_horizontal_frame2" />
+            <Frame region="player_dice_dot4_horizontal_frame3" />
+            <Frame region="player_dice_dot4_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 5 Dot Horizontal Animation-->
+        <Animation name="player_dice_dot5_horizontal_animation" delay="150">
+            <Frame region="player_dice_dot5_horizontal_frame1" />
+            <Frame region="player_dice_dot5_horizontal_frame2" />
+            <Frame region="player_dice_dot5_horizontal_frame3" />
+            <Frame region="player_dice_dot5_horizontal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 6 Dot Horizontal Animation-->
+        <Animation name="player_dice_dot6_horizontal_animation" delay="150">
+            <Frame region="player_dice_dot6_horizontal_frame1" />
+            <Frame region="player_dice_dot6_horizontal_frame2" />
+            <Frame region="player_dice_dot6_horizontal_frame3" />
+            <Frame region="player_dice_dot6_horizontal_frame4" />
+        </Animation>
+        <!--End | Player Dice Horizontal Animation-->
+
+
+        <!--Start | Player Dice Vertical Animation-->
+        <!--Player Dice with 1 Dot Vertical Animation-->
+        <Animation name="player_dice_dot1_vertical_animation" delay="150">
+            <Frame region="player_dice_dot1_vertical_frame1" />
+            <Frame region="player_dice_dot1_vertical_frame2" />
+            <Frame region="player_dice_dot1_vertical_frame3" />
+            <Frame region="player_dice_dot1_vertical_frame4" />
+        </Animation>
+
+        <!--Player Dice with 2 Dot Vertical Animation-->
+        <Animation name="player_dice_dot2_vertical_animation" delay="150">
+            <Frame region="player_dice_dot2_vertical_frame1" />
+            <Frame region="player_dice_dot2_vertical_frame2" />
+            <Frame region="player_dice_dot2_vertical_frame3" />
+            <Frame region="player_dice_dot2_vertical_frame4" />
+        </Animation>
+
+        <!--Player Dice with 3 Dot Vertical Animation-->
+        <Animation name="player_dice_dot3_vertical_animation" delay="150">
+            <Frame region="player_dice_dot3_vertical_frame1" />
+            <Frame region="player_dice_dot3_vertical_frame2" />
+            <Frame region="player_dice_dot3_vertical_frame3" />
+            <Frame region="player_dice_dot3_vertical_frame4" />
+        </Animation>
+
+        <!--Player Dice with 4 Dot Vertical Animation-->
+        <Animation name="player_dice_dot4_vertical_animation" delay="150">
+            <Frame region="player_dice_dot4_vertical_frame1" />
+            <Frame region="player_dice_dot4_vertical_frame2" />
+            <Frame region="player_dice_dot4_vertical_frame3" />
+            <Frame region="player_dice_dot4_vertical_frame4" />
+        </Animation>
+
+        <!--Player Dice with 5 Dot Vertical Animation-->
+        <Animation name="player_dice_dot5_vertical_animation" delay="150">
+            <Frame region="player_dice_dot5_vertical_frame1" />
+            <Frame region="player_dice_dot5_vertical_frame2" />
+            <Frame region="player_dice_dot5_vertical_frame3" />
+            <Frame region="player_dice_dot5_vertical_frame4" />
+        </Animation>
+
+        <!--Player Dice with 6 Dot Vertical Animation-->
+        <Animation name="player_dice_dot6_vertical_animation" delay="150">
+            <Frame region="player_dice_dot6_vertical_frame1" />
+            <Frame region="player_dice_dot6_vertical_frame2" />
+            <Frame region="player_dice_dot6_vertical_frame3" />
+            <Frame region="player_dice_dot6_vertical_frame4" />
+        </Animation>
+        <!--End | Player Dice Vertical Animation-->
+
+        
+        <!--Start | Player Dice Negative Diagonal Animation-->
+        <!--Player Dice with 1 Dot Negative Diagonal Animation-->
+        <Animation name="player_dice_dot1_negative_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot1_negative_diagonal_frame1" />
+            <Frame region="player_dice_dot1_negative_diagonal_frame2" />
+            <Frame region="player_dice_dot1_negative_diagonal_frame3" />
+            <Frame region="player_dice_dot1_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 2 Dot Negative Diagonal Animation-->
+        <Animation name="player_dice_dot2_negative_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot2_negative_diagonal_frame1" />
+            <Frame region="player_dice_dot2_negative_diagonal_frame2" />
+            <Frame region="player_dice_dot2_negative_diagonal_frame3" />
+            <Frame region="player_dice_dot2_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 3 Dot Negative Diagonal Animation-->
+        <Animation name="player_dice_dot3_negative_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot3_negative_diagonal_frame1" />
+            <Frame region="player_dice_dot3_negative_diagonal_frame2" />
+            <Frame region="player_dice_dot3_negative_diagonal_frame3" />
+            <Frame region="player_dice_dot3_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 4 Dot Negative Diagonal Animation-->
+        <Animation name="player_dice_dot4_negative_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot4_negative_diagonal_frame1" />
+            <Frame region="player_dice_dot4_negative_diagonal_frame2" />
+            <Frame region="player_dice_dot4_negative_diagonal_frame3" />
+            <Frame region="player_dice_dot4_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 5 Dot Negative Diagonal Animation-->
+        <Animation name="player_dice_dot5_negative_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot5_negative_diagonal_frame1" />
+            <Frame region="player_dice_dot5_negative_diagonal_frame2" />
+            <Frame region="player_dice_dot5_negative_diagonal_frame3" />
+            <Frame region="player_dice_dot5_negative_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 6 Dot Negative Diagonal Animation-->
+        <Animation name="player_dice_dot6_negative_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot6_negative_diagonal_frame1" />
+            <Frame region="player_dice_dot6_negative_diagonal_frame2" />
+            <Frame region="player_dice_dot6_negative_diagonal_frame3" />
+            <Frame region="player_dice_dot6_negative_diagonal_frame4" />
+        </Animation>
+        <!--End | Player Dice Negative Diagonal Animation-->
+
+
+        <!--Start | Player Dice Positive Diagonal Animation-->
+        <!--Player Dice with 1 Dot Positive Diagonal Animation-->
+        <Animation name="player_dice_dot1_positive_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot1_positive_diagonal_frame1" />
+            <Frame region="player_dice_dot1_positive_diagonal_frame2" />
+            <Frame region="player_dice_dot1_positive_diagonal_frame3" />
+            <Frame region="player_dice_dot1_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 2 Dot Positive Diagonal Animation-->
+        <Animation name="player_dice_dot2_positive_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot2_positive_diagonal_frame1" />
+            <Frame region="player_dice_dot2_positive_diagonal_frame2" />
+            <Frame region="player_dice_dot2_positive_diagonal_frame3" />
+            <Frame region="player_dice_dot2_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 3 Dot Positive Diagonal Animation-->
+        <Animation name="player_dice_dot3_positive_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot3_positive_diagonal_frame1" />
+            <Frame region="player_dice_dot3_positive_diagonal_frame2" />
+            <Frame region="player_dice_dot3_positive_diagonal_frame3" />
+            <Frame region="player_dice_dot3_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 4 Dot Positive Diagonal Animation-->
+        <Animation name="player_dice_dot4_positive_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot4_positive_diagonal_frame1" />
+            <Frame region="player_dice_dot4_positive_diagonal_frame2" />
+            <Frame region="player_dice_dot4_positive_diagonal_frame3" />
+            <Frame region="player_dice_dot4_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 5 Dot Positive Diagonal Animation-->
+        <Animation name="player_dice_dot5_positive_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot5_positive_diagonal_frame1" />
+            <Frame region="player_dice_dot5_positive_diagonal_frame2" />
+            <Frame region="player_dice_dot5_positive_diagonal_frame3" />
+            <Frame region="player_dice_dot5_positive_diagonal_frame4" />
+        </Animation>
+
+        <!--Player Dice with 6 Dot Positive Diagonal Animation-->
+        <Animation name="player_dice_dot6_positive_diagonal_animation" delay="150">
+            <Frame region="player_dice_dot6_positive_diagonal_frame1" />
+            <Frame region="player_dice_dot6_positive_diagonal_frame2" />
+            <Frame region="player_dice_dot6_positive_diagonal_frame3" />
+            <Frame region="player_dice_dot6_positive_diagonal_frame4" />
+        </Animation>
+        <!--End | Player Dice Positive Diagonal Animation-->
+
+        <!--Start | Player Dice Death Animation-->
+        <!--Player Dice Death Animation-->
+        <Animation name="player_dice_death_animation" delay="300">
+            <Frame region="player_dice_death_frame1" />
+            <Frame region="player_dice_death_frame2" />
+            <Frame region="player_dice_death_frame3" />
+            <Frame region="player_dice_death_frame4" />
+        </Animation>
+        <!--End | Player Death Animation-->
+    </Animations>
+</TextureAtlas>

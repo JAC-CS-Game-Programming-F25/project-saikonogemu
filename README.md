@@ -16,7 +16,7 @@ With Die becoming more unstable, he is now able to phase as of Level 3, the Diet
 
 Levels 4, 5, and 6 follow the story of Die as he progresses through the Dietopia desert, factory, and frosted wasteland. Featuring larger maps with different designs, more Corrupted, and more Controlled, drastically changing the difficulty of the game.
 
-Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where Die has achieved catastrophic levels of destruction. Level 7 Dustopia starts to tear between cold and hot. Following this level, in level 8 the player will complete the ending of the world, having the world crumble into magma. Finally Die will ascend and will exist in the void, where the player will conquer the nightmares of Die in one last fight. During these levels, the player will receive 1 extra dot at the start of each level due to Die nearing his ascension. The game will be hard, but not impossible.
+Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where Die has achieved catastrophic levels of destruction. Level 7 Dietopia starts to tear between cold and hot. Following this level, in level 8 the player will complete the ending of the world, having the world crumble into magma. Finally Die will ascend and will exist in the void, where the player will conquer the nightmares of Die in one last fight. During these levels, the player will receive 1 extra dot at the start of each level due to Die nearing his ascension. The game will be hard, but not impossible.
 
 ## 📃 Requirements
 
@@ -77,7 +77,7 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 ![Main Menu](./Game/Content/Images/Wireframes/MainMenu.png)
 
 - **Play**: will start the game.
-- **Settings**: will allow the player to ajust their settings before the game starts.
+- **Settings**: will allow the player to adjust their settings before the game starts.
 - **Quit**: will exit the game nicely :D
 
 #### Pause Menu
@@ -85,8 +85,8 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 ![Pause Menu](./Game/Content/Images/Wireframes/PauseMenu.png)
 
 - **Audio**: slider to adjust the audio.
-- **Graphics**: will allow the player to ajust their graphics.
-- **Controls**: allows the player to ajust their controls.
+- **Graphics**: will allow the player to adjust their graphics.
+- **Controls**: allows the player to adjust their controls.
 - **Save**: will save changes to settings.
 - **Back**: will exit settings.
 
@@ -95,7 +95,7 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 ![Pause Menu](./Game/Content/Images/Wireframes/Settings.png)
 
 - **Resume**: will resume the game.
-- **Settings**: will allow the player to ajust their settings during the game.
+- **Settings**: will allow the player to adjust their settings during the game.
 - **Quit**: will exit the game nicely :D
 
 #### Game Over (You lose)
@@ -112,7 +112,7 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 - **Play**: will restart the game.
 - **Quit**: will exit the game nicely :D
 
-#### Gameboads
+#### Gameboards
 
 For the gameboards, they are all designed using Tiled off of my tilesheets for each level. Here they are below.
 
@@ -182,7 +182,8 @@ All images are personally made. Below are the dice spritesheets I made for this 
 
 #### ✏️ Fonts
 
-For fonts, I'm using a copyright free font (has a liscence permitting the use of this font for any means, in any capacity) found on itch.io.
+For fonts, I'm using a copyright free font (has a license permitting the use of this font for any means, in any capacity) found on itch.io.
+// TODO: Add custom DIE font here.
 
 [PeaberryBase](https://emhuo.itch.io/peaberry-pixel-font)
 
@@ -194,4 +195,4 @@ I've not decided if I will be making all the music or not. Sound Effects will be
 
 I'm using the [Monogame](https://docs.monogame.net/articles/index.html) library to help with general game stuff, such as running the game, dealing with graphics, and providing data types such as Vector2.
 
-I'm also using [Pleasing](https://github.com/franknorton/Pleasing) for tweening and easing, since it would take way too long to implement a fully indepth one needed for this game.
+I'm also using [Pleasing](https://github.com/franknorton/Pleasing) for tweening and easing, since it would take way too long to implement a fully in-depth one needed for this game.
