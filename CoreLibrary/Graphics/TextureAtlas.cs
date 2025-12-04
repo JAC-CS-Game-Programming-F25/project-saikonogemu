@@ -45,6 +45,11 @@ public class TextureAtlas
     /// </summary>
     public Texture2D Texture { get; set; }
 
+    /// <summary>
+    /// Gets the file name this TextureAtlas is derived from.
+    /// </summary>
+    public string FileName {get; private set;}
+
     #endregion Properties
 
     #region Constructors
@@ -229,6 +234,9 @@ public class TextureAtlas
                 }
             }
         }
+
+        // Sets the filename in the atlas.
+        atlas.FileName = fileName;
 
         return atlas;
     }

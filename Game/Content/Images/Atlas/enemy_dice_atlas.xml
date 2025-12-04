@@ -171,6 +171,38 @@
 
     <!--The combinations of regions into animations-->
     <Animations>
+        <!--Start | Enemy Dice Idle Animation-->
+        <!--Enemy Dice with 1 Dot Idle Animation-->
+        <Animation name="enemy_dice_dot1_idle_animation" delay="150">
+            <Frame region="enemy_dice_dot1_horizontal_frame1" />
+        </Animation>
+
+        <!--Enemy Dice with 2 Dot Idle Animation-->
+        <Animation name="enemy_dice_dot2_idle_animation" delay="150">
+            <Frame region="enemy_dice_dot2_horizontal_frame1" />
+        </Animation>
+
+        <!--Enemy Dice with 3 Dot Idle Animation-->
+        <Animation name="enemy_dice_dot3_idle_animation" delay="150">
+            <Frame region="enemy_dice_dot3_horizontal_frame1" />
+        </Animation>
+
+        <!--Enemy Dice with 4 Dot Idle Animation-->
+        <Animation name="enemy_dice_dot4_idle_animation" delay="150">
+            <Frame region="enemy_dice_dot4_horizontal_frame1" />
+        </Animation>
+
+        <!--Enemy Dice with 5 Dot Idle Animation-->
+        <Animation name="enemy_dice_dot5_idle_animation" delay="150">
+            <Frame region="enemy_dice_dot5_horizontal_frame1" />
+        </Animation>
+
+        <!--Enemy Dice with 6 Dot Idle Animation-->
+        <Animation name="enemy_dice_dot6_idle_animation" delay="150">
+            <Frame region="enemy_dice_dot6_horizontal_frame1" />
+        </Animation>
+        <!--End | Enemy Dice Idle Animation-->
+
         <!--Start | Enemy Dice Horizontal Animation-->
         <!--Enemy Dice with 1 Dot Horizontal Animation-->
         <Animation name="enemy_dice_dot1_horizontal_animation" delay="150">

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using CoreLibrary;
 using CoreLibrary.Graphics;
@@ -14,6 +15,7 @@ public class GameScene : Scene
     #region  Fields
     // FIXME: Adjust the fields to properties as needed. Might want to make protected too.
 
+    // TODO: The camera might be moved to Scene.
     // The camera for the scene (what the player sees)
     private Camera _camera = new Camera();
 
@@ -24,6 +26,8 @@ public class GameScene : Scene
     // The tilemap of the scene.
     private Tilemap _tilemap;
 
+    // FIXME: This shouldn't be AnimatedSprite.
+    private List<AnimatedSprite> _dice;
     // FIXME: this is a temp to test animations/textures
     private AnimatedSprite player;
     #endregion Fields
@@ -54,14 +58,17 @@ public class GameScene : Scene
     {
         base.LoadContent();
 
-        // Loads all the dice textures.
-        LoadDice();
-
-        // TODO: Initialize player, initialize enemies, initialize targets. Use dice factory.
+        // Loads all the dice textures initially.
+        // The player dice which texture will change will be done in it's States.
+        LoadInitDice();
 
         // FIXME: Move to Level
         _tilemap = Tilemap.FromFile(Content, "Images/Levels/XML/level4.xml");
-        _tilemap.Scale = new Vector2(1.0f, 1.0f);
+        _tilemap.Scale = new Vector2(3.0f, 3.0f);
+
+        // TODO: Initialize player, initialize enemies, initialize targets. Use dice factory. Pass in dice to PlayState.
+        // Adds the states to the state machine.
+        StateMachine.Add("PlayState", new PlayState());
 
         // TODO: Start game scene song here.
     }
@@ -69,10 +76,6 @@ public class GameScene : Scene
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-
-        // TODO: PlayState: Updates NPC movements. Keyboard inputs. Gamepad inputs. Update physics manager.
-
-        player.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)
@@ -87,10 +90,16 @@ public class GameScene : Scene
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.TransformationMatrix);
 
         // Draws the tilemap (we want to see it even if paused).
-        // TODO: draw tilemap
         _tilemap.Draw(Core.SpriteBatch);
 
-        //player.Draw(Core.SpriteBatch, Vector2.Zero);
+        // We draw all the dice here since we want to be able to see them in both paused and play states.
+        // Depending on the state it will be rendered differently, that is handled in the state itself.
+        // FIXME: This will be changed to Dice instead of AnimatedSprite.
+        foreach (AnimatedSprite die in _dice)
+        {
+            // FIXME: This should use the stored position from the dice.
+            die.Draw(Core.SpriteBatch, Vector2.Zero);
+        }
 
         // Ends the drawing.
         Core.SpriteBatch.End();
@@ -98,7 +107,7 @@ public class GameScene : Scene
     #endregion Scene Lifecycle
 
     #region Methods
-    public void LoadDice()
+    public void LoadInitDice()
     {
         // Creates a TextureAtlas from the XML file. (this stores all the sprites for this scene)
         // This is where all the animations are gotten from the XML and can be given to sprites etc.
@@ -106,8 +115,8 @@ public class GameScene : Scene
         // FIXME: This will be moved to the DiceStates.
         // Player Dice
         TextureAtlas playerTextureAtlas = TextureAtlas.FromFile(Content, "Images/Atlas/player_dice_atlas.xml");
-        player = playerTextureAtlas.CreateAnimatedSprite("player_dice_dot6_positive_diagonal_animation");
-        player.Scale = new Vector2(2.0f, 2.0f);
+        player = playerTextureAtlas.CreateAnimatedSprite("player_dice_dot6_vertical_animation");
+        player.Scale = new Vector2(3.0f, 3.0f);
 
         // Target Dice
         //TextureAtlas targetTextureAtlas = TextureAtlas.FromFile(Content, "Images/Atlas/target_dice_atlas.xml");

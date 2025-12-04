@@ -15,7 +15,7 @@
 
 using Microsoft.Xna.Framework;
 
-namespace CoreLibrary.StateMachine;
+namespace CoreLibrary;
 
 /// <summary>
 /// Represents the state of an entity, object, etc.

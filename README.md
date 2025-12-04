@@ -196,3 +196,7 @@ I've not decided if I will be making all the music or not. Sound Effects will be
 I'm using the [Monogame](https://docs.monogame.net/articles/index.html) library to help with general game stuff, such as running the game, dealing with graphics, and providing data types such as Vector2.
 
 I'm also using [Pleasing](https://github.com/franknorton/Pleasing) for tweening and easing, since it would take way too long to implement a fully in-depth one needed for this game.
+
+#### 📝 Documentation
+
+All internal comments; Method headers, Inline comments Comment blocks; are written by me. The only exception is the file summaries along side copyright notices which have been generated, but reviewed. This README file was also all written by me based off of the template given with this assignment. Can proudly say all the code is authentically written without AI.

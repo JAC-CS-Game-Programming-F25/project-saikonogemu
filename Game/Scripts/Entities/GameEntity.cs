@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using CoreLibrary;
 using CoreLibrary.Graphics;
 using CoreLibrary.Physics;
-using CoreLibrary.StateMachine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -34,6 +33,11 @@ using Microsoft.Xna.Framework.Content;
 public abstract class GameEntity
 {
     #region Properties
+    private ContentManager _contentManager;
+
+    /// <summary>
+    /// Gets the statemachine of the entity.
+    /// </summary>
     public StateMachine? StateMachine { get; set; }
 
     /// <summary>
@@ -81,11 +85,13 @@ public abstract class GameEntity
     /// <param name="entityDefinition">All the entity specific parameters.</param>
     public GameEntity(ContentManager content, Dictionary<string, object>? entityDefinition = null)
     {
+        _contentManager = content;
+
         // Entity Sprite Name.
         string name = GetValue(entityDefinition, "name", "default");
 
         // Entity Texture.
-        EntityTexture = TextureAtlas.FromFile(content, "images/entity-definition.xml");
+        EntityTexture = TextureAtlas.FromFile(content, GetValue(entityDefinition, "texture", "FailedTextureLoading"));
 
         // Current Animation.
         CurrentAnimation = EntityTexture.CreateAnimatedSprite(name);
@@ -146,6 +152,42 @@ public abstract class GameEntity
     public void ChangeState(string name, object? parameters = null)
     {
         StateMachine?.Change(name, parameters);
+    }
+
+    /// <summary>
+    /// Called when the dice's sprite should be updated.
+    /// </summary>
+    /// <param name="texturePath">The path to the new texture for the game entity.</param>
+    /// <exception cref="Exception">Thrown when the texture path is invalid or wasn't able to retrieve the entity texture.</exception>
+    public void UpdateTexture(string texturePath)
+    {
+        // Entity Texture.
+        try
+        {
+            EntityTexture = TextureAtlas.FromFile(_contentManager, texturePath); 
+        } 
+        catch
+        {
+            throw new Exception($"Failed to load new texture in GameEntity. Texture: {texturePath}.");
+        }
+    }
+
+    /// <summary>
+    /// Updates the animation of the game entity.
+    /// </summary>
+    /// <param name="animationName">The name of the animation to switch to.</param>
+    /// <exception cref="Exception">Thrown when couldn't retrieve new animation.</exception>
+    public void UpdateAnimation(string animationName, int totalCycles = int.MaxValue)
+    {
+        // Animation
+        try
+        {
+            CurrentAnimation = EntityTexture.CreateAnimatedSprite(animationName, totalCycles);
+        } 
+        catch
+        {
+            throw new Exception($"Failed to load new animation in GameEntity. Animation name: {animationName}.");
+        }
     }
     #endregion Methods
 

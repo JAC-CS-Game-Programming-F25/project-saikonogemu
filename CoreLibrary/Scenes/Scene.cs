@@ -20,6 +20,8 @@ using Microsoft.Xna.Framework.Content;
 
 namespace CoreLibrary.Scenes;
 
+#nullable enable
+
 /// <summary>
 /// Represents the base class for all game scenes.
 /// Provides lifecycle methods for initialization, content management,
@@ -41,6 +43,11 @@ public abstract class Scene : IDisposable
     /// Gets a value that indicates if the scene has been disposed of.
     /// </summary>
     public bool IsDisposed { get; private set; }
+
+    /// <summary>
+    /// Gets the statemachine of the entity.
+    /// </summary>
+    public StateMachine? StateMachine { get; set; }
 
     #endregion Properties
 
@@ -99,15 +106,35 @@ public abstract class Scene : IDisposable
     /// Updates this scene.
     /// </summary>
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
-    public virtual void Update(GameTime gameTime) { }
+    public virtual void Update(GameTime gameTime)
+    {
+        // Updates the StateMachine.
+        StateMachine?.Update(gameTime);
+    }
 
     /// <summary>
     /// Draws this scene.
     /// </summary>
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
-    public virtual void Draw(GameTime gameTime) { }
+    public virtual void Draw(GameTime gameTime)
+    {
+        // Draws the StateMachine.
+        StateMachine?.Draw(gameTime);
+    }
 
     #endregion Update and Draw
+
+    #region Methods
+    /// <summary>
+    /// Changes the current state to provided state.
+    /// </summary>
+    /// <param name="name">The name of the state to change to.</param>
+    /// <param name="parameters">Optional enter methods parameters.</param>
+    public void ChangeState(string name, object? parameters = null)
+    {
+        StateMachine?.Change(name, parameters);
+    }
+    #endregion Methods
 
     #region Disposal
 
