@@ -28,6 +28,10 @@ public class Dice : GameEntity
     private const float _diceScale = 3.0f;
     #endregion Fields
 
+    #region Properties
+    public DiceDirections DiceDirection {get; set;} = DiceDirections.Right;
+    #endregion Properties
+
     #region Constructors
     /// <summary>
     /// Creates a new dice entity instance.
@@ -50,9 +54,6 @@ public class Dice : GameEntity
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-
-        // Updates the animation sprite based on the direction the dice is moving.
-        UpdateAnimationRelativeToMovement();
     }
 
     /// <summary>
@@ -67,68 +68,6 @@ public class Dice : GameEntity
     #endregion Update and Draw
 
     #region Methods
-    /// <summary>
-    /// Updates the animation sprite based on the direction the dice is moving.
-    /// </summary>
-    public void UpdateAnimationRelativeToMovement()
-    {
-        // This should not be in a state and here's why:
-        // - Animations should be updated relative to the dice velocity no matter what.
-        // - These happen no matter what state the dice is in OTHER than dying.
-
-        if (IsDead) return;
-
-        if (Hitbox.Velocity == Vector2.Zero)
-        {
-            // Dice is still.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_idle_animation");
-        } 
-        else if (Hitbox.Velocity.X < 0 && Hitbox.Velocity.Y < 0)
-        {
-            // Dice is moving left up.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_negative_diagonal_animation");
-            CurrentAnimation.ReverseAnimation();
-        }
-        else if (Hitbox.Velocity.X > 0 && Hitbox.Velocity.Y > 0)
-        {
-            // Dice is moving right down.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_negative_diagonal_animation");
-        }
-        else if (Hitbox.Velocity.Y > 0 && Hitbox.Velocity.X < 0 )
-        {
-            // Dice is moving left down.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_positive_diagonal_animation");
-            CurrentAnimation.ReverseAnimation();
-        }
-        else if (Hitbox.Velocity.Y < 0 && Hitbox.Velocity.X > 0 )
-        {
-            // Dice is moving right up.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_positive_diagonal_animation");
-        }
-        else if (Hitbox.Velocity.X < 0)
-        {
-            // Dice is moving left.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_horizontal_animation");
-            CurrentAnimation.ReverseAnimation();
-        }
-        else if (Hitbox.Velocity.X > 0)
-        {
-            // Dice is moving right.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_horizontal_animation");
-        }
-        else if (Hitbox.Velocity.Y < 0)
-        {
-            // Dice is moving up.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_vertical_animation");
-            CurrentAnimation.ReverseAnimation();
-        }
-        else if (Hitbox.Velocity.Y > 0)
-        {
-            // Dice is moving down.
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_vertical_animation");
-        }
-    }
-
     /// <summary>
     /// Called when the dice loses a life.
     /// </summary>
@@ -158,7 +97,7 @@ public class Dice : GameEntity
     /// Gets the name preset of file paths for that dice.
     /// </summary>
     /// <returns>Returns the name preset.</returns>
-    private string GetDiceTypeTexture()
+    public string GetDiceTypeTexture()
     {
         // Get the end path of the file.
         // e.g. player_dice_atlas.xml

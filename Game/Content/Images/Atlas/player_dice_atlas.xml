@@ -173,39 +173,106 @@
     <Animations>
         <!--Start | Player Dice Idle Animation-->
         <!--Player Dice with 1 Dot Idle Animation-->
-        <Animation name="player_dice_dot1_idle_animation" delay="150">
+        <Animation name="player_dice_dot1_idle_animation" delay="100">
             <Frame region="player_dice_dot1_horizontal_frame1" />
         </Animation>
 
         <!--Player Dice with 2 Dot Idle Animation-->
-        <Animation name="player_dice_dot2_idle_animation" delay="150">
+        <Animation name="player_dice_dot2_idle_animation" delay="100">
             <Frame region="player_dice_dot2_horizontal_frame1" />
         </Animation>
 
         <!--Player Dice with 3 Dot Idle Animation-->
-        <Animation name="player_dice_dot3_idle_animation" delay="150">
+        <Animation name="player_dice_dot3_idle_animation" delay="100">
             <Frame region="player_dice_dot3_horizontal_frame1" />
         </Animation>
 
         <!--Player Dice with 4 Dot Idle Animation-->
-        <Animation name="player_dice_dot4_idle_animation" delay="150">
+        <Animation name="player_dice_dot4_idle_animation" delay="100">
             <Frame region="player_dice_dot4_horizontal_frame1" />
         </Animation>
 
         <!--Player Dice with 5 Dot Idle Animation-->
-        <Animation name="player_dice_dot5_idle_animation" delay="150">
+        <Animation name="player_dice_dot5_idle_animation" delay="100">
             <Frame region="player_dice_dot5_horizontal_frame1" />
         </Animation>
 
         <!--Player Dice with 6 Dot Idle Animation-->
-        <Animation name="player_dice_dot6_idle_animation" delay="150">
+        <Animation name="player_dice_dot6_idle_animation" delay="100">
             <Frame region="player_dice_dot6_horizontal_frame1" />
         </Animation>
         <!--End | Player Dice Idle Animation-->
 
+
+        <!--Start | Player Dice Negative Diagonal Idle Animation-->
+        <!--Player Dice with 1 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dice_dot1_negative_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot1_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 2 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dice_dot2_negative_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot2_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 3 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dice_dot3_negative_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot3_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 4 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dice_dot4_negative_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot4_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 5 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dice_dot5_negative_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot5_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 6 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dice_dot6_negative_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot6_negative_diagonal_frame1" />
+        </Animation>
+        <!--End | Player Dice Negative Diagonal Idle Animation-->
+
+
+        <!--Start | Player Dice Positive Diagonal Idle Animation-->
+        <!--Player Dice with 1 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dice_dot1_positive_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot1_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 2 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dice_dot2_positive_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot2_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 3 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dice_dot3_positive_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot3_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 4 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dice_dot4_positive_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot4_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 5 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dice_dot5_positive_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot5_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dice with 6 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dice_dot6_positive_diagonal_idle_animation" delay="100">
+            <Frame region="player_dice_dot6_positive_diagonal_frame1" />
+        </Animation>
+        <!--End | Player Dice Positive Diagonal Idle Animation-->
+
+
         <!--Start | Player Dice Horizontal Animation-->
         <!--Player Dice with 1 Dot Horizontal Animation-->
-        <Animation name="player_dice_dot1_horizontal_animation" delay="150">
+        <Animation name="player_dice_dot1_horizontal_animation" delay="100">
             <Frame region="player_dice_dot1_horizontal_frame1" />
             <Frame region="player_dice_dot1_horizontal_frame2" />
             <Frame region="player_dice_dot1_horizontal_frame3" />
@@ -213,7 +280,7 @@
         </Animation>
 
         <!--Player Dice with 2 Dot Horizontal Animation-->
-        <Animation name="player_dice_dot2_horizontal_animation" delay="150">
+        <Animation name="player_dice_dot2_horizontal_animation" delay="100">
             <Frame region="player_dice_dot2_horizontal_frame1" />
             <Frame region="player_dice_dot2_horizontal_frame2" />
             <Frame region="player_dice_dot2_horizontal_frame3" />
@@ -221,7 +288,7 @@
         </Animation>
 
         <!--Player Dice with 3 Dot Horizontal Animation-->
-        <Animation name="player_dice_dot3_horizontal_animation" delay="150">
+        <Animation name="player_dice_dot3_horizontal_animation" delay="100">
             <Frame region="player_dice_dot3_horizontal_frame1" />
             <Frame region="player_dice_dot3_horizontal_frame2" />
             <Frame region="player_dice_dot3_horizontal_frame3" />
@@ -229,7 +296,7 @@
         </Animation>
 
         <!--Player Dice with 4 Dot Horizontal Animation-->
-        <Animation name="player_dice_dot4_horizontal_animation" delay="150">
+        <Animation name="player_dice_dot4_horizontal_animation" delay="100">
             <Frame region="player_dice_dot4_horizontal_frame1" />
             <Frame region="player_dice_dot4_horizontal_frame2" />
             <Frame region="player_dice_dot4_horizontal_frame3" />
@@ -237,7 +304,7 @@
         </Animation>
 
         <!--Player Dice with 5 Dot Horizontal Animation-->
-        <Animation name="player_dice_dot5_horizontal_animation" delay="150">
+        <Animation name="player_dice_dot5_horizontal_animation" delay="100">
             <Frame region="player_dice_dot5_horizontal_frame1" />
             <Frame region="player_dice_dot5_horizontal_frame2" />
             <Frame region="player_dice_dot5_horizontal_frame3" />
@@ -245,7 +312,7 @@
         </Animation>
 
         <!--Player Dice with 6 Dot Horizontal Animation-->
-        <Animation name="player_dice_dot6_horizontal_animation" delay="150">
+        <Animation name="player_dice_dot6_horizontal_animation" delay="100">
             <Frame region="player_dice_dot6_horizontal_frame1" />
             <Frame region="player_dice_dot6_horizontal_frame2" />
             <Frame region="player_dice_dot6_horizontal_frame3" />
@@ -256,7 +323,7 @@
 
         <!--Start | Player Dice Vertical Animation-->
         <!--Player Dice with 1 Dot Vertical Animation-->
-        <Animation name="player_dice_dot1_vertical_animation" delay="150">
+        <Animation name="player_dice_dot1_vertical_animation" delay="100">
             <Frame region="player_dice_dot1_vertical_frame1" />
             <Frame region="player_dice_dot1_vertical_frame2" />
             <Frame region="player_dice_dot1_vertical_frame3" />
@@ -264,7 +331,7 @@
         </Animation>
 
         <!--Player Dice with 2 Dot Vertical Animation-->
-        <Animation name="player_dice_dot2_vertical_animation" delay="150">
+        <Animation name="player_dice_dot2_vertical_animation" delay="100">
             <Frame region="player_dice_dot2_vertical_frame1" />
             <Frame region="player_dice_dot2_vertical_frame2" />
             <Frame region="player_dice_dot2_vertical_frame3" />
@@ -272,7 +339,7 @@
         </Animation>
 
         <!--Player Dice with 3 Dot Vertical Animation-->
-        <Animation name="player_dice_dot3_vertical_animation" delay="150">
+        <Animation name="player_dice_dot3_vertical_animation" delay="100">
             <Frame region="player_dice_dot3_vertical_frame1" />
             <Frame region="player_dice_dot3_vertical_frame2" />
             <Frame region="player_dice_dot3_vertical_frame3" />
@@ -280,7 +347,7 @@
         </Animation>
 
         <!--Player Dice with 4 Dot Vertical Animation-->
-        <Animation name="player_dice_dot4_vertical_animation" delay="150">
+        <Animation name="player_dice_dot4_vertical_animation" delay="100">
             <Frame region="player_dice_dot4_vertical_frame1" />
             <Frame region="player_dice_dot4_vertical_frame2" />
             <Frame region="player_dice_dot4_vertical_frame3" />
@@ -288,7 +355,7 @@
         </Animation>
 
         <!--Player Dice with 5 Dot Vertical Animation-->
-        <Animation name="player_dice_dot5_vertical_animation" delay="150">
+        <Animation name="player_dice_dot5_vertical_animation" delay="100">
             <Frame region="player_dice_dot5_vertical_frame1" />
             <Frame region="player_dice_dot5_vertical_frame2" />
             <Frame region="player_dice_dot5_vertical_frame3" />
@@ -296,7 +363,7 @@
         </Animation>
 
         <!--Player Dice with 6 Dot Vertical Animation-->
-        <Animation name="player_dice_dot6_vertical_animation" delay="150">
+        <Animation name="player_dice_dot6_vertical_animation" delay="100">
             <Frame region="player_dice_dot6_vertical_frame1" />
             <Frame region="player_dice_dot6_vertical_frame2" />
             <Frame region="player_dice_dot6_vertical_frame3" />
@@ -307,7 +374,7 @@
         
         <!--Start | Player Dice Negative Diagonal Animation-->
         <!--Player Dice with 1 Dot Negative Diagonal Animation-->
-        <Animation name="player_dice_dot1_negative_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot1_negative_diagonal_animation" delay="100">
             <Frame region="player_dice_dot1_negative_diagonal_frame1" />
             <Frame region="player_dice_dot1_negative_diagonal_frame2" />
             <Frame region="player_dice_dot1_negative_diagonal_frame3" />
@@ -315,7 +382,7 @@
         </Animation>
 
         <!--Player Dice with 2 Dot Negative Diagonal Animation-->
-        <Animation name="player_dice_dot2_negative_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot2_negative_diagonal_animation" delay="100">
             <Frame region="player_dice_dot2_negative_diagonal_frame1" />
             <Frame region="player_dice_dot2_negative_diagonal_frame2" />
             <Frame region="player_dice_dot2_negative_diagonal_frame3" />
@@ -323,7 +390,7 @@
         </Animation>
 
         <!--Player Dice with 3 Dot Negative Diagonal Animation-->
-        <Animation name="player_dice_dot3_negative_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot3_negative_diagonal_animation" delay="100">
             <Frame region="player_dice_dot3_negative_diagonal_frame1" />
             <Frame region="player_dice_dot3_negative_diagonal_frame2" />
             <Frame region="player_dice_dot3_negative_diagonal_frame3" />
@@ -331,7 +398,7 @@
         </Animation>
 
         <!--Player Dice with 4 Dot Negative Diagonal Animation-->
-        <Animation name="player_dice_dot4_negative_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot4_negative_diagonal_animation" delay="100">
             <Frame region="player_dice_dot4_negative_diagonal_frame1" />
             <Frame region="player_dice_dot4_negative_diagonal_frame2" />
             <Frame region="player_dice_dot4_negative_diagonal_frame3" />
@@ -339,7 +406,7 @@
         </Animation>
 
         <!--Player Dice with 5 Dot Negative Diagonal Animation-->
-        <Animation name="player_dice_dot5_negative_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot5_negative_diagonal_animation" delay="100">
             <Frame region="player_dice_dot5_negative_diagonal_frame1" />
             <Frame region="player_dice_dot5_negative_diagonal_frame2" />
             <Frame region="player_dice_dot5_negative_diagonal_frame3" />
@@ -347,7 +414,7 @@
         </Animation>
 
         <!--Player Dice with 6 Dot Negative Diagonal Animation-->
-        <Animation name="player_dice_dot6_negative_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot6_negative_diagonal_animation" delay="100">
             <Frame region="player_dice_dot6_negative_diagonal_frame1" />
             <Frame region="player_dice_dot6_negative_diagonal_frame2" />
             <Frame region="player_dice_dot6_negative_diagonal_frame3" />
@@ -358,7 +425,7 @@
 
         <!--Start | Player Dice Positive Diagonal Animation-->
         <!--Player Dice with 1 Dot Positive Diagonal Animation-->
-        <Animation name="player_dice_dot1_positive_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot1_positive_diagonal_animation" delay="100">
             <Frame region="player_dice_dot1_positive_diagonal_frame1" />
             <Frame region="player_dice_dot1_positive_diagonal_frame2" />
             <Frame region="player_dice_dot1_positive_diagonal_frame3" />
@@ -366,7 +433,7 @@
         </Animation>
 
         <!--Player Dice with 2 Dot Positive Diagonal Animation-->
-        <Animation name="player_dice_dot2_positive_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot2_positive_diagonal_animation" delay="100">
             <Frame region="player_dice_dot2_positive_diagonal_frame1" />
             <Frame region="player_dice_dot2_positive_diagonal_frame2" />
             <Frame region="player_dice_dot2_positive_diagonal_frame3" />
@@ -374,7 +441,7 @@
         </Animation>
 
         <!--Player Dice with 3 Dot Positive Diagonal Animation-->
-        <Animation name="player_dice_dot3_positive_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot3_positive_diagonal_animation" delay="100">
             <Frame region="player_dice_dot3_positive_diagonal_frame1" />
             <Frame region="player_dice_dot3_positive_diagonal_frame2" />
             <Frame region="player_dice_dot3_positive_diagonal_frame3" />
@@ -382,7 +449,7 @@
         </Animation>
 
         <!--Player Dice with 4 Dot Positive Diagonal Animation-->
-        <Animation name="player_dice_dot4_positive_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot4_positive_diagonal_animation" delay="100">
             <Frame region="player_dice_dot4_positive_diagonal_frame1" />
             <Frame region="player_dice_dot4_positive_diagonal_frame2" />
             <Frame region="player_dice_dot4_positive_diagonal_frame3" />
@@ -390,7 +457,7 @@
         </Animation>
 
         <!--Player Dice with 5 Dot Positive Diagonal Animation-->
-        <Animation name="player_dice_dot5_positive_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot5_positive_diagonal_animation" delay="100">
             <Frame region="player_dice_dot5_positive_diagonal_frame1" />
             <Frame region="player_dice_dot5_positive_diagonal_frame2" />
             <Frame region="player_dice_dot5_positive_diagonal_frame3" />
@@ -398,7 +465,7 @@
         </Animation>
 
         <!--Player Dice with 6 Dot Positive Diagonal Animation-->
-        <Animation name="player_dice_dot6_positive_diagonal_animation" delay="150">
+        <Animation name="player_dice_dot6_positive_diagonal_animation" delay="100">
             <Frame region="player_dice_dot6_positive_diagonal_frame1" />
             <Frame region="player_dice_dot6_positive_diagonal_frame2" />
             <Frame region="player_dice_dot6_positive_diagonal_frame3" />
