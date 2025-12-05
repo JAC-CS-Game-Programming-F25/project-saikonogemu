@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using CoreLibrary;
 using CoreLibrary.Graphics;
 using CoreLibrary.Physics;
+using CoreLibrary.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -38,7 +39,7 @@ public abstract class GameEntity
     /// <summary>
     /// Gets the statemachine of the entity.
     /// </summary>
-    public StateMachine? StateMachine { get; set; }
+    public StateMachine StateMachine { get; set; } = new StateMachine();
 
     /// <summary>
     /// Gets the texture used for all game entities.
@@ -87,28 +88,25 @@ public abstract class GameEntity
     {
         _contentManager = content;
 
-        // Entity Sprite Name.
-        string name = GetValue(entityDefinition, "name", "default");
-
         // Entity Texture.
-        EntityTexture = TextureAtlas.FromFile(content, GetValue(entityDefinition, "texture", "FailedTextureLoading"));
+        EntityTexture = TextureAtlas.FromFile(content, Utils.GetValue(entityDefinition, "texture", "FailedTextureLoading"));
 
         // Current Animation.
-        CurrentAnimation = EntityTexture.CreateAnimatedSprite(name);
+        CurrentAnimation = EntityTexture.CreateAnimatedSprite(Utils.GetValue(entityDefinition, "animationName", "default"));
 
         // Collisions.
-        Vector2 sizeOffset = GetValue(entityDefinition, "sizeOffset", Vector2.Zero);
-        Vector2 position = GetValue(entityDefinition, "position", Vector2.Zero);
-        Vector2 positionOffset = GetValue(entityDefinition, "positionOffset", Vector2.Zero);
+        Vector2 sizeOffset = Utils.GetValue(entityDefinition, "sizeOffset", Vector2.Zero);
+        Vector2 position = Utils.GetValue(entityDefinition, "position", Vector2.Zero);
+        Vector2 positionOffset = Utils.GetValue(entityDefinition, "positionOffset", Vector2.Zero);
         Hitbox = PhysicsManager.Instance.CreateSpriteRigidBody(CurrentAnimation, sizeOffset, position, positionOffset);
 
         // Physics.
-        Hitbox.Velocity = GetValue(entityDefinition, "velocity", Vector2.One);
+        Hitbox.Velocity = Utils.GetValue(entityDefinition, "velocity", Vector2.Zero);
 
         // Lively Things.
-        TotalHealth = GetValue(entityDefinition, "entityTotalHealth", 1);
+        TotalHealth = Utils.GetValue(entityDefinition, "entityTotalHealth", 1);
         Health = TotalHealth;
-        Strength = GetValue(entityDefinition, "entityStrength", 1);
+        Strength = Utils.GetValue(entityDefinition, "entityStrength", 1);
     }
 
     #endregion Constructors
@@ -149,7 +147,7 @@ public abstract class GameEntity
     /// </summary>
     /// <param name="name">The name of the state to change to.</param>
     /// <param name="parameters">Optional enter methods parameters.</param>
-    public void ChangeState(string name, object? parameters = null)
+    public void ChangeState(string name, Dictionary<string, object>? parameters = null)
     {
         StateMachine?.Change(name, parameters);
     }
@@ -190,21 +188,4 @@ public abstract class GameEntity
         }
     }
     #endregion Methods
-
-    #region Helper Methods   
-    /// <summary>
-    /// Gets the potentially null value from a potentially null dictionary.
-    /// </summary>
-    /// <typeparam name="T">The type we are trying to convert to.</typeparam>
-    /// <param name="dictionary">The potentially null dictionary.</param>
-    /// <param name="key">The key to the potentially null or invalid value.</param>
-    /// <param name="fallback">The fallback default.</param>
-    /// <returns>The fallback value if it fails; the value itself otherwise.</returns>
-    T GetValue<T>(Dictionary<string, object>? dictionary, string key, T fallback)
-    {
-        if (dictionary != null && dictionary.TryGetValue(key, out var value) && value is T castValue)
-            return castValue;
-        return fallback;
-    }
-    #endregion Helper Methods
 }

@@ -13,9 +13,12 @@
  *  © 2025 FarLostBrand. All rights reserved.
  ***************************************************************/
 
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace CoreLibrary;
+
+#nullable enable
 
 /// <summary>
 /// Represents the state of an entity, object, etc.
@@ -26,7 +29,7 @@ public abstract class State
     /// Called when entering this State.
     /// </summary>
     /// <param name="parameters">Optional parameters needed from other states.</param>
-    public virtual void Enter(object parameters = null) { }
+    public virtual void Enter(Dictionary<string, object>? parameters = null) { }
 
     /// <summary>
     /// Called when exiting this State.
@@ -42,7 +45,7 @@ public abstract class State
     /// <summary>
     /// Called every GameTime while this state is active.
     /// </summary>
-    /// <param name="gameTime"></param>
+    /// <param name="gameTime">The GameTime of the game.</param>
     public virtual void Draw(GameTime gameTime) { }
 }
 

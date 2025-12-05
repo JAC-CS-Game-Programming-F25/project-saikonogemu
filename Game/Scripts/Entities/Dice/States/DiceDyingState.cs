@@ -1,22 +1,14 @@
-using System;
 using System.Collections.Generic;
 using CoreLibrary;
-using CoreLibrary.Utils;
 using Microsoft.Xna.Framework;
-
-namespace DieTheRollingDiceGame;
 
 #nullable enable
 
 /// <summary>
-/// Represents the state of an entity, object, etc.
+/// Represents the state of the dice in dying form.
 /// </summary>
-public class PlayState : State
+public class DiceDyingState : State
 {
-    #region Fields
-    private List<Dice> _dice;
-    #endregion Fields
-
     #region Lifecycle Methods
     /// <summary>
     /// Called when entering this State.
@@ -24,14 +16,7 @@ public class PlayState : State
     /// <param name="parameters">Optional parameters needed from other states.</param>
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
-        base.Enter();
-
-        _dice = Utils.GetValue(parameters, "dice", new List<Dice>());
-
-        if (_dice is null)
-        {
-            throw new ArgumentNullException("Passed dice in PlayState shouldn't be null.");
-        }
+        base.Enter(parameters);
     }
 
     /// <summary>
@@ -49,22 +34,15 @@ public class PlayState : State
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-
-        // TODO: PlayState: Updates NPC movements. Keyboard inputs. Gamepad inputs. Update physics manager.
-        foreach (Dice die in _dice)
-        {
-            die.Update(gameTime);
-        }
     }
 
     /// <summary>
     /// Called every GameTime while this state is active.
     /// </summary>
-    /// <param name="gameTime"></param>
+    /// <param name="gameTime">The GameTime of the game.</param>
     public override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
     }
     #endregion Lifecycle Methods
 }
-

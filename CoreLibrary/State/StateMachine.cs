@@ -21,6 +21,8 @@ using Microsoft.Xna.Framework;
 
 namespace CoreLibrary;
 
+#nullable enable
+
 /// <summary>
 /// Stores the different states and helps manage it.
 /// </summary>
@@ -51,7 +53,7 @@ public class StateMachine
     /// <param name="state">The state you would like to add to the state machine (value).</param>
     /// <param name="enterParameters">The parameters passed to the state when it's enter is called.</param>
     /// <exception cref="ArgumentNullException">Thrown when invalid State is provided.</exception>
-    public void Add(string name, State state, object enterParameters = null)
+    public void Add(string name, State state, Dictionary<string, object>? enterParameters = null)
     {
         // Throws if the given state is an invalid state.
         if (state == null)
@@ -77,7 +79,7 @@ public class StateMachine
     /// <param name="name">The name of the state you would like to change to.</param>
     /// <param name="enterParameters">The parameters passed to the state when it's enter is called.</param>
     /// <exception cref="InvalidOperationException"></exception>
-    public void Change(string name, object enterParameters = null)
+    public void Change(string name, Dictionary<string, object>? enterParameters = null)
     {
         // Checks to make sure state you want to change to exist.
         if (!_states.TryGetValue(name, out var newState))

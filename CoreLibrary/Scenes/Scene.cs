@@ -15,6 +15,7 @@
  ***************************************************************/
 
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -47,7 +48,7 @@ public abstract class Scene : IDisposable
     /// <summary>
     /// Gets the statemachine of the entity.
     /// </summary>
-    public StateMachine? StateMachine { get; set; }
+    public StateMachine StateMachine { get; set; } = new StateMachine();
 
     #endregion Properties
 
@@ -130,7 +131,7 @@ public abstract class Scene : IDisposable
     /// </summary>
     /// <param name="name">The name of the state to change to.</param>
     /// <param name="parameters">Optional enter methods parameters.</param>
-    public void ChangeState(string name, object? parameters = null)
+    public void ChangeState(string name, Dictionary<string, object>? parameters = null)
     {
         StateMachine?.Change(name, parameters);
     }

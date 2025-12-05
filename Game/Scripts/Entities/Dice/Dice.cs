@@ -17,7 +17,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using CoreLibrary.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -25,6 +24,10 @@ using Microsoft.Xna.Framework.Content;
 
 public class Dice : GameEntity
 {
+    #region Fields
+    private const float _diceScale = 3.0f;
+    #endregion Fields
+
     #region Constructors
     /// <summary>
     /// Creates a new dice entity instance.
@@ -32,7 +35,10 @@ public class Dice : GameEntity
     /// </summary>
     /// <param name="content">The content manager used by the scene to load in content.</param>
     /// <param name="diceDefinition">All the dice specific parameters.</param>
-    public Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition) {}
+    public Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition)
+    {
+        CurrentAnimation.Scale = new Vector2(_diceScale, _diceScale);
+    }
     #endregion Constructors
 
     #region Update and Draw
@@ -55,7 +61,7 @@ public class Dice : GameEntity
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
     public override void Draw(GameTime gameTime)
     {
-        base.Update(gameTime);
+        base.Draw(gameTime);
     }
 
     #endregion Update and Draw
@@ -75,51 +81,51 @@ public class Dice : GameEntity
         if (Hitbox.Velocity == Vector2.Zero)
         {
             // Dice is still.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_idle_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_idle_animation");
         } 
         else if (Hitbox.Velocity.X < 0 && Hitbox.Velocity.Y < 0)
         {
             // Dice is moving left up.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_negative_diagonal_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_negative_diagonal_animation");
             CurrentAnimation.ReverseAnimation();
         }
         else if (Hitbox.Velocity.X > 0 && Hitbox.Velocity.Y > 0)
         {
             // Dice is moving right down.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_negative_diagonal_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_negative_diagonal_animation");
         }
         else if (Hitbox.Velocity.Y > 0 && Hitbox.Velocity.X < 0 )
         {
             // Dice is moving left down.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_positive_diagonal_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_positive_diagonal_animation");
             CurrentAnimation.ReverseAnimation();
         }
         else if (Hitbox.Velocity.Y < 0 && Hitbox.Velocity.X > 0 )
         {
             // Dice is moving right up.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_positive_diagonal_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_positive_diagonal_animation");
         }
         else if (Hitbox.Velocity.X < 0)
         {
             // Dice is moving left.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_horizontal_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_horizontal_animation");
             CurrentAnimation.ReverseAnimation();
         }
         else if (Hitbox.Velocity.X > 0)
         {
             // Dice is moving right.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_horizontal_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_horizontal_animation");
         }
         else if (Hitbox.Velocity.Y < 0)
         {
             // Dice is moving up.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_vertical_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_vertical_animation");
             CurrentAnimation.ReverseAnimation();
         }
         else if (Hitbox.Velocity.Y > 0)
         {
             // Dice is moving down.
-            UpdateAnimation(GetDiceTypeTexture() + $"dot{Health}_vertical_animation");
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}_vertical_animation");
         }
     }
 
@@ -161,7 +167,6 @@ public class Dice : GameEntity
         // If there was a match.
         if (match.Success)
         {
-            Debug.WriteLine(match.Groups[1].Value);
             return match.Groups[1].Value;
         }
 
