@@ -48,7 +48,6 @@ public class AnimatedSprite : Sprite
             Region = _animation.Frames[0];
         }
     }
-
     #endregion Properties
 
     #region Constructors

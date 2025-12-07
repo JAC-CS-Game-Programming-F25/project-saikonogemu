@@ -74,7 +74,7 @@ public class Rigidbody
     /// <param name="size">The size of the rigidbody collider.</param>
     public Rigidbody(bool dynamic, Vector2 position, Vector2 size)
     {
-        Collider = new RectangleFloat(position.X, position.Y, size.X, size.Y);
+        Collider = new RectangleFloat(position, size.X, size.Y);
         Dynamic = dynamic;
     }
 
@@ -87,7 +87,7 @@ public class Rigidbody
     /// <param name="height">The height of the rigidbody collider.</param>
     public Rigidbody(bool dynamic, Vector2 position, float width, float height)
     {
-        Collider = new RectangleFloat(position.X, position.Y, width, height);
+        Collider = new RectangleFloat(position, width, height);
         Dynamic = dynamic;
     }
 

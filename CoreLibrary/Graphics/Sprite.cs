@@ -14,6 +14,7 @@
  *  © 2025 FarLostBrand. All rights reserved.
  ***************************************************************/
 
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -79,6 +80,11 @@ public class Sprite
     /// </summary>
     public float Height => Region.Height * Scale.Y;
 
+    /// <summary>
+    /// The offset to render the sprite at.
+    /// </summary>
+    public Vector2 SpriteOffset { get; set; } = Vector2.Zero;
+
     #endregion Properties
 
     #region Constructors
@@ -117,7 +123,7 @@ public class Sprite
     /// <param name="position">The XY-coordinate position to render this sprite at.</param>
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
+        Region.Draw(spriteBatch, position + SpriteOffset, Color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
 
     #endregion Public Methods

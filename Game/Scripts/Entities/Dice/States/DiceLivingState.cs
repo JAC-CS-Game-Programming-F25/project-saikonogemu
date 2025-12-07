@@ -69,95 +69,110 @@ public class DiceLivingState : State
     /// </summary>
     public void UpdateAnimationRelativeToMovement()
     {
-        if (Dice is null || Dice.CurrentAnimation.CurrentCycle < 1) return;
+        if (Dice is null) return;
 
         if (Dice.Hitbox.Velocity == Vector2.Zero)
         {
             if (Dice.DiceDirection == DiceDirections.UpLeft || Dice.DiceDirection == DiceDirections.DownRight)
             {
+                Console.WriteLine("here");
                 // Dice is negative diagonal still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_negative_diagonal_idle_animation");
+                Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
             }
             else if (Dice.DiceDirection == DiceDirections.UpRight || Dice.DiceDirection == DiceDirections.DownLeft)
             {
                 // Dice is negative diagonal still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_positive_diagonal_idle_animation");
+                Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
             }
             else
             {
                 // Dice is still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_idle_animation");
+                Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
             }
         } 
         else if (Dice.Hitbox.Velocity.X < 0 && Dice.Hitbox.Velocity.Y < 0)
         {
-            // Dice is moving left up.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_negative_diagonal_animation");
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.UpLeft) return;
 
-            ReverseDiceAnimationIfNeeded(DiceDirections.UpLeft);
+            // Dice is moving left up.
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_up_left_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.UpLeft;
         }
         else if (Dice.Hitbox.Velocity.X > 0 && Dice.Hitbox.Velocity.Y > 0)
         {
-            // Dice is moving right down.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_negative_diagonal_animation");
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.DownRight) return;
 
-            ReverseDiceAnimationIfNeeded(DiceDirections.DownRight);
+            // Dice is moving right down.
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_down_right_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.DownRight;
         }
         else if (Dice.Hitbox.Velocity.Y > 0 && Dice.Hitbox.Velocity.X < 0 )
         {
-            // Dice is moving left down.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_positive_diagonal_animation");
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.DownLeft) return;
             
-            ReverseDiceAnimationIfNeeded(DiceDirections.DownLeft);
+            // Dice is moving left down.
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_down_left_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.DownLeft;
         }
         else if (Dice.Hitbox.Velocity.Y < 0 && Dice.Hitbox.Velocity.X > 0 )
         {
-            // Dice is moving right up.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_positive_diagonal_animation");
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.UpRight) return;
 
-            ReverseDiceAnimationIfNeeded(DiceDirections.UpRight);
+            // Dice is moving right up.
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_up_right_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.UpRight;
         }
         else if (Dice.Hitbox.Velocity.X < 0)
         {
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.Left) return;
+
             // Dice is moving left.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_horizontal_animation");
-            
-            ReverseDiceAnimationIfNeeded(DiceDirections.Left);
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_left_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.Left;
         }
         else if (Dice.Hitbox.Velocity.X > 0)
         {
-            // Dice is moving right.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_horizontal_animation");
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.Right) return;
 
-            ReverseDiceAnimationIfNeeded(DiceDirections.Right);
+            // Dice is moving right.
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_right_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.Right;
         }
         else if (Dice.Hitbox.Velocity.Y < 0)
         {
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.Up) return;
+
             // Dice is moving up.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_vertical_animation");
-            
-            ReverseDiceAnimationIfNeeded(DiceDirections.Up);
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_up_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.Up;
         }
         else if (Dice.Hitbox.Velocity.Y > 0)
         {
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.Down) return;
+
             // Dice is moving down.
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_vertical_animation");
-
-            ReverseDiceAnimationIfNeeded(DiceDirections.Down);
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_down_animation");
+            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.DiceDirection = DiceDirections.Down;
         }
-    }
-
-    public void ReverseDiceAnimationIfNeeded(DiceDirections goingDirection)
-    {
-        if (Dice is null) return;
-
-        if (goingDirection == Dice.DiceDirection) return;
-        else if ((goingDirection is DiceDirections.Left or DiceDirections.Up or DiceDirections.UpLeft or DiceDirections.DownLeft) &&
-                (Dice.DiceDirection is DiceDirections.Right or DiceDirections.Down or DiceDirections.DownRight or DiceDirections.UpRight)) Dice.CurrentAnimation.ReverseAnimation();
-        else if ((Dice.DiceDirection is DiceDirections.Left or DiceDirections.Up or DiceDirections.UpLeft or DiceDirections.DownLeft) &&
-                (goingDirection is DiceDirections.Right or DiceDirections.Down or DiceDirections.DownRight or DiceDirections.UpRight)) Dice.CurrentAnimation.ReverseAnimation();
-
-        Dice.DiceDirection = goingDirection;
     }
     #endregion Methods
 }

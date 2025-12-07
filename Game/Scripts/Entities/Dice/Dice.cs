@@ -24,11 +24,9 @@ using Microsoft.Xna.Framework.Content;
 
 public class Dice : GameEntity
 {
-    #region Fields
-    private const float _diceScale = 3.0f;
-    #endregion Fields
-
     #region Properties
+    public const float NORMAL_OFFSET = -5.0f;
+    public const float DIAGONAL_OFFSET = -10.0f;
     public DiceDirections DiceDirection {get; set;} = DiceDirections.Right;
     #endregion Properties
 
@@ -39,10 +37,7 @@ public class Dice : GameEntity
     /// </summary>
     /// <param name="content">The content manager used by the scene to load in content.</param>
     /// <param name="diceDefinition">All the dice specific parameters.</param>
-    public Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition)
-    {
-        CurrentAnimation.Scale = new Vector2(_diceScale, _diceScale);
-    }
+    public Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition) { }
     #endregion Constructors
 
     #region Update and Draw
@@ -54,6 +49,7 @@ public class Dice : GameEntity
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        CurrentAnimation.Scale = Scale;
     }
 
     /// <summary>

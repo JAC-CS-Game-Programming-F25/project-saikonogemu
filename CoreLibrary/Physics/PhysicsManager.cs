@@ -31,7 +31,7 @@ public sealed class PhysicsManager
 {
     #region Fields
 
-    private static readonly List<RectangleFloat> _tileColliders = new();
+    private readonly List<RectangleFloat> _tileColliders = new();
     private readonly List<Rigidbody> _rigidBodies = new();
     private readonly List<CollisionManifold> _collisionManifolds = new();
 
@@ -45,7 +45,7 @@ public sealed class PhysicsManager
     /// <summary>
     /// Gets or sets all tile colliders currently used for collision checks.
     /// </summary>
-    public static IEnumerable<RectangleFloat> TileColliders
+    public IEnumerable<RectangleFloat> TileColliders
     {
         get => _tileColliders;
         set
@@ -152,7 +152,7 @@ public sealed class PhysicsManager
     /// Adds a rigidbody to the physics simulation.
     /// </summary>
     /// <param name="rigidbody">The rigidbody to register.</param>
-    public void AddRigibody(Rigidbody rigidbody) => _rigidBodies.Add(rigidbody);
+    public void AddRigidbody(Rigidbody rigidbody) => _rigidBodies.Add(rigidbody);
 
     /// <summary>
     /// Creates and registers a rigidbody based on a <see cref="Sprite"/>.
@@ -162,11 +162,11 @@ public sealed class PhysicsManager
     /// <param name="position">The starting position of the rigidbody.</param>
     /// <param name="positionOffset">The position offset of the hitbox from the bounding box.</param>
     /// <returns>The created rigidbody instance.</returns>
-    public Rigidbody CreateSpriteRigidBody(Sprite sprite, Vector2 sizeOffset, Vector2 position, Vector2 positionOffset)
+    public Rigidbody CreateSpriteRigidBody(Sprite sprite, Vector2 sizeOffset, Vector2 position, Vector2 scale)
     {
-        Vector2 size = new Vector2(sprite.Width + sizeOffset.X, sprite.Height + sizeOffset.Y);
-        Rigidbody rigidbody = new Rigidbody(true, position + positionOffset, size);
-        AddRigibody(rigidbody);
+        Vector2 size = new Vector2(sprite.Width + sizeOffset.X, sprite.Height + sizeOffset.Y) * scale;
+        Rigidbody rigidbody = new(true, position, size);
+        AddRigidbody(rigidbody);
         return rigidbody;
     }
 
@@ -178,11 +178,11 @@ public sealed class PhysicsManager
     /// <param name="position">The starting position of the rigidbody.</param>
     /// <param name="positionOffset">The position offset of the hitbox from the bounding box.</param>
     /// <returns>The created rigidbody instance.</returns>
-    public Rigidbody CreateSpriteRigidBody(AnimatedSprite animatedSprite, Vector2 sizeOffset, Vector2 position, Vector2 positionOffset)
+    public Rigidbody CreateSpriteRigidBody(AnimatedSprite animatedSprite, Vector2 sizeOffset, Vector2 position, Vector2 scale)
     {
-        Vector2 size = new Vector2(animatedSprite.Width + sizeOffset.X, animatedSprite.Height + sizeOffset.Y);
-        Rigidbody rigidbody = new(true, position + positionOffset, size);
-        AddRigibody(rigidbody);
+        Vector2 size = new Vector2(animatedSprite.Width + sizeOffset.X, animatedSprite.Height + sizeOffset.Y) * scale;
+        Rigidbody rigidbody = new(true, position, size);
+        AddRigidbody(rigidbody);
         return rigidbody;
     }
 

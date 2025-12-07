@@ -13,7 +13,7 @@ namespace DieTheRollingDiceGame;
 public class GameScene : Scene
 {
     #region  Fields
-    // FIXME: Adjust the fields to properties as needed. Might want to make protected too.
+    private Texture2D _debugRed;
 
     // TODO: The camera might be moved to Scene.
     // The camera for the scene (what the player sees)
@@ -57,7 +57,7 @@ public class GameScene : Scene
         base.LoadContent();
 
         // FIXME: Move to Level
-        _tilemap = Tilemap.FromFile(Content, "Images/Levels/XML/level4.xml");
+        _tilemap = Tilemap.FromFile(Content, "Images/Levels/XML/level1.xml");
         _tilemap.Scale = new Vector2(3.0f, 3.0f);
 
         // TODO: Initialize player, initialize enemies, initialize targets. Use dice factory. Pass in dice to PlayState.
@@ -77,17 +77,32 @@ public class GameScene : Scene
                 ["texture"] = "Images/Atlas/player_dice_atlas.xml",
                 ["animationName"] = "player_dice_dot6_idle_animation",
                 ["position"] = new Vector2(centerColumn * _tilemap.TileWidth, centerRow * _tilemap.TileHeight),
+                ["positionOffset"] = new Vector2(-5, -5),
+                ["sizeOffset"] = new Vector2(-10, -10),
+                ["scale"] = new Vector2(3.0f, 3.0f),
                 ["entityTotalHealth"] = 6
             }
         ));
 
         // Adds the states to the state machine.
         StateMachine.Add("PlayState", new PlayState(), new Dictionary<string, object> { ["dice"] = _dice});
+
+        // TODO: REMOVE THIS
+        _debugRed = new Texture2D(Core.GraphicsDevice, 1, 1);
+        _debugRed.SetData(new[] { Color.White });
+
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        
+        // FIXME: Make it so it works with the camera smh.
+        // Adds collidable tiles to the Physics.
+        PhysicsManager.Instance.TileColliders = _tilemap.GetNearbyColliders(
+            new RectangleFloat(0,0, _tilemap.Columns * 32 * 3, _tilemap.Rows * 32 * 3)
+        );
     }
 
     public override void Draw(GameTime gameTime)
@@ -109,6 +124,47 @@ public class GameScene : Scene
         foreach (Dice die in _dice)
         {
             die.Draw(gameTime);
+        }
+
+        // TODO: DELETE ME
+        if (PhysicsManager.Instance.TileColliders != null)
+        {
+            foreach (var r in PhysicsManager.Instance.TileColliders)
+            {
+                // r is RectangleFloat: convert to Rectangle for SpriteBatch draw
+                Rectangle drawRect = new Rectangle(
+                    (int)Math.Floor(r.Left),
+                    (int)Math.Floor(r.Top),
+                    (int)Math.Ceiling(r.Width),
+                    (int)Math.Ceiling(r.Height)
+                );
+
+                // outline: 1px thick borders
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, 1), Color.Red);
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Bottom - 1, drawRect.Width, 1), Color.Red);
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Top, 1, drawRect.Height), Color.Red);
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Right - 1, drawRect.Top, 1, drawRect.Height), Color.Red);
+            }
+
+            foreach (var r in PhysicsManager.Instance.RigidBodies)
+            {
+                // r is RectangleFloat: convert to Rectangle for SpriteBatch draw
+                Rectangle drawRect = new Rectangle(
+                    (int)Math.Floor(r.Collider.Left),
+                    (int)Math.Floor(r.Collider.Top),
+                    (int)Math.Ceiling(r.Collider.Width),
+                    (int)Math.Ceiling(r.Collider.Height)
+                );
+
+                // fill with translucent red
+                Core.SpriteBatch.Draw(_debugRed, drawRect, new Color(255, 0, 0, 80));
+
+                // outline: 1px thick borders
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, 1), Color.Red);
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Bottom - 1, drawRect.Width, 1), Color.Red);
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Top, 1, drawRect.Height), Color.Red);
+                Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Right - 1, drawRect.Top, 1, drawRect.Height), Color.Red);
+            }
         }
 
         // Ends the drawing.

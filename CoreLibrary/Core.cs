@@ -215,7 +215,7 @@ public class Core : Game
         // If there is an active scene, update it.
         if (s_activeScene != null)
         {
-            Physics.Update(gameTime); // TODO: Add fixed timestep physics later.
+            Physics.Update(gameTime);
             s_activeScene.Update(gameTime);
         }
 

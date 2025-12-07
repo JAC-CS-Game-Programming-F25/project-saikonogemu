@@ -327,7 +327,15 @@ public class Tilemap
                 string[] solidIds = collidableElement.Value
                     .Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 foreach (var id in solidIds)
-                    collidableTiles.Add(int.Parse(id));
+                {
+                    // Get the tileset index for this location
+                    int tilesetIndex = int.Parse(id) - 1;
+
+                    if (tilesetIndex < 0)
+                        continue;
+
+                    collidableTiles.Add(tilesetIndex);
+                }
             }
 
             // Split the value of the tiles data into rows by splitting on

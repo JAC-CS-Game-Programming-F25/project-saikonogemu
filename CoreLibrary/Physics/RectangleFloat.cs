@@ -94,7 +94,7 @@ public struct RectangleFloat : IEquatable<RectangleFloat>
     /// </summary>
     public Vector2 Position
     {
-        readonly get => new Vector2(Left, Top);
+        readonly get => new Vector2(_x, _y);
         set
         {
             _x = value.X;

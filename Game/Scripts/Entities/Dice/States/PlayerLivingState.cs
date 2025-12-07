@@ -14,10 +14,6 @@ using Microsoft.Xna.Framework.Input;
 /// </summary>
 public class PlayerLivingState : DiceLivingState
 {
-    #region Fields
-    private const float MOVEMENT_SPEED = 200.0f;
-    #endregion Fields
-
     #region Lifecycle Methods
     /// <summary>
     /// Called when entering this State.
@@ -66,17 +62,25 @@ public class PlayerLivingState : DiceLivingState
     {
         Vector2 selectDelta = Vector2.Zero;
 
-        // If the W or Up keys are down, move the slime up on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.W)) selectDelta.Y -= MOVEMENT_SPEED;
+        // TODO: make it so that these are tied to settings.
 
-        // if the S or Down keys are down, move the slime down on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.S)) selectDelta.Y += MOVEMENT_SPEED;
+        // If the W or Up keys are down, move the player up on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.W)) selectDelta.Y -= 1;
 
-        // If the A or Left keys are down, move the slime left on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.A)) selectDelta.X -= MOVEMENT_SPEED;
+        // if the S or Down keys are down, move the player down on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.S)) selectDelta.Y += 1;
 
-        // If the D or Right keys are down, move the slime right on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.D)) selectDelta.X += MOVEMENT_SPEED;
+        // If the A or Left keys are down, move the player left on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.A)) selectDelta.X -= 1;
+
+        // If the D or Right keys are down, move the player right on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.D)) selectDelta.X += 1;
+
+        // We normalize if it's possible (this makes diagonals the same speed as horizontals/verticals).
+        if (selectDelta != Vector2.Zero)
+        {
+            selectDelta = Vector2.Normalize(selectDelta) * Dice!.Speed;
+        }
 
         // Modifies the player's velocity.
         Dice!.Hitbox.Velocity = selectDelta;

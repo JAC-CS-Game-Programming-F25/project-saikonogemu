@@ -72,6 +72,16 @@ public abstract class GameEntity
     public int Strength { get; set; }
 
     /// <summary>
+    /// Gets the scale of the entity.
+    /// </summary>
+    public Vector2 Scale { get; set; }
+
+    /// <summary>
+    /// Gets the speed of the entity.
+    /// </summary>
+    public float Speed { get; set; }
+
+    /// <summary>
     /// Gets whether the entity is dead.
     /// </summary>
     public bool IsDead { get; set; } = false;
@@ -93,15 +103,17 @@ public abstract class GameEntity
 
         // Current Animation.
         CurrentAnimation = EntityTexture.CreateAnimatedSprite(Utils.GetValue(entityDefinition, "animationName", "default"));
+        Scale = Utils.GetValue(entityDefinition, "scale", Vector2.One);
+        CurrentAnimation.SpriteOffset = Utils.GetValue(entityDefinition, "positionOffset", Vector2.Zero) * Scale;
 
         // Collisions.
         Vector2 sizeOffset = Utils.GetValue(entityDefinition, "sizeOffset", Vector2.Zero);
         Vector2 position = Utils.GetValue(entityDefinition, "position", Vector2.Zero);
-        Vector2 positionOffset = Utils.GetValue(entityDefinition, "positionOffset", Vector2.Zero);
-        Hitbox = PhysicsManager.Instance.CreateSpriteRigidBody(CurrentAnimation, sizeOffset, position, positionOffset);
+        Hitbox = PhysicsManager.Instance.CreateSpriteRigidBody(CurrentAnimation, sizeOffset, position, Scale);
 
         // Physics.
         Hitbox.Velocity = Utils.GetValue(entityDefinition, "velocity", Vector2.Zero);
+        Speed = Utils.GetValue(entityDefinition, "speed", 100) * Scale.X;
 
         // Lively Things.
         TotalHealth = Utils.GetValue(entityDefinition, "entityTotalHealth", 1);
@@ -180,11 +192,13 @@ public abstract class GameEntity
         // Animation
         try
         {
+            Vector2 offset = CurrentAnimation.SpriteOffset;
             CurrentAnimation = EntityTexture.CreateAnimatedSprite(animationName, totalCycles);
+            CurrentAnimation.SpriteOffset = offset;
         } 
         catch
         {
-            throw new Exception($"Failed to load new animation in GameEntity. Animation name: {animationName}.");
+            throw new Exception($"Failed to load new animation in GameEntity. Animation name: {animationName}");
         }
     }
     #endregion Methods
