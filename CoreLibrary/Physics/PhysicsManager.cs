@@ -145,7 +145,7 @@ public sealed class PhysicsManager
 
     /// <summary>
     /// Clears all registered rigidbodies from the simulation.
-    /// </sucmmary>
+    /// </summary>
     public void Reset() => _rigidBodies.Clear();
 
     /// <summary>

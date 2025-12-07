@@ -73,24 +73,29 @@ public class DiceLivingState : State
 
         if (Dice.Hitbox.Velocity == Vector2.Zero)
         {
+            // Returns if we are already animating the correct way.
+            if (Dice.DiceDirection == DiceDirections.Idle) return;
+
             if (Dice.DiceDirection == DiceDirections.UpLeft || Dice.DiceDirection == DiceDirections.DownRight)
             {
-                Console.WriteLine("here");
                 // Dice is negative diagonal still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_negative_diagonal_idle_animation");
                 Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+                Dice.DiceDirection = DiceDirections.Idle;
             }
             else if (Dice.DiceDirection == DiceDirections.UpRight || Dice.DiceDirection == DiceDirections.DownLeft)
             {
                 // Dice is negative diagonal still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_positive_diagonal_idle_animation");
                 Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+                Dice.DiceDirection = DiceDirections.Idle;
             }
             else
             {
                 // Dice is still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_idle_animation");
                 Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+                Dice.DiceDirection = DiceDirections.Idle;
             }
         } 
         else if (Dice.Hitbox.Velocity.X < 0 && Dice.Hitbox.Velocity.Y < 0)

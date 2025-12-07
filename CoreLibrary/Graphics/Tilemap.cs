@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using CoreLibrary.Physics;
@@ -35,12 +36,15 @@ public class Tilemap
     #region Fields
 
     private readonly Tileset _tileset;
-    private readonly int?[] _tiles;
-    private readonly bool[] _collidable;
-
+    private readonly Dictionary<int, int?[]> _layeredTiles;
+    private readonly Dictionary<int, bool[]> _layerCollidable;
     #endregion Fields
 
     #region Properties
+    /// <summary>
+    /// Gets the list of layers in this tilemap.
+    /// </summary>
+    public List<int> Layers {get; private set;} = new List<int>();
 
     /// <summary>
     /// Gets the total number of rows in this tilemap.
@@ -89,8 +93,10 @@ public class Tilemap
         Columns = columns;
         Count = Columns * Rows;
         Scale = Vector2.One;
-        _tiles = new int?[Count];
-        _collidable = new bool[Count];
+        _layeredTiles = new Dictionary<int, int?[]>();
+        _layerCollidable = new Dictionary<int, bool[]>();
+
+        EnsureLayerCapacity(0);
     }
 
     #endregion Constructors
@@ -98,16 +104,34 @@ public class Tilemap
     #region Public Methods
 
     /// <summary>
+    /// Adds a new layer to the dictionaries if that layer doesn't exist.
+    /// </summary>
+    /// <param name="layerNumber">The layer to ensure.</param>
+    public void EnsureLayerCapacity(int layerNumber)
+    {
+        if (!_layeredTiles.ContainsKey(layerNumber))
+        {
+            _layeredTiles[layerNumber] = new int?[Count];
+            _layerCollidable[layerNumber] = new bool[Count];
+            Layers.Add(layerNumber);
+        }
+    }
+
+
+    /// <summary>
     /// Sets the tile at the given index in this tilemap to use the tile from
     /// the tileset at the specified tileset id.
     /// </summary>
     /// <param name="index">The index of the tile in this tilemap.</param>
+    /// <param name="layerNumber"> The layer that this tile is on. </param>
     /// <param name="tilesetID">The tileset id of the tile from the tileset to use.</param>
     /// <param name="collidable">Whether the tile is collidable, default is false.</param>
-    public void SetTile(int index, int? tilesetID, bool collidable = false)
+    public void SetTile(int index, int layerNumber, int tilesetID, bool collidable = false)
     {
-        _tiles[index] = tilesetID;
-        _collidable[index] = collidable && tilesetID.HasValue;
+        EnsureLayerCapacity(layerNumber);
+
+        _layeredTiles[layerNumber][index] = tilesetID;
+        _layerCollidable[layerNumber][index] = collidable;
     }
 
     /// <summary>
@@ -116,21 +140,24 @@ public class Tilemap
     /// </summary>
     /// <param name="column">The column of the tile in this tilemap.</param>
     /// <param name="row">The row of the tile in this tilemap.</param>
+    /// <param name="layerNumber"> The layer that this tile is on. </param>
     /// <param name="tilesetID">The tileset id of the tile from the tileset to use.</param>
-    public void SetTile(int column, int row, int tilesetID, bool collidable = false)
+    /// <param name="collidable">Whether the tile is collidable, default is false.</param>
+    public void SetTile(int column, int row, int layerNumber, int tilesetID, bool collidable = false)
     {
         int index = row * Columns + column;
-        SetTile(index, tilesetID, collidable);
+        SetTile(index, layerNumber, tilesetID, collidable);
     }
 
     /// <summary>
     /// Gets the texture region of the tile from this tilemap at the specified index.
     /// </summary>
     /// <param name="index">The index of the tile in this tilemap.</param>
+    /// <param name="layerNumber"> The layer that this tile is on. </param>
     /// <returns>The texture region of the tile from this tilemap at the specified index.</returns>
-    public TextureRegion GetTile(int index)
+    public TextureRegion GetTile(int index, int layerNumber)
     {
-        int? id = _tiles[index];
+        int? id = _layeredTiles[layerNumber][index];
         return id is null or < 0 ? null : _tileset.GetTile(id.Value) ;
     }
 
@@ -140,11 +167,12 @@ public class Tilemap
     /// </summary>
     /// <param name="column">The column of the tile in this tilemap.</param>
     /// <param name="row">The row of the tile in this tilemap.</param>
+    /// <param name="layerNumber"> The layer that this tile is on. </param>
     /// <returns>The texture region of the tile from this tilemap at the specified column and row.</returns>
-    public TextureRegion GetTile(int column, int row)
+    public TextureRegion GetTile(int column, int row, int layerNumber)
     {
         int index = row * Columns + column;
-        return GetTile(index);
+        return GetTile(index, layerNumber);
     }
 
     /// <summary>
@@ -154,7 +182,11 @@ public class Tilemap
     /// <returns><see langword="true"/> if the tile is collidable; otherwise, <see langword="false"/>.</returns>
     public bool IsCollidable(int index)
     {
-        return _collidable[index];
+        foreach (var layer in _layerCollidable.Values)
+        {
+            if (layer[index]) return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -170,14 +202,15 @@ public class Tilemap
     }
 
     /// <summary>
-    /// Draws this tilemap using the given sprite batch.
+    /// Draws a specific layer in this tilemap using the given sprite batch.
     /// </summary>
     /// <param name="spriteBatch">The sprite batch used to draw this tilemap.</param>
-    public void Draw(SpriteBatch spriteBatch)
+    /// <param name="layerNumber"> The layer that this tile is on.</param>
+    public void DrawLayer(SpriteBatch spriteBatch, int layerNumber)
     {
         for (int i = 0; i < Count; i++)
         {
-            int? tileSetIndex = _tiles[i];
+            int? tileSetIndex = _layeredTiles[layerNumber][i];
 
             if (tileSetIndex == null || tileSetIndex < 0)
                 continue;
@@ -189,6 +222,32 @@ public class Tilemap
 
             Vector2 position = new Vector2(x * TileWidth, y * TileHeight);
             tile.Draw(spriteBatch, position, Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 1.0f);
+        }
+    }
+
+    /// <summary>
+    /// Draws all of this tilemap using the given sprite batch.
+    /// </summary>
+    /// <param name="spriteBatch">The sprite batch used to draw this tilemap.</param>
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        foreach(int key in _layeredTiles.Keys)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                int? tileSetIndex = _layeredTiles[key][i];
+
+                if (tileSetIndex == null || tileSetIndex < 0)
+                    continue;
+
+                TextureRegion tile = _tileset.GetTile(tileSetIndex.Value);
+
+                int x = i % Columns;
+                int y = i / Columns;
+
+                Vector2 position = new Vector2(x * TileWidth, y * TileHeight);
+                tile.Draw(spriteBatch, position, Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 1.0f);
+            }
         }
     }
 
@@ -230,27 +289,6 @@ public class Tilemap
             }
         }
     }
-
-    /// <summary>
-    /// Draws rectangles around the colliders.
-    /// </summary>
-    /// <param name="spriteBatch">The sprite batch used for drawing.</param>
-    /// <param name="pixel">The texture used to draw the rectangles.</param>
-    /// <param name="color">The color of the rectangles.</param>
-    public void DrawColliders(SpriteBatch spriteBatch, Texture2D pixel, Color color)
-    {
-        for (int i = 0; i < Count; i++)
-        {
-            if (_collidable[i])
-            {
-                int x = i % Columns;
-                int y = i / Columns;
-                RectangleFloat rect = new RectangleFloat(x * TileWidth, y * TileHeight, TileWidth, TileHeight);
-                spriteBatch.Draw(pixel, rect.Position, color * 0.4f);
-            }
-        }
-    }
-
     #endregion Collision Helpers
 
     /// <summary>
@@ -269,21 +307,7 @@ public class Tilemap
             XDocument doc = XDocument.Load(reader);
             XElement root = doc.Root;
 
-            // The <Tileset> element contains the information about the tileset
-            // used by the tilemap.
-            //
-            // Example
-            // <Tileset region="0 0 100 100" tileWidth="10" tileHeight="10">contentPath</Tileset>
-            //
-            // The region attribute represents the x, y, width, and height
-            // components of the boundary for the texture region within the
-            // texture at the contentPath specified.
-            //
-            // The tileWidth and tileHeight attributes specify the width and
-            // height of each tile in the tileset.
-            //
-            // The contentPath value is the path to the texture to
-            // load that contains the tileset.
+            // The <Tileset> element contains the information about the tileset.
             XElement tilesetElement = root.Element("Tileset");
 
             string regionAttribute = tilesetElement.Attribute("region").Value;
@@ -297,80 +321,61 @@ public class Tilemap
             int tileHeight = int.Parse(tilesetElement.Attribute("tileHeight").Value);
             string contentPath = tilesetElement.Value;
 
-            // Load the texture 2D at the content path
             Texture2D texture = content.Load<Texture2D>(contentPath);
-
-            // Create the texture region from the texture
             TextureRegion textureRegion = new TextureRegion(texture, x, y, width, height);
-
-            // Create the tileset using the texture region
             Tileset tileset = new Tileset(textureRegion, tileWidth, tileHeight);
 
-            // The <Tiles> element contains lines of strings where each line
-            // represents a row in the tilemap. Each line is a space-separated
-            // string where each element represents a column in that row.
-            //
-            // Example:
-            // <Tiles>
-            //      00 01 01 02
-            //      03 04 04 05
-            //      03 04 04 05
-            //      06 07 07 08
-            // </Tiles>
-            XElement tilesElement = root.Element("Tiles");
+            // We will read tiles one layer at a time.
+            XElement firstTilesElement = root.Elements("Tiles").First();
+            string[] firstRows = firstTilesElement.Value.Trim().Split('\n');
+            int totalRows = firstRows.Length;
+            int columnCount = firstRows[0].Split(" ", StringSplitOptions.RemoveEmptyEntries).Length;
 
-            // Get the collidable tiles from the tilemap definition.
+            Tilemap tilemap = new Tilemap(tileset, columnCount, totalRows);
+
+            // Get collidable tile IDs.
             HashSet<int> collidableTiles = new HashSet<int>();
             XElement collidableElement = root.Element("CollidableTiles");
             if (collidableElement != null)
             {
                 string[] solidIds = collidableElement.Value
                     .Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
                 foreach (var id in solidIds)
                 {
-                    // Get the tileset index for this location
                     int tilesetIndex = int.Parse(id) - 1;
-
-                    if (tilesetIndex < 0)
-                        continue;
-
-                    collidableTiles.Add(tilesetIndex);
+                    if (tilesetIndex >= 0)
+                        collidableTiles.Add(tilesetIndex);
                 }
             }
 
-            // Split the value of the tiles data into rows by splitting on
-            // the new line character.
-            string[] rows = tilesElement.Value.Trim().Split('\n', StringSplitOptions.RemoveEmptyEntries);
-
-            // Split the value of the first row to determine the total number of columns.
-            int columnCount = rows[0].Split(" ", StringSplitOptions.RemoveEmptyEntries).Length;
-
-            // Create the tilemap
-            Tilemap tilemap = new Tilemap(tileset, columnCount, rows.Length);
-
-            // Process each row
-            for (int row = 0; row < rows.Length; row++)
+            // Support multiple <Tiles> blocks for layering
+            foreach (XElement tilesElement in root.Elements("Tiles"))
             {
-                // Split the row into individual columns
-                string[] columns = rows[row].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                // Read layer number if provided, default = 0
+                int layerNumber = (int?)tilesElement.Attribute("layer") ?? 0;
 
-                // Process each column of the current row
-                for (int column = 0; column < columnCount; column++)
+                tilemap.EnsureLayerCapacity(layerNumber);
+
+                // Split by lines for each row
+                string[] rows = tilesElement.Value.Trim()
+                    .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+                for (int row = 0; row < rows.Length; row++)
                 {
-                    // Get the tileset index for this location
-                    int tilesetIndex = int.Parse(columns[column]) - 1;
+                    string[] columns = rows[row].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                    if (tilesetIndex < 0)
-                        continue;
+                    for (int column = 0; column < columnCount; column++)
+                    {
+                        int tilesetIndex = int.Parse(columns[column]) - 1;
 
-                    // Get the texture region of that tile from the tileset
-                    TextureRegion region = tileset.GetTile(tilesetIndex);
+                        if (tilesetIndex < 0)
+                            continue;
 
-                    // Get whether that tile should be collidable
-                    bool collidable = collidableTiles.Contains(tilesetIndex);
+                        bool collidable = collidableTiles.Contains(tilesetIndex);
 
-                    // Add that region to the tilemap at the row and column location
-                    tilemap.SetTile(column, row, tilesetIndex, collidable);
+                        tilemap.SetTile(column, row, layerNumber, tilesetIndex, collidable);
+                    }
                 }
             }
 

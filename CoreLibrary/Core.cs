@@ -120,6 +120,8 @@ public class Core : Game
         Graphics.PreferredBackBufferHeight = height;
         Graphics.IsFullScreen = fullScreen;
 
+        // TODO: Add full screen toggle. Graphics.ToggleFullScreen()
+
         // Apply the graphic presentation changes.
         Graphics.ApplyChanges();
 
@@ -157,14 +159,10 @@ public class Core : Game
         // Create the sprite batch instance.
         SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // Sets the graphics to the screen (if this fails, it is set to the defaults in the constructor)
-        if (GraphicsDevice == null)
-        {
-            Graphics.ApplyChanges();
-        }
-
         Graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
         Graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+
+        Graphics.ApplyChanges();
 
         // Create a new input manager.
         Input = new InputManager();

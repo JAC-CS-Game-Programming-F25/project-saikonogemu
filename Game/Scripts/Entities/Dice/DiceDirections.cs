@@ -7,5 +7,6 @@ public enum DiceDirections
     UpLeft, 
     DownLeft,
     UpRight,
-    DownRight
+    DownRight,
+    Idle,
 }

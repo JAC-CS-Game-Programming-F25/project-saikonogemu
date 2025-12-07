@@ -14,7 +14,7 @@ namespace DieTheRollingDiceGame;
 public class PlayState : State
 {
     #region Fields
-    private List<Dice> _dice;
+    private List<Dice>? _dice;
     #endregion Fields
 
     #region Lifecycle Methods

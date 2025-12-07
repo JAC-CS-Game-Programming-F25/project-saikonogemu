@@ -77,7 +77,7 @@ namespace CoreLibrary
         /// <exception cref="InvalidOperationException">
         /// Thrown if more than one Camera instance is created.
         /// </exception>
-        public Camera(Vector2 position, float scale)
+        public Camera(Vector2 position, float scale = 1f)
         {
             if (s_instance != null)
                 throw new InvalidOperationException("Only a single Camera instance can be created.");

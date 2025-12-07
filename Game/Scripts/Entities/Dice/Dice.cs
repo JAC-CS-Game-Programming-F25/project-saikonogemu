@@ -27,7 +27,7 @@ public class Dice : GameEntity
     #region Properties
     public const float NORMAL_OFFSET = -5.0f;
     public const float DIAGONAL_OFFSET = -10.0f;
-    public DiceDirections DiceDirection {get; set;} = DiceDirections.Right;
+    public DiceDirections DiceDirection {get; set;} = DiceDirections.Idle;
     #endregion Properties
 
     #region Constructors
