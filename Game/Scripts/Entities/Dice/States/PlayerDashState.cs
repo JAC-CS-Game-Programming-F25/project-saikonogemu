@@ -1,14 +1,39 @@
+using System;
 using System.Collections.Generic;
+using CoreLibrary.Graphics;
 using Microsoft.Xna.Framework;
+using Pleasing;
 
 #nullable enable
+
+namespace Game.Scripts.Entities.Dice.States;
 
 /// <summary>
 /// Represents the state of the player in living form as they are dashing.
 /// </summary>
 public class PlayerDashState : PlayerLivingState
 {
-    #region Lifecycle Methods
+    #region Constants
+    const int DashPower = 3;
+    const float DECELERATION = 10f; 
+    private const float GHOST_SPAWN_INTERVAL = 0.2f;
+    private const float GHOST_INITIAL_OPACITY = 1f;
+    private const float GHOST_FADE_DURATION = 1000f;
+    #endregion Constants
+
+    #region Properties
+    private readonly List<PlayerDice> _ghosts = new();
+    private float _ghostSpawnTimer = 0f;
+
+    public bool IsDashing {get; private set;}
+
+    /// <summary>
+    /// This is a shadow clone of the player dice to do the fade illusion.
+    /// </summary>
+    private PlayerDice? GhostDice {get; set;}
+    #endregion Properties
+
+    #region Lifecycle Methods   
     /// <summary>
     /// Called when entering this State.
     /// </summary>
@@ -16,6 +41,17 @@ public class PlayerDashState : PlayerLivingState
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
         base.Enter(parameters);
+
+        if (Dice is null) 
+            throw new ArgumentNullException("Dice cannot be null in PlayerDashState.");
+
+        // Updates the textures.
+        Dice.UpdateTexture("Images/Atlas/player_dash_dice_atlas.xml");
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+
+        // Boosts the velocity!
+        Dice.Hitbox.Velocity *= DashPower;
+        IsDashing = true;
     }
 
     /// <summary>
@@ -32,6 +68,29 @@ public class PlayerDashState : PlayerLivingState
     /// <param name="gameTime">The GameTime of the game.</param>
     public override void Update(GameTime gameTime)
     {
+        // Updates all the ghost.
+        for (int i = _ghosts.Count - 1; i >= 0; i--)
+        {
+            PlayerDice ghost = _ghosts[i];
+            ghost.Update(gameTime);
+
+            // Removes all old ghosts.
+            if (ghost.DiceOpacity <= 0.01f)
+                _ghosts.RemoveAt(i);
+        }
+
+        if (IsDashing == true)
+        {
+            HandleGhostGeneration(gameTime);
+            HandleDashDeceleration();
+            return;
+        }
+
+        // If there are no ghosts left, and we are done dashing, we return to the NeutralState.
+        if (_ghosts.Count == 0 && IsDashing == false)
+            ChangeToNeutral();
+
+
         base.Update(gameTime);
     }
 
@@ -42,6 +101,91 @@ public class PlayerDashState : PlayerLivingState
     public override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
+
+        // Renders all the ghost.
+        foreach(PlayerDice ghost in _ghosts)
+            ghost.Draw(gameTime);
     }
     #endregion Lifecycle Methods
+
+    #region Dash Methods
+    /// <summary>
+    /// Generates ghosts based on a timer.
+    /// </summary>
+    /// <param name="gameTime">The gameTime of the Game.</param>
+    private void HandleGhostGeneration(GameTime gameTime)
+    {
+        _ghostSpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        if (_ghostSpawnTimer >= GHOST_SPAWN_INTERVAL)
+        {
+            _ghostSpawnTimer = 0f;
+            SpawnGhost();
+        }
+    }
+
+    /// <summary>
+    /// Spawns a ghost copy of the player.
+    /// </summary>
+    private void SpawnGhost()
+    {
+        // Makes a ghost clone.
+        PlayerDice ghost = ((PlayerDice)Dice!).CreateGhost();
+
+        // Starts ghost slightly transparent.
+        ghost.DiceOpacity = GHOST_INITIAL_OPACITY;
+
+        // Tweens if out.
+        ghost.TweenOpacity(GHOST_FADE_DURATION, 0);
+
+        // Adds it to the list to render.
+        _ghosts.Add(ghost);
+    }
+
+    /// <summary>
+    /// Makes the dash slowly end by adjusting the dice's velocity.
+    /// </summary>
+    private void HandleDashDeceleration()
+    {
+        // Progressively get to dice's speed.
+        ClampAxisTowardsSpeed(ref Dice!.Hitbox.Velocity.X);
+        ClampAxisTowardsSpeed(ref Dice!.Hitbox.Velocity.Y);
+
+        // Check to see if the dash is over.
+        if (Math.Abs(Dice!.Hitbox.Velocity.X) <= Dice!.Speed && Math.Abs(Dice!.Hitbox.Velocity.Y) <= Dice!.Speed)
+        {
+            IsDashing = false;
+
+            // Updates the textures of the dice.
+            Dice.UpdateTexture("Images/Atlas/player_ascension_dice_atlas.xml");
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+        }
+    }
+
+    /// <summary>
+    /// "Clamps" the velocity of a specific axis towards the dice's speed.
+    /// </summary>
+    /// <param name="axisVelocity">The velocity of the axis to clamp.</param>
+    private void ClampAxisTowardsSpeed(ref float axisVelocity)
+    {
+        // If the axis' velocity is greater than the dice's speed.
+        if (Math.Abs(axisVelocity) > Dice!.Speed)
+        {
+            // Move towards the dice speed.
+            axisVelocity -= Math.Sign(axisVelocity) * DECELERATION;
+
+            // If we overshoot we adjust the velocity back to the dice's speed.
+            if (Math.Abs(axisVelocity) < Dice!.Speed)
+                axisVelocity = Math.Sign(axisVelocity) * Dice!.Speed;
+    }
+    }
+
+    /// <summary>
+    /// Switches the state to the neutral state.
+    /// </summary>
+    private void ChangeToNeutral()
+    {
+        Dice?.ChangeState("PlayerNeutralState");
+    }
+    #endregion Dash Methods
 }

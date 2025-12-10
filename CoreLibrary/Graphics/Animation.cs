@@ -74,5 +74,14 @@ public class Animation
     {
         Frames.Reverse();
     }
+
+    /// <summary>
+    /// Clones the Animation instance (deep clone).
+    /// </summary>
+    /// <returns>Returns the cloned item.</returns>
+    public Animation Clone()
+    {
+        return (Animation)MemberwiseClone();
+    }
     #endregion Methods
 }

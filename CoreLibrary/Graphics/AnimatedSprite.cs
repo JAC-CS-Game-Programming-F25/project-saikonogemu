@@ -117,5 +117,16 @@ public class AnimatedSprite : Sprite
     {
         Animation.ReverseAnimation();
     }
+
+    /// <summary>
+    /// Clones the AnimatedSprite instance (deep clone).
+    /// </summary>
+    /// <returns>Returns the cloned item.</returns>
+    public virtual AnimatedSprite Clone()
+    {
+        AnimatedSprite clone = (AnimatedSprite)MemberwiseClone();
+        clone.Animation = Animation.Clone();
+        return clone;
+    }
     #endregion Public Methods
 }

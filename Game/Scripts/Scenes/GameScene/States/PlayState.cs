@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using CoreLibrary;
 using CoreLibrary.Utils;
+using Game.Scripts.Entities.Dice;
 using Microsoft.Xna.Framework;
 
-namespace DieTheRollingDiceGame;
+namespace Game.Scripts.Scenes.GameScene.States;
 
 #nullable enable
 

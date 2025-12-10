@@ -173,238 +173,509 @@
     <Animations>
         <!--Start | Player Dash Dice Idle Animation-->
         <!--Player Dash Dice with 1 Dot Idle Animation-->
-        <Animation name="player_dash_dice_dot1_idle_animation" delay="150">
+        <Animation name="player_dash_dice_dot1_idle_animation" delay="75">
             <Frame region="player_dash_dice_dot1_horizontal_frame1" />
         </Animation>
 
         <!--Player Dash Dice with 2 Dot Idle Animation-->
-        <Animation name="player_dash_dice_dot2_idle_animation" delay="150">
+        <Animation name="player_dash_dice_dot2_idle_animation" delay="75">
             <Frame region="player_dash_dice_dot2_horizontal_frame1" />
         </Animation>
 
         <!--Player Dash Dice with 3 Dot Idle Animation-->
-        <Animation name="player_dash_dice_dot3_idle_animation" delay="150">
+        <Animation name="player_dash_dice_dot3_idle_animation" delay="75">
             <Frame region="player_dash_dice_dot3_horizontal_frame1" />
         </Animation>
 
         <!--Player Dash Dice with 4 Dot Idle Animation-->
-        <Animation name="player_dash_dice_dot4_idle_animation" delay="150">
+        <Animation name="player_dash_dice_dot4_idle_animation" delay="75">
             <Frame region="player_dash_dice_dot4_horizontal_frame1" />
         </Animation>
 
         <!--Player Dash Dice with 5 Dot Idle Animation-->
-        <Animation name="player_dash_dice_dot5_idle_animation" delay="150">
+        <Animation name="player_dash_dice_dot5_idle_animation" delay="75">
             <Frame region="player_dash_dice_dot5_horizontal_frame1" />
         </Animation>
 
         <!--Player Dash Dice with 6 Dot Idle Animation-->
-        <Animation name="player_dash_dice_dot6_idle_animation" delay="150">
+        <Animation name="player_dash_dice_dot6_idle_animation" delay="75">
             <Frame region="player_dash_dice_dot6_horizontal_frame1" />
         </Animation>
         <!--End | Player Dash Dice Idle Animation-->
 
-        <!--Start | Player Dash Dice Horizontal Animation-->
-        <!--Player Dash Dice with 1 Dot Horizontal Animation-->
-        <Animation name="player_dash_dice_dot1_horizontal_animation" delay="150">
+
+        <!--Start | Player Dash Dice Negative Diagonal Idle Animation-->
+        <!--Player Dash Dice with 1 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot1_negative_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot1_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 2 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot2_negative_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot2_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 3 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot3_negative_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot3_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 4 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot4_negative_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot4_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 5 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot5_negative_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot5_negative_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 6 Dot Negative Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot6_negative_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot6_negative_diagonal_frame1" />
+        </Animation>
+        <!--End | Player Dash Dice Negative Diagonal Idle Animation-->
+
+
+        <!--Start | Player Dash Dice Positive Diagonal Idle Animation-->
+        <!--Player Dash Dice with 1 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot1_positive_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot1_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 2 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot2_positive_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot2_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 3 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot3_positive_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot3_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 4 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot4_positive_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot4_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 5 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot5_positive_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot5_positive_diagonal_frame1" />
+        </Animation>
+
+        <!--Player Dash Dice with 6 Dot Positive Diagonal Idle Animation-->
+        <Animation name="player_dash_dice_dot6_positive_diagonal_idle_animation" delay="75">
+            <Frame region="player_dash_dice_dot6_positive_diagonal_frame1" />
+        </Animation>
+        <!--End | Player Dash Dice Positive Diagonal Idle Animation-->
+
+
+        <!--Start | Player Dash Dice Left Animation-->
+        <!--Player Dash Dice with 1 Dot Left Animation-->
+        <Animation name="player_dash_dice_dot1_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot1_horizontal_frame1" />
+            <Frame region="player_dash_dice_dot1_horizontal_frame4" />
+            <Frame region="player_dash_dice_dot1_horizontal_frame3" />
+            <Frame region="player_dash_dice_dot1_horizontal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 2 Dot Left Animation-->
+        <Animation name="player_dash_dice_dot2_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot2_horizontal_frame1" />
+            <Frame region="player_dash_dice_dot2_horizontal_frame4" />
+            <Frame region="player_dash_dice_dot2_horizontal_frame3" />
+            <Frame region="player_dash_dice_dot2_horizontal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 3 Dot Left Animation-->
+        <Animation name="player_dash_dice_dot3_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot3_horizontal_frame1" />
+            <Frame region="player_dash_dice_dot3_horizontal_frame4" />
+            <Frame region="player_dash_dice_dot3_horizontal_frame3" />
+            <Frame region="player_dash_dice_dot3_horizontal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 4 Dot Left Animation-->
+        <Animation name="player_dash_dice_dot4_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot4_horizontal_frame1" />
+            <Frame region="player_dash_dice_dot4_horizontal_frame4" />
+            <Frame region="player_dash_dice_dot4_horizontal_frame3" />
+            <Frame region="player_dash_dice_dot4_horizontal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 5 Dot Left Animation-->
+        <Animation name="player_dash_dice_dot5_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot5_horizontal_frame1" />
+            <Frame region="player_dash_dice_dot5_horizontal_frame4" />
+            <Frame region="player_dash_dice_dot5_horizontal_frame3" />
+            <Frame region="player_dash_dice_dot5_horizontal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 6 Dot Left Animation-->
+        <Animation name="player_dash_dice_dot6_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot6_horizontal_frame1" />
+            <Frame region="player_dash_dice_dot6_horizontal_frame4" />
+            <Frame region="player_dash_dice_dot6_horizontal_frame3" />
+            <Frame region="player_dash_dice_dot6_horizontal_frame2" />
+        </Animation>
+        <!--End | Player Dash Dice Left Animation-->
+
+
+        <!--Start | Player Dash Dice Right Animation-->
+        <!--Player Dash Dice with 1 Dot Right Animation-->
+        <Animation name="player_dash_dice_dot1_right_animation" delay="75">
             <Frame region="player_dash_dice_dot1_horizontal_frame1" />
             <Frame region="player_dash_dice_dot1_horizontal_frame2" />
             <Frame region="player_dash_dice_dot1_horizontal_frame3" />
             <Frame region="player_dash_dice_dot1_horizontal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 2 Dot Horizontal Animation-->
-        <Animation name="player_dash_dice_dot2_horizontal_animation" delay="150">
+        <!--Player Dash Dice with 2 Dot Right Animation-->
+        <Animation name="player_dash_dice_dot2_right_animation" delay="75">
             <Frame region="player_dash_dice_dot2_horizontal_frame1" />
             <Frame region="player_dash_dice_dot2_horizontal_frame2" />
             <Frame region="player_dash_dice_dot2_horizontal_frame3" />
             <Frame region="player_dash_dice_dot2_horizontal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 3 Dot Horizontal Animation-->
-        <Animation name="player_dash_dice_dot3_horizontal_animation" delay="150">
+        <!--Player Dash Dice with 3 Dot Right Animation-->
+        <Animation name="player_dash_dice_dot3_right_animation" delay="75">
             <Frame region="player_dash_dice_dot3_horizontal_frame1" />
             <Frame region="player_dash_dice_dot3_horizontal_frame2" />
             <Frame region="player_dash_dice_dot3_horizontal_frame3" />
             <Frame region="player_dash_dice_dot3_horizontal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 4 Dot Horizontal Animation-->
-        <Animation name="player_dash_dice_dot4_horizontal_animation" delay="150">
+        <!--Player Dash Dice with 4 Dot Right Animation-->
+        <Animation name="player_dash_dice_dot4_right_animation" delay="75">
             <Frame region="player_dash_dice_dot4_horizontal_frame1" />
             <Frame region="player_dash_dice_dot4_horizontal_frame2" />
             <Frame region="player_dash_dice_dot4_horizontal_frame3" />
             <Frame region="player_dash_dice_dot4_horizontal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 5 Dot Horizontal Animation-->
-        <Animation name="player_dash_dice_dot5_horizontal_animation" delay="150">
+        <!--Player Dash Dice with 5 Dot Right Animation-->
+        <Animation name="player_dash_dice_dot5_right_animation" delay="75">
             <Frame region="player_dash_dice_dot5_horizontal_frame1" />
             <Frame region="player_dash_dice_dot5_horizontal_frame2" />
             <Frame region="player_dash_dice_dot5_horizontal_frame3" />
             <Frame region="player_dash_dice_dot5_horizontal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 6 Dot Horizontal Animation-->
-        <Animation name="player_dash_dice_dot6_horizontal_animation" delay="150">
+        <!--Player Dash Dice with 6 Dot Right Animation-->
+        <Animation name="player_dash_dice_dot6_right_animation" delay="75">
             <Frame region="player_dash_dice_dot6_horizontal_frame1" />
             <Frame region="player_dash_dice_dot6_horizontal_frame2" />
             <Frame region="player_dash_dice_dot6_horizontal_frame3" />
             <Frame region="player_dash_dice_dot6_horizontal_frame4" />
         </Animation>
-        <!--End | Player Dash Dice Horizontal Animation-->
+        <!--End | Player Dash Dice Right Animation-->
 
 
-        <!--Start | Player Dash Dice Vertical Animation-->
-        <!--Player Dash Dice with 1 Dot Vertical Animation-->
-        <Animation name="player_dash_dice_dot1_vertical_animation" delay="150">
+       <!--Start | Player Dash Dice Up Animation-->
+        <!--Player Dash Dice with 1 Dot Up Animation-->
+        <Animation name="player_dash_dice_dot1_up_animation" delay="75">
+            <Frame region="player_dash_dice_dot1_vertical_frame1" />
+            <Frame region="player_dash_dice_dot1_vertical_frame4" />
+            <Frame region="player_dash_dice_dot1_vertical_frame3" />
+            <Frame region="player_dash_dice_dot1_vertical_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 2 Dot Up Animation-->
+        <Animation name="player_dash_dice_dot2_up_animation" delay="75">
+            <Frame region="player_dash_dice_dot2_vertical_frame1" />
+            <Frame region="player_dash_dice_dot2_vertical_frame4" />
+            <Frame region="player_dash_dice_dot2_vertical_frame3" />
+            <Frame region="player_dash_dice_dot2_vertical_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 3 Dot Up Animation-->
+        <Animation name="player_dash_dice_dot3_up_animation" delay="75">
+            <Frame region="player_dash_dice_dot3_vertical_frame1" />
+            <Frame region="player_dash_dice_dot3_vertical_frame4" />
+            <Frame region="player_dash_dice_dot3_vertical_frame3" />
+            <Frame region="player_dash_dice_dot3_vertical_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 4 Dot Up Animation-->
+        <Animation name="player_dash_dice_dot4_up_animation" delay="75">
+            <Frame region="player_dash_dice_dot4_vertical_frame1" />
+            <Frame region="player_dash_dice_dot4_vertical_frame4" />
+            <Frame region="player_dash_dice_dot4_vertical_frame3" />
+            <Frame region="player_dash_dice_dot4_vertical_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 5 Dot Up Animation-->
+        <Animation name="player_dash_dice_dot5_up_animation" delay="75">
+            <Frame region="player_dash_dice_dot5_vertical_frame1" />
+            <Frame region="player_dash_dice_dot5_vertical_frame4" />
+            <Frame region="player_dash_dice_dot5_vertical_frame3" />
+            <Frame region="player_dash_dice_dot5_vertical_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 6 Dot Up Animation-->
+        <Animation name="player_dash_dice_dot6_up_animation" delay="75">
+            <Frame region="player_dash_dice_dot6_vertical_frame1" />
+            <Frame region="player_dash_dice_dot6_vertical_frame4" />
+            <Frame region="player_dash_dice_dot6_vertical_frame3" />
+            <Frame region="player_dash_dice_dot6_vertical_frame2" />
+        </Animation>
+        <!--End | Player Dash Dice Up Animation-->
+
+
+        <!--Start | Player Dash Dice Down Animation-->
+        <!--Player Dash Dice with 1 Dot Down Animation-->
+        <Animation name="player_dash_dice_dot1_down_animation" delay="75">
             <Frame region="player_dash_dice_dot1_vertical_frame1" />
             <Frame region="player_dash_dice_dot1_vertical_frame2" />
             <Frame region="player_dash_dice_dot1_vertical_frame3" />
             <Frame region="player_dash_dice_dot1_vertical_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 2 Dot Vertical Animation-->
-        <Animation name="player_dash_dice_dot2_vertical_animation" delay="150">
+        <!--Player Dash Dice with 2 Dot Down Animation-->
+        <Animation name="player_dash_dice_dot2_down_animation" delay="75">
             <Frame region="player_dash_dice_dot2_vertical_frame1" />
             <Frame region="player_dash_dice_dot2_vertical_frame2" />
             <Frame region="player_dash_dice_dot2_vertical_frame3" />
             <Frame region="player_dash_dice_dot2_vertical_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 3 Dot Vertical Animation-->
-        <Animation name="player_dash_dice_dot3_vertical_animation" delay="150">
+        <!--Player Dash Dice with 3 Dot Down Animation-->
+        <Animation name="player_dash_dice_dot3_down_animation" delay="75">
             <Frame region="player_dash_dice_dot3_vertical_frame1" />
             <Frame region="player_dash_dice_dot3_vertical_frame2" />
             <Frame region="player_dash_dice_dot3_vertical_frame3" />
             <Frame region="player_dash_dice_dot3_vertical_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 4 Dot Vertical Animation-->
-        <Animation name="player_dash_dice_dot4_vertical_animation" delay="150">
+        <!--Player Dash Dice with 4 Dot Down Animation-->
+        <Animation name="player_dash_dice_dot4_down_animation" delay="75">
             <Frame region="player_dash_dice_dot4_vertical_frame1" />
             <Frame region="player_dash_dice_dot4_vertical_frame2" />
             <Frame region="player_dash_dice_dot4_vertical_frame3" />
             <Frame region="player_dash_dice_dot4_vertical_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 5 Dot Vertical Animation-->
-        <Animation name="player_dash_dice_dot5_vertical_animation" delay="150">
+        <!--Player Dash Dice with 5 Dot Down Animation-->
+        <Animation name="player_dash_dice_dot5_down_animation" delay="75">
             <Frame region="player_dash_dice_dot5_vertical_frame1" />
             <Frame region="player_dash_dice_dot5_vertical_frame2" />
             <Frame region="player_dash_dice_dot5_vertical_frame3" />
             <Frame region="player_dash_dice_dot5_vertical_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 6 Dot Vertical Animation-->
-        <Animation name="player_dash_dice_dot6_vertical_animation" delay="150">
+        <!--Player Dash Dice with 6 Dot Down Animation-->
+        <Animation name="player_dash_dice_dot6_down_animation" delay="75">
             <Frame region="player_dash_dice_dot6_vertical_frame1" />
             <Frame region="player_dash_dice_dot6_vertical_frame2" />
             <Frame region="player_dash_dice_dot6_vertical_frame3" />
             <Frame region="player_dash_dice_dot6_vertical_frame4" />
         </Animation>
-        <!--End | Player Dash Dice Vertical Animation-->
+        <!--End | Player Dash Dice Down Animation-->
 
-        
-        <!--Start | Player Dash Dice Negative Diagonal Animation-->
-        <!--Player Dash Dice with 1 Dot Negative Diagonal Animation-->
-        <Animation name="player_dash_dice_dot1_negative_diagonal_animation" delay="150">
+
+       <!--Start | Player Dash Dice Up Left Animation-->
+        <!--Player Dash Dice with 1 Dot Up Left Animation-->
+        <Animation name="player_dash_dice_dot1_up_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot1_negative_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot1_negative_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot1_negative_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot1_negative_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 2 Dot Up Left Animation-->
+        <Animation name="player_dash_dice_dot2_up_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot2_negative_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot2_negative_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot2_negative_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot2_negative_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 3 Dot Up Left Animation-->
+        <Animation name="player_dash_dice_dot3_up_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot3_negative_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot3_negative_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot3_negative_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot3_negative_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 4 Dot Up Left Animation-->
+        <Animation name="player_dash_dice_dot4_up_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot4_negative_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot4_negative_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot4_negative_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot4_negative_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 5 Dot Up Left Animation-->
+        <Animation name="player_dash_dice_dot5_up_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot5_negative_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot5_negative_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot5_negative_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot5_negative_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 6 Dot Up Left Animation-->
+        <Animation name="player_dash_dice_dot6_up_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot6_negative_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot6_negative_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot6_negative_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot6_negative_diagonal_frame2" />
+        </Animation>
+        <!--End | Player Dash Dice Up Left Animation-->
+
+   
+        <!--Start | Player Dash Dice Down Right Animation-->
+        <!--Player Dash Dice with 1 Dot Down Right Animation-->
+        <Animation name="player_dash_dice_dot1_down_right_animation" delay="75">
             <Frame region="player_dash_dice_dot1_negative_diagonal_frame1" />
             <Frame region="player_dash_dice_dot1_negative_diagonal_frame2" />
             <Frame region="player_dash_dice_dot1_negative_diagonal_frame3" />
             <Frame region="player_dash_dice_dot1_negative_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 2 Dot Negative Diagonal Animation-->
-        <Animation name="player_dash_dice_dot2_negative_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 2 Dot Down Right Animation-->
+        <Animation name="player_dash_dice_dot2_down_right_animation" delay="75">
             <Frame region="player_dash_dice_dot2_negative_diagonal_frame1" />
             <Frame region="player_dash_dice_dot2_negative_diagonal_frame2" />
             <Frame region="player_dash_dice_dot2_negative_diagonal_frame3" />
             <Frame region="player_dash_dice_dot2_negative_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 3 Dot Negative Diagonal Animation-->
-        <Animation name="player_dash_dice_dot3_negative_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 3 Dot Down Right Animation-->
+        <Animation name="player_dash_dice_dot3_down_right_animation" delay="75">
             <Frame region="player_dash_dice_dot3_negative_diagonal_frame1" />
             <Frame region="player_dash_dice_dot3_negative_diagonal_frame2" />
             <Frame region="player_dash_dice_dot3_negative_diagonal_frame3" />
             <Frame region="player_dash_dice_dot3_negative_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 4 Dot Negative Diagonal Animation-->
-        <Animation name="player_dash_dice_dot4_negative_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 4 Dot Down Right Animation-->
+        <Animation name="player_dash_dice_dot4_down_right_animation" delay="75">
             <Frame region="player_dash_dice_dot4_negative_diagonal_frame1" />
             <Frame region="player_dash_dice_dot4_negative_diagonal_frame2" />
             <Frame region="player_dash_dice_dot4_negative_diagonal_frame3" />
             <Frame region="player_dash_dice_dot4_negative_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 5 Dot Negative Diagonal Animation-->
-        <Animation name="player_dash_dice_dot5_negative_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 5 Dot Down Right Animation-->
+        <Animation name="player_dash_dice_dot5_down_right_animation" delay="75">
             <Frame region="player_dash_dice_dot5_negative_diagonal_frame1" />
             <Frame region="player_dash_dice_dot5_negative_diagonal_frame2" />
             <Frame region="player_dash_dice_dot5_negative_diagonal_frame3" />
             <Frame region="player_dash_dice_dot5_negative_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 6 Dot Negative Diagonal Animation-->
-        <Animation name="player_dash_dice_dot6_negative_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 6 Dot Down Right Animation-->
+        <Animation name="player_dash_dice_dot6_down_right_animation" delay="75">
             <Frame region="player_dash_dice_dot6_negative_diagonal_frame1" />
             <Frame region="player_dash_dice_dot6_negative_diagonal_frame2" />
             <Frame region="player_dash_dice_dot6_negative_diagonal_frame3" />
             <Frame region="player_dash_dice_dot6_negative_diagonal_frame4" />
         </Animation>
-        <!--End | Player Dash Dice Negative Diagonal Animation-->
+        <!--End | Player Dash Dice Down Right Animation-->
 
 
-        <!--Start | Player Dash Dice Positive Diagonal Animation-->
-        <!--Player Dash Dice with 1 Dot Positive Diagonal Animation-->
-        <Animation name="player_dash_dice_dot1_positive_diagonal_animation" delay="150">
+       <!--Start | Player Dash Dice Down Left Animation-->
+        <!--Player Dash Dice with 1 Dot Down Left Animation-->
+        <Animation name="player_dash_dice_dot1_down_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot1_positive_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot1_positive_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot1_positive_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot1_positive_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 2 Dot Down Left Animation-->
+        <Animation name="player_dash_dice_dot2_down_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot2_positive_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot2_positive_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot2_positive_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot2_positive_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 3 Dot Down Left Animation-->
+        <Animation name="player_dash_dice_dot3_down_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot3_positive_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot3_positive_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot3_positive_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot3_positive_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 4 Dot Down Left Animation-->
+        <Animation name="player_dash_dice_dot4_down_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot4_positive_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot4_positive_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot4_positive_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot4_positive_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 5 Dot Down Left Animation-->
+        <Animation name="player_dash_dice_dot5_down_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot5_positive_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot5_positive_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot5_positive_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot5_positive_diagonal_frame2" />
+        </Animation>
+
+        <!--Player Dash Dice with 6 Dot Down Left Animation-->
+        <Animation name="player_dash_dice_dot6_down_left_animation" delay="75">
+            <Frame region="player_dash_dice_dot6_positive_diagonal_frame1" />
+            <Frame region="player_dash_dice_dot6_positive_diagonal_frame4" />
+            <Frame region="player_dash_dice_dot6_positive_diagonal_frame3" />
+            <Frame region="player_dash_dice_dot6_positive_diagonal_frame2" />
+        </Animation>
+        <!--End | Player Dash Dice Down Left Animation-->
+
+
+        <!--Start | Player Dash Dice Up Right Animation-->
+        <!--Player Dash Dice with 1 Dot Up Right Animation-->
+        <Animation name="player_dash_dice_dot1_up_right_animation" delay="75">
             <Frame region="player_dash_dice_dot1_positive_diagonal_frame1" />
             <Frame region="player_dash_dice_dot1_positive_diagonal_frame2" />
             <Frame region="player_dash_dice_dot1_positive_diagonal_frame3" />
             <Frame region="player_dash_dice_dot1_positive_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 2 Dot Positive Diagonal Animation-->
-        <Animation name="player_dash_dice_dot2_positive_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 2 Dot Up Right Animation-->
+        <Animation name="player_dash_dice_dot2_up_right_animation" delay="75">
             <Frame region="player_dash_dice_dot2_positive_diagonal_frame1" />
             <Frame region="player_dash_dice_dot2_positive_diagonal_frame2" />
             <Frame region="player_dash_dice_dot2_positive_diagonal_frame3" />
             <Frame region="player_dash_dice_dot2_positive_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 3 Dot Positive Diagonal Animation-->
-        <Animation name="player_dash_dice_dot3_positive_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 3 Dot Up Right Animation-->
+        <Animation name="player_dash_dice_dot3_up_right_animation" delay="75">
             <Frame region="player_dash_dice_dot3_positive_diagonal_frame1" />
             <Frame region="player_dash_dice_dot3_positive_diagonal_frame2" />
             <Frame region="player_dash_dice_dot3_positive_diagonal_frame3" />
             <Frame region="player_dash_dice_dot3_positive_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 4 Dot Positive Diagonal Animation-->
-        <Animation name="player_dash_dice_dot4_positive_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 4 Dot Up Right Animation-->
+        <Animation name="player_dash_dice_dot4_up_right_animation" delay="75">
             <Frame region="player_dash_dice_dot4_positive_diagonal_frame1" />
             <Frame region="player_dash_dice_dot4_positive_diagonal_frame2" />
             <Frame region="player_dash_dice_dot4_positive_diagonal_frame3" />
             <Frame region="player_dash_dice_dot4_positive_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 5 Dot Positive Diagonal Animation-->
-        <Animation name="player_dash_dice_dot5_positive_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 5 Dot Up Right Animation-->
+        <Animation name="player_dash_dice_dot5_up_right_animation" delay="75">
             <Frame region="player_dash_dice_dot5_positive_diagonal_frame1" />
             <Frame region="player_dash_dice_dot5_positive_diagonal_frame2" />
             <Frame region="player_dash_dice_dot5_positive_diagonal_frame3" />
             <Frame region="player_dash_dice_dot5_positive_diagonal_frame4" />
         </Animation>
 
-        <!--Player Dash Dice with 6 Dot Positive Diagonal Animation-->
-        <Animation name="player_dash_dice_dot6_positive_diagonal_animation" delay="150">
+        <!--Player Dash Dice with 6 Dot Up Right Animation-->
+        <Animation name="player_dash_dice_dot6_up_right_animation" delay="75">
             <Frame region="player_dash_dice_dot6_positive_diagonal_frame1" />
             <Frame region="player_dash_dice_dot6_positive_diagonal_frame2" />
             <Frame region="player_dash_dice_dot6_positive_diagonal_frame3" />
             <Frame region="player_dash_dice_dot6_positive_diagonal_frame4" />
         </Animation>
-        <!--End | Player Dash Dice Positive Diagonal Animation-->
+        <!--End | Player Dash Dice Up Right Animation-->
 
         <!--Start | Player Dash Dice Death Animation-->
         <!--Player Dash Dice Death Animation-->
@@ -414,6 +685,6 @@
             <Frame region="player_dash_dice_death_frame3" />
             <Frame region="player_dash_dice_death_frame4" />
         </Animation>
-        <!--End | Player Dash Death Animation-->
+        <!--End | Player Death Animation-->
     </Animations>
 </TextureAtlas>

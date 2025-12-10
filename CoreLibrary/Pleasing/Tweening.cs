@@ -122,8 +122,7 @@ namespace Pleasing
             }
             removeTimelines.Clear();
         }
-#endif
-
+#else
         public static void Update(float deltaTime)
         {
             foreach(var timeline in timelines)
@@ -131,6 +130,7 @@ namespace Pleasing
                 timeline.Update(deltaTime);
             }
         }
+#endif
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ namespace Pleasing
         }
 
         /// <summary>
-        /// Scans through the timeline backwards, resetting properties to their orginal state.
+        /// Scans through the timeline backwards, resetting properties to their original state.
         /// </summary>
         protected void ResetProperties()
         {

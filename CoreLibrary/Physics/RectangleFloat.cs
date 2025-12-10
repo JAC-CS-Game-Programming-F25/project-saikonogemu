@@ -226,5 +226,13 @@ public struct RectangleFloat : IEquatable<RectangleFloat>
     public static bool operator !=(RectangleFloat rectA, RectangleFloat rectB) =>
         !rectA.Equals(rectB);
 
+    /// <summary>
+    /// Clones the RectangleFloat instance (deep clone).
+    /// </summary>
+    /// <returns>Returns the cloned item.</returns>
+    public RectangleFloat Clone()
+    {
+        return (RectangleFloat)MemberwiseClone();
+    }
     #endregion Public Methods
 }

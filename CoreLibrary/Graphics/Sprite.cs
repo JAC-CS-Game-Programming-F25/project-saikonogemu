@@ -17,6 +17,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pleasing;
 
 namespace CoreLibrary.Graphics;
 
@@ -80,11 +81,6 @@ public class Sprite
     /// </summary>
     public float Height => Region.Height * Scale.Y;
 
-    /// <summary>
-    /// The offset to render the sprite at.
-    /// </summary>
-    public Vector2 SpriteOffset { get; set; } = Vector2.Zero;
-
     #endregion Properties
 
     #region Constructors
@@ -109,6 +105,39 @@ public class Sprite
     #region Public Methods
 
     /// <summary>
+    /// Tweens the opacity of the sprite.
+    /// </summary>
+    /// <param name="duration">How long the tweening should take.</param>
+    /// <param name="targetOpacity">The target finishing opacity.</param>
+    /// <param name="easing">The easing we want to use, Linear is the default.</param>
+    /// <returns>The tweening timeline so we can stop/repeat the tween.</returns>
+    public TweenTimeline TweenOpacity(float duration, float targetOpacity, EasingFunction easing = null)
+    {
+        // This will make sure the opacity is a valid float.
+        targetOpacity = MathHelper.Clamp(targetOpacity, 0f, 1f);
+
+        // The initial color of the rendering.
+        Color startColor = Color;
+        int targetAlpha = MathHelper.Clamp((int)Math.Round(targetOpacity * 255f), 0, 255);
+        Color targetColor = new Color(startColor.R, startColor.G, startColor.B, targetAlpha);
+
+        // Creates a tweening timeline (makes it so we can repeat/stop it).
+        TweenTimeline timeline = Tweening.NewTimeline();
+        timeline.AdaptiveDuration = true;
+
+        TweenableProperty<Color> colorProp = timeline.AddColor(this, "Color");
+
+        // We'll use Linear easing by default.
+        EasingFunction ease = easing ?? Easing.Linear;
+
+        // Add the start and end frames (like checkpoints, super helpful for linked tweens).
+        colorProp.AddFrame(0f, startColor, ease);
+        colorProp.AddFrame(duration, targetColor, ease);
+
+        return timeline;
+    }
+
+    /// <summary>
     /// Sets the origin point of this sprite to its center.
     /// </summary>
     public void CenterOrigin()
@@ -123,7 +152,7 @@ public class Sprite
     /// <param name="position">The XY-coordinate position to render this sprite at.</param>
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        Region.Draw(spriteBatch, position + SpriteOffset, Color, Rotation, Origin, Scale, Effects, LayerDepth);
+        Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
 
     #endregion Public Methods

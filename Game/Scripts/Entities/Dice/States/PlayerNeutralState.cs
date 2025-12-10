@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using CoreLibrary;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 #nullable enable
+
+namespace Game.Scripts.Entities.Dice.States;
 
 /// <summary>
 /// Represents the state of the player in living neutral form.
@@ -16,6 +20,10 @@ public class PlayerNeutralState : PlayerLivingState
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
         base.Enter(parameters);
+
+        // Updates the textures of the dice.
+        Dice!.UpdateTexture("Images/Atlas/player_dice_atlas.xml");
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
     }
 
     /// <summary>
@@ -33,6 +41,8 @@ public class PlayerNeutralState : PlayerLivingState
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        CheckAbilities();
     }
 
     /// <summary>
@@ -44,4 +54,36 @@ public class PlayerNeutralState : PlayerLivingState
         base.Draw(gameTime);
     }
     #endregion Lifecycle Methods
+
+    #region Ability Methods
+    /// <summary>
+    /// Checks to see if an ability is triggered.
+    /// </summary>
+    private void CheckAbilities()
+    {
+        // TODO: make it so that these are tied to settings.
+
+        // If the J or Z keys are down, activate the dash.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.J)) Dash();
+
+        // If the K or X keys are down, activate phasing.
+        else if (Core.Input.Keyboard.IsKeyDown(Keys.K)) Phase();
+    }
+
+    /// <summary>
+    /// Switches the state to the dash state.
+    /// </summary>
+    private void Dash()
+    {
+        Dice?.ChangeState("PlayerDashState", new Dictionary<string, object> { ["dice"] = Dice });
+    }
+
+    /// <summary>
+    /// Switches the state to the phase state.
+    /// </summary> 
+    private void Phase()
+    {
+        Dice?.ChangeState("PlayerPhaseState", new Dictionary<string, object> { ["dice"] = Dice });
+    }
+    #endregion Ability Methods
 }

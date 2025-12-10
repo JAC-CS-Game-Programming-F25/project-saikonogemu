@@ -1,14 +1,23 @@
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Game.Scripts.Entities.Dice.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 #nullable enable
 
+namespace Game.Scripts.Entities.Dice;
+
 public class PlayerDice : Dice
 {
+    #region Backing Fields
+    private ContentManager _content;
+    Dictionary<string, object>? _diceDefinition;
+    #endregion Backing Fields
+
     #region Constructors
     /// <summary>
     /// Creates a new PlayerDice entity instance.
@@ -17,8 +26,20 @@ public class PlayerDice : Dice
     /// <param name="diceDefinition">All the dice specific parameters.</param>
     public PlayerDice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition)
     {
+        _content = content;
+        _diceDefinition = diceDefinition;
+
         // Adds the player neutral state.
-        StateMachine.Add("PlayerNeutralState", new PlayerNeutralState(), new Dictionary<string, object> { ["player"] = this });
+        AddState("PlayerNeutralState", new PlayerNeutralState(), new Dictionary<string, object> { ["dice"] = this });
+
+        // Adds the player dash state.
+        AddState("PlayerDashState", new PlayerDashState());
+
+        // Adds the player phase state.
+        AddState("PlayerPhaseState", new PlayerPhaseState());
+
+        // Adds the player phase state.
+        AddState("DiceDyingState", new DiceDyingState());
     }
     #endregion Constructors
 
@@ -45,6 +66,29 @@ public class PlayerDice : Dice
     #endregion Update and Draw
 
     #region Methods
-    
+    /// <summary>
+    /// Clones the PlayerDice instance as a ghost.
+    /// </summary>
+    /// <returns>Returns the cloned item.</returns>
+    public PlayerDice CreateGhost()
+    {
+        // Clones the player.
+        PlayerDice ghost = (PlayerDice)MemberwiseClone();
+
+        // Copies only what we need.
+        ghost.CurrentAnimation = CurrentAnimation.Clone();
+        ghost.DiceOpacity = DiceOpacity;
+
+        // Snapshot the position
+        ghost.Hitbox = Hitbox.Clone();
+        ghost.Hitbox.Velocity = Vector2.Zero;
+        ghost.Hitbox.Dynamic = false;
+
+        // Ghost should not update states.
+        ghost.StateMachine = null;
+
+        return ghost;
+    }
+
     #endregion Methods
 }

@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 
 #nullable enable
 
+namespace Game.Scripts.Entities.Dice.States;
+
 /// <summary>
 /// Represents the state of the dice in dying form.
 /// </summary>

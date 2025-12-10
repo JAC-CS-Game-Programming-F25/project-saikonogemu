@@ -6,16 +6,19 @@ using CoreLibrary.Graphics;
 using CoreLibrary.Physics;
 using CoreLibrary.Scenes;
 using CoreLibrary.Utils;
+using Game.Scripts.Entities.Dice;
+using Game.Scripts.Scenes.GameScene.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pleasing;
 
-namespace DieTheRollingDiceGame;
+namespace Game.Scripts.Scenes.GameScene;
 
 public class GameScene : Scene
 {
     #region  Fields
     // The camera for the scene (what the player sees)
-    private Camera _camera = new Camera();
+    private Camera _camera = new();
 
     // The bounds of the screen (the physical bounds of the player's screen (e.g. 1920x1080)).
     // These are always exact numbers.
@@ -94,7 +97,7 @@ public class GameScene : Scene
                 ["texture"] = "Images/Atlas/player_dice_atlas.xml",
                 ["animationName"] = "player_dice_dot6_idle_animation",
                 ["position"] = new Vector2(centerColumn * _tilemap.TileWidth, centerRow * _tilemap.TileHeight),
-                ["positionOffset"] = new Vector2(-5, -5),
+                ["positionOffset"] = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET),
                 ["sizeOffset"] = new Vector2(-10, -10),
                 ["scale"] = new Vector2(3.0f, 3.0f),
                 ["entityTotalHealth"] = 6

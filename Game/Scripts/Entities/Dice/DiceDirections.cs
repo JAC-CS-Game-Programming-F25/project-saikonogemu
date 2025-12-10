@@ -1,3 +1,5 @@
+namespace Game.Scripts.Entities.Dice;
+
 public enum DiceDirections
 {
     Left,

@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Input;
 
 #nullable enable
 
+namespace Game.Scripts.Entities.Dice.States;
+
 /// <summary>
 /// Represents the state of the player in living form.
 /// </summary>

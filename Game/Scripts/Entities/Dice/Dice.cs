@@ -14,31 +14,33 @@
  *  © 2025 FarLostBrand. All rights reserved.
  ***************************************************************/
 
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Pleasing;
 
 #nullable enable
 
-public class Dice : GameEntity
+namespace Game.Scripts.Entities.Dice;
+
+/// <summary>
+/// Creates a new dice entity instance.
+/// This serves as a generic for the dice to come.
+/// </summary>
+/// <param name="content">The content manager used by the scene to load in content.</param>
+/// <param name="diceDefinition">All the dice specific parameters.</param>
+public class Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : GameEntity(content, diceDefinition)
 {
     #region Properties
-    public const float NORMAL_OFFSET = -5.0f;
-    public const float DIAGONAL_OFFSET = -10.0f;
+    // This is calculated by doing pixels/scale.
+    public const float NORMAL_OFFSET = 1.67f;
+    public const float DIAGONAL_OFFSET = 3.33f;
     public DiceDirections DiceDirection {get; set;} = DiceDirections.Idle;
-    #endregion Properties
+    public float DiceOpacity {get; set; } = 1.0f;
 
-    #region Constructors
-    /// <summary>
-    /// Creates a new dice entity instance.
-    /// This serves as a generic for the dice to come.
-    /// </summary>
-    /// <param name="content">The content manager used by the scene to load in content.</param>
-    /// <param name="diceDefinition">All the dice specific parameters.</param>
-    public Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition) { }
-    #endregion Constructors
+    #endregion Properties
 
     #region Update and Draw
 
@@ -59,6 +61,8 @@ public class Dice : GameEntity
     public override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
+
+        CurrentAnimation.Color = Color.White * DiceOpacity;
     }
 
     #endregion Update and Draw
@@ -106,6 +110,53 @@ public class Dice : GameEntity
         }
 
         return "FailedFileName";
+    }
+
+    /// <summary>
+    /// Gets the name preset of animation name for that dice without the dice type.
+    /// </summary>
+    /// <returns>Returns the animation name for that dice without the dice type.</returns>
+    public string GetAnimationTypeWithoutDice()
+    {
+        // Get the end of the animation name.
+        // e.g. player_dice_atlas.xml
+        Match match = Regex.Match(CurrentAnimationName, @"(?<=dice).*$");
+
+        // If there was a match.
+        if (match.Success)
+        {
+            return match.Groups[0].Value;
+        }
+
+        return "FailedFileName";
+    }
+
+    /// <summary>
+    /// Tweens the opacity of the dice.
+    /// </summary>
+    /// <param name="duration">How long the tweening should take.</param>
+    /// <param name="targetOpacity">The target finishing opacity.</param>
+    /// <param name="easing">The easing we want to use, Linear is the default.</param>
+    /// <returns>The tweening timeline so we can stop/repeat the tween.</returns>
+    public TweenTimeline TweenOpacity(float duration, float targetOpacity, EasingFunction? easing = null)
+    {
+        // This will make sure the opacity is a valid float.
+        targetOpacity = MathHelper.Clamp(targetOpacity, 0f, 1f);
+
+        // Creates a tweening timeline (makes it so we can repeat/stop it).
+        TweenTimeline timeline = Tweening.NewTimeline();
+        timeline.AdaptiveDuration = true;
+
+        TweenableProperty<float> opacityProp = timeline.AddFloat(this, nameof(DiceOpacity));
+
+        // We'll use Linear easing by default.
+        EasingFunction ease = easing ?? Easing.Linear;
+
+        // Add the start and end frames (like checkpoints, super helpful for linked tweens).
+        opacityProp.AddFrame(0f, DiceOpacity, ease);
+        opacityProp.AddFrame(duration, targetOpacity, ease);
+
+        return timeline;
     }
     #endregion Methods
 }

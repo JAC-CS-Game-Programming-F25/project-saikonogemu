@@ -26,6 +26,8 @@ using Microsoft.Xna.Framework.Content;
 
 #nullable enable
 
+namespace Game.Scripts.Entities;
+
 /// <summary>
 /// Represents the base class for all game entities.
 /// Provides lifecycle methods for initialization, content management,
@@ -39,7 +41,7 @@ public abstract class GameEntity
     /// <summary>
     /// Gets the statemachine of the entity.
     /// </summary>
-    public StateMachine StateMachine { get; set; } = new StateMachine();
+    protected StateMachine? StateMachine { get; set; } = new StateMachine();
 
     /// <summary>
     /// Gets the texture used for all game entities.
@@ -47,14 +49,19 @@ public abstract class GameEntity
     public TextureAtlas EntityTexture { get; private set; }
 
     /// <summary>
+    /// Gets the name of the current animation.
+    /// </summary>
+    public string CurrentAnimationName { get; private set; }
+
+    /// <summary>
     /// Gets the current game entity's texture.
     /// </summary>
-    public AnimatedSprite CurrentAnimation { get; private set; }
+    public AnimatedSprite CurrentAnimation { get; protected set; }
 
     /// <summary>
     /// Gets the hitbox of the game entity.
     /// </summary>
-    public Rigidbody Hitbox { get; private set; }
+    public Rigidbody Hitbox { get; protected set; }
 
     /// <summary>
     /// Gets the total health of the entity.
@@ -102,9 +109,10 @@ public abstract class GameEntity
         EntityTexture = TextureAtlas.FromFile(content, Utils.GetValue(entityDefinition, "texture", "FailedTextureLoading"));
 
         // Current Animation.
-        CurrentAnimation = EntityTexture.CreateAnimatedSprite(Utils.GetValue(entityDefinition, "animationName", "default"));
+        CurrentAnimationName = Utils.GetValue(entityDefinition, "animationName", "default");
+        CurrentAnimation = EntityTexture.CreateAnimatedSprite(CurrentAnimationName);
         Scale = Utils.GetValue(entityDefinition, "scale", Vector2.One);
-        CurrentAnimation.SpriteOffset = Utils.GetValue(entityDefinition, "positionOffset", Vector2.Zero) * Scale;
+        CurrentAnimation.Origin = Utils.GetValue(entityDefinition, "positionOffset", Vector2.Zero) * Scale;
 
         // Collisions.
         Vector2 sizeOffset = Utils.GetValue(entityDefinition, "sizeOffset", Vector2.Zero);
@@ -154,6 +162,11 @@ public abstract class GameEntity
     #endregion Update and Draw
 
     #region Methods
+    public void AddState(string stateName, State state, Dictionary<string, object>? parameters = null)
+    {
+        StateMachine?.Add(stateName, state, parameters);
+    }
+
     /// <summary>
     /// Changes the current state to provided state.
     /// </summary>
@@ -192,9 +205,12 @@ public abstract class GameEntity
         // Animation
         try
         {
-            Vector2 offset = CurrentAnimation.SpriteOffset;
+            Vector2 offset = CurrentAnimation.Origin;
+            Color color = CurrentAnimation.Color;
             CurrentAnimation = EntityTexture.CreateAnimatedSprite(animationName, totalCycles);
-            CurrentAnimation.SpriteOffset = offset;
+            CurrentAnimationName = animationName;
+            CurrentAnimation.Origin = offset;
+            CurrentAnimation.Color = color;
         } 
         catch
         {

@@ -111,5 +111,15 @@ public class Rigidbody
         Position += Velocity * deltaTime;
     }
 
+    /// <summary>
+    /// Clones the Rigidbody instance (deep clone).
+    /// </summary>
+    /// <returns>Returns the cloned item.</returns>
+    public Rigidbody Clone()
+    {
+        Rigidbody clone = (Rigidbody)MemberwiseClone();
+        clone.Collider = Collider.Clone();
+        return clone;
+    }
     #endregion Public Methods
 }

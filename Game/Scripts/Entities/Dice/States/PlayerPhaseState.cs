@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 #nullable enable
 
+namespace Game.Scripts.Entities.Dice.States;
+
 /// <summary>
 /// Represents the state of the player in living form as they are phasing.
 /// </summary>
-public class PlayerPhasingState : PlayerLivingState
+public class PlayerPhaseState : PlayerLivingState
 {
     #region Lifecycle Methods
     /// <summary>
@@ -16,6 +19,7 @@ public class PlayerPhasingState : PlayerLivingState
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
         base.Enter(parameters);
+        Console.WriteLine("Hello from phase!");
     }
 
     /// <summary>
@@ -32,6 +36,7 @@ public class PlayerPhasingState : PlayerLivingState
     /// <param name="gameTime">The GameTime of the game.</param>
     public override void Update(GameTime gameTime)
     {
+        
         base.Update(gameTime);
     }
 

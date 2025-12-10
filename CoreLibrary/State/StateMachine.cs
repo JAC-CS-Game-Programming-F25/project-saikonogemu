@@ -37,12 +37,12 @@ public class StateMachine
     /// <summary>
     /// The current state (value).
     /// </summary>
-    private State _currentState;
+    private State? _currentState;
 
     /// <summary>
     /// The current state name (key).
     /// </summary>
-    public string CurrentStateName { get; private set; }
+    public string? CurrentStateName { get; private set; }
     #endregion Properties
 
     #region Methods

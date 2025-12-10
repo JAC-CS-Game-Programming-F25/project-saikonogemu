@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 
 #nullable enable
 
+namespace Game.Scripts.Entities.Dice.States;
+
 /// <summary>
 /// Represents the state of the dice in living form.
 /// </summary>
@@ -27,10 +29,10 @@ public class DiceLivingState : State
     {
         base.Enter(parameters);
 
-        Dice = Utils.GetValue(parameters, "player", Dice);
+        Dice = Utils.GetValue(parameters, "dice", Dice);
 
         if (Dice is null)
-            throw new ArgumentNullException("Player is null in PlayerLivingState.");
+            throw new ArgumentNullException("dice is null in PlayerLivingState.");
     }
 
     /// <summary>
@@ -80,21 +82,21 @@ public class DiceLivingState : State
             {
                 // Dice is negative diagonal still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_negative_diagonal_idle_animation");
-                Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+                Dice.CurrentAnimation.Origin = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
                 Dice.DiceDirection = DiceDirections.Idle;
             }
             else if (Dice.DiceDirection == DiceDirections.UpRight || Dice.DiceDirection == DiceDirections.DownLeft)
             {
                 // Dice is negative diagonal still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_positive_diagonal_idle_animation");
-                Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+                Dice.CurrentAnimation.Origin = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
                 Dice.DiceDirection = DiceDirections.Idle;
             }
             else
             {
                 // Dice is still.
                 Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_idle_animation");
-                Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+                Dice.CurrentAnimation.Origin = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
                 Dice.DiceDirection = DiceDirections.Idle;
             }
         } 
@@ -105,7 +107,7 @@ public class DiceLivingState : State
 
             // Dice is moving left up.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_up_left_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.UpLeft;
         }
         else if (Dice.Hitbox.Velocity.X > 0 && Dice.Hitbox.Velocity.Y > 0)
@@ -115,7 +117,7 @@ public class DiceLivingState : State
 
             // Dice is moving right down.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_down_right_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.DownRight;
         }
         else if (Dice.Hitbox.Velocity.Y > 0 && Dice.Hitbox.Velocity.X < 0 )
@@ -125,7 +127,7 @@ public class DiceLivingState : State
             
             // Dice is moving left down.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_down_left_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.DownLeft;
         }
         else if (Dice.Hitbox.Velocity.Y < 0 && Dice.Hitbox.Velocity.X > 0 )
@@ -135,7 +137,7 @@ public class DiceLivingState : State
 
             // Dice is moving right up.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_up_right_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.DIAGONAL_OFFSET, Dice.DIAGONAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.UpRight;
         }
         else if (Dice.Hitbox.Velocity.X < 0)
@@ -145,7 +147,7 @@ public class DiceLivingState : State
 
             // Dice is moving left.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_left_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.Left;
         }
         else if (Dice.Hitbox.Velocity.X > 0)
@@ -155,7 +157,7 @@ public class DiceLivingState : State
 
             // Dice is moving right.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_right_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.Right;
         }
         else if (Dice.Hitbox.Velocity.Y < 0)
@@ -165,7 +167,7 @@ public class DiceLivingState : State
 
             // Dice is moving up.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_up_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.Up;
         }
         else if (Dice.Hitbox.Velocity.Y > 0)
@@ -175,7 +177,7 @@ public class DiceLivingState : State
 
             // Dice is moving down.
             Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}_down_animation");
-            Dice.CurrentAnimation.SpriteOffset = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
+            Dice.CurrentAnimation.Origin = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET) * Dice.Scale;
             Dice.DiceDirection = DiceDirections.Down;
         }
     }

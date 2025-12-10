@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Pleasing;
 
 namespace CoreLibrary.Scenes;
 
@@ -109,6 +110,9 @@ public abstract class Scene : IDisposable
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
     public virtual void Update(GameTime gameTime)
     {
+        // Update all tweens.
+        Tweening.Update(gameTime);
+
         // Updates the StateMachine.
         StateMachine?.Update(gameTime);
     }
