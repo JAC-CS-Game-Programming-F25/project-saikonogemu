@@ -1,2 +1,4 @@
 
-public record Level(LevelType levelType);
+using System.Drawing;
+
+public record Level(LevelType levelType, Color levelColor);

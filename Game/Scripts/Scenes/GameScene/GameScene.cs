@@ -16,6 +16,11 @@ namespace Game.Scripts.Scenes.GameScene;
 
 public class GameScene : Scene
 {
+    #region Constants
+    // FIXME: Change to match song length??? MAYBE?
+    private const float BACKGROUND_CHANGE_DURATION = 20000f;
+    #endregion Constants
+
     #region  Fields
     // The camera for the scene (what the player sees)
     private Camera _camera = new();
@@ -80,6 +85,10 @@ public class GameScene : Scene
             _tilemap.Rows * (int)_tilemap.TileHeight
         );
 
+        // FIXME: Change to use Level.Color
+        BackgroundColor = Color.Green;
+        TweenBackground(BACKGROUND_CHANGE_DURATION, Color.Black);
+
         // TODO: Initialize player, initialize enemies, initialize targets. Use dice factory. Pass in dice to PlayState.
 
 
@@ -121,7 +130,6 @@ public class GameScene : Scene
 
         _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
         
-        // FIXME: Make it so it works with the camera smh.
         // Adds collidable tiles to the Physics.
         PhysicsManager.Instance.TileColliders = _tilemap.GetNearbyColliders(
             _camera.GetBounds(_screenBounds.Width, _screenBounds.Height)
@@ -131,9 +139,6 @@ public class GameScene : Scene
     public override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
-
-        // Clears the canvas back to a black screen (can be any color I like black since it looks like the void :D).
-        Core.GraphicsDevice.Clear(Color.Black);
 
         // PointClamp makes it so that the nearest pixel is selected without anti-aliasing, etc.
         // If you don't know what a samplerState is, see https://docs.monogame.net/articles/getting_to_know/whatis/graphics/WhatIs_Sampler.html

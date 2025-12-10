@@ -51,6 +51,10 @@ public abstract class Scene : IDisposable
     /// </summary>
     public StateMachine StateMachine { get; set; } = new StateMachine();
 
+    /// <summary>
+    /// The background color of the scene.
+    /// </summary>
+    public Color BackgroundColor { get; set; } = Color.Black;
     #endregion Properties
 
     #region Constructors
@@ -123,6 +127,9 @@ public abstract class Scene : IDisposable
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
     public virtual void Draw(GameTime gameTime)
     {
+        // Clears the canvas back to the backgroundColor;
+        Core.GraphicsDevice.Clear(BackgroundColor);
+
         // Draws the StateMachine.
         StateMachine?.Draw(gameTime);
     }
@@ -174,4 +181,34 @@ public abstract class Scene : IDisposable
     }
 
     #endregion Disposal
+
+    #region Public Methods
+    /// <summary>
+    /// Tweens the opacity of the background.
+    /// </summary>
+    /// <param name="duration">How long the tweening should take.</param>
+    /// <param name="targetOpacity">The target finishing opacity.</param>
+    /// <param name="easing">The easing we want to use, Linear is the default.</param>
+    /// <returns>The tweening timeline so we can stop/repeat the tween.</returns>
+    public TweenTimeline TweenBackground(float duration, Color targetColor, EasingFunction? easing = null)
+    {
+        // The initial color of the rendering.
+        Color startColor = BackgroundColor;
+
+        // Creates a tweening timeline (makes it so we can repeat/stop it).
+        TweenTimeline timeline = Tweening.NewTimeline();
+        timeline.AdaptiveDuration = true;
+
+        TweenableProperty<Color> colorProp = timeline.AddColor(this, nameof(BackgroundColor));
+
+        // We'll use Linear easing by default.
+        EasingFunction ease = easing ?? Easing.Linear;
+
+        // Add the start and end frames (like checkpoints, super helpful for linked tweens).
+        colorProp.AddFrame(0f, startColor, ease);
+        colorProp.AddFrame(duration, targetColor, ease);
+
+        return timeline;
+    }
+    #endregion Public Methods
 }

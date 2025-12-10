@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CoreLibrary;
 using Microsoft.Xna.Framework;
@@ -64,7 +65,8 @@ public class PlayerNeutralState : PlayerLivingState
         // TODO: make it so that these are tied to settings.
 
         // If the J or Z keys are down, activate the dash.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.J)) Dash();
+        if (Core.Input.Keyboard.IsKeyDown(Keys.J) && (Math.Abs(Dice!.Hitbox.Velocity.X) > 0 || Math.Abs(Dice!.Hitbox.Velocity.Y) > 0)) 
+            Dash();
 
         // If the K or X keys are down, activate phasing.
         else if (Core.Input.Keyboard.IsKeyDown(Keys.K)) Phase();
