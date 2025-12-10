@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Pleasing;
 
 #nullable enable
 
@@ -11,6 +12,16 @@ namespace Game.Scripts.Entities.Dice.States;
 /// </summary>
 public class PlayerPhaseState : PlayerLivingState
 {
+    #region Constants
+    private const float ACTIVATION_DELAY = 200f;
+    private const float ABILITY_DURATION = 1000f;
+    private const float COOLDOWN = 2.5f;
+    #endregion Constants
+
+    #region Backing Fields
+    private float _abilityCooldownTimer = 0f;
+    #endregion Backing Fields
+
     #region Lifecycle Methods
     /// <summary>
     /// Called when entering this State.
@@ -19,7 +30,18 @@ public class PlayerPhaseState : PlayerLivingState
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
         base.Enter(parameters);
-        Console.WriteLine("Hello from phase!");
+
+        if (Dice is null) 
+            throw new ArgumentNullException("Dice cannot be null in PlayerPhaseState.");
+
+        // Updates the textures.
+        Dice.UpdateTexture("Images/Atlas/player_ascension_dice_atlas.xml");
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+
+        // Don't want to accidentally cancer the iframes.
+        Dice.DiceOpacity = 0.99f;
+
+        Dice.TweenOpacity(ACTIVATION_DELAY, 0f);
     }
 
     /// <summary>
@@ -27,6 +49,8 @@ public class PlayerPhaseState : PlayerLivingState
     /// </summary>
     public override void Exit()
     {
+        // TODO: Remove collision immortality.
+
         base.Exit();
     }
 
@@ -36,7 +60,11 @@ public class PlayerPhaseState : PlayerLivingState
     /// <param name="gameTime">The GameTime of the game.</param>
     public override void Update(GameTime gameTime)
     {
-        
+        if (Dice!.DiceOpacity == 0f)
+            StartIFrames();
+        else if (Dice!.DiceOpacity == 1f)
+            HandleAbilityCooldown(gameTime);
+
         base.Update(gameTime);
     }
 
@@ -49,4 +77,40 @@ public class PlayerPhaseState : PlayerLivingState
         base.Draw(gameTime);
     }
     #endregion Lifecycle Methods
+
+    #region Methods
+    /// <summary>
+    /// Begins the immortality frames for the dice.
+    /// </summary>
+    private void StartIFrames()
+    {
+        //TODO: Add collision immortality.
+        Dice!.TweenOpacity(ABILITY_DURATION, 1f);
+    }
+
+    /// <summary>
+    /// Handles the ability cooldown.
+    /// </summary>
+    /// <param name="gameTime">The gameTime of the Game.</param>
+    private void HandleAbilityCooldown(GameTime gameTime)
+    {
+        _abilityCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        Console.WriteLine(_abilityCooldownTimer);
+
+        if (_abilityCooldownTimer >= COOLDOWN)
+        {
+            _abilityCooldownTimer = 0;
+            ChangeToNeutral();
+        }
+    }
+
+    /// <summary>
+    /// Switches the state to the neutral state.
+    /// </summary>
+    private void ChangeToNeutral()
+    {
+        Dice?.ChangeState("PlayerNeutralState");
+    }
+    #endregion Methods
 }
