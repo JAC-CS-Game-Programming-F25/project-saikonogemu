@@ -1,10 +1,11 @@
 ﻿using CoreLibrary;
+using Game.Scripts.Levels;
 using Game.Scripts.Scenes.GameScene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace DieTheRollingDiceGame;
+namespace Game.Scripts;
 
 public class Game1 : Core
 {
@@ -23,7 +24,7 @@ public class Game1 : Core
 
         // Start the game with the title scene.
         // TODO:  Change to be title screen.
-        ChangeScene(new GameScene());
+        ChangeScene(new GameScene(LevelType.Level1));
     }
 
     protected override void LoadContent() { }

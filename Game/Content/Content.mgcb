@@ -13,6 +13,33 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Data/Levels/level1_data.xml
+/copy:Data/Levels/level1_data.xml
+
+#begin Data/Levels/level2_data.xml
+/copy:Data/Levels/level2_data.xml
+
+#begin Data/Levels/level3_data.xml
+/copy:Data/Levels/level3_data.xml
+
+#begin Data/Levels/level4_data.xml
+/copy:Data/Levels/level4_data.xml
+
+#begin Data/Levels/level5_data.xml
+/copy:Data/Levels/level5_data.xml
+
+#begin Data/Levels/level6_data.xml
+/copy:Data/Levels/level6_data.xml
+
+#begin Data/Levels/level7_data.xml
+/copy:Data/Levels/level7_data.xml
+
+#begin Data/Levels/level8_data.xml
+/copy:Data/Levels/level8_data.xml
+
+#begin Data/Levels/level9_data.xml
+/copy:Data/Levels/level9_data.xml
+
 #begin Fonts/peaberrybase_font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -98,18 +125,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/Dice/target_dice.png
 
-#begin Images/Tiles/level_tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Tiles/level_tiles.png
-
 #begin Images/Levels/XML/level1.xml
 /copy:Images/Levels/XML/level1.xml
 
@@ -136,4 +151,16 @@
 
 #begin Images/Levels/XML/level9.xml
 /copy:Images/Levels/XML/level9.xml
+
+#begin Images/Tiles/level_tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Tiles/level_tiles.png
 

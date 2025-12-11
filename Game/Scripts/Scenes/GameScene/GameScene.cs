@@ -7,6 +7,7 @@ using CoreLibrary.Physics;
 using CoreLibrary.Scenes;
 using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice;
+using Game.Scripts.Levels;
 using Game.Scripts.Scenes.GameScene.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,8 +30,7 @@ public class GameScene : Scene
     // These are always exact numbers.
     private Rectangle _screenBounds;
 
-    // FIXME: Move this to LEVEL
-    // The bounds of the room (the physical bounds of the level.
+    // The bounds of the room.
     private Rectangle _roomBounds;
 
     // The tilemap of the scene.
@@ -42,7 +42,21 @@ public class GameScene : Scene
     private Vector2? _oldPlayerPosition = null;
     #endregion Fields
 
+    #region Properties
+    public Level CurrentLevel {get; private set;}
+    #endregion Properties
+
     #region Scene Lifecycle
+
+    /// <summary>
+    /// The very start of the core processor of the game.
+    /// </summary>
+    /// <param name="levelType">The level that this game scene is running.</param>
+    public GameScene(LevelType levelType) : base()
+    {
+        // Loads the info for the current level.
+        CurrentLevel = Level.FromFile(Content, $"Data/Levels/level{(int)levelType}_data.xml");
+    }
 
     /// <summary>
     /// The very first method ran when the scene is started.

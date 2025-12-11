@@ -1,5 +1,7 @@
+namespace Game.Scripts.Levels;
+
 public enum LevelType {
-    Level1,
+    Level1 = 1,
     Level2,
     Level3,
     Level4,

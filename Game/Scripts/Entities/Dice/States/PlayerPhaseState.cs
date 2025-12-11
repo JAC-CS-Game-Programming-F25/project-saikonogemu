@@ -96,8 +96,6 @@ public class PlayerPhaseState : PlayerLivingState
     {
         _abilityCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        Console.WriteLine(_abilityCooldownTimer);
-
         if (_abilityCooldownTimer >= COOLDOWN)
         {
             _abilityCooldownTimer = 0;

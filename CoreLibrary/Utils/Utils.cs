@@ -73,5 +73,19 @@ public static class Utils
             Core.SpriteBatch.Draw(_debugOrange, new Rectangle(drawRect.Right - OUTLINE_SIZE, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Orange);
         }
     }
+
+    /// <summary>
+    /// Gets a Color from the provided hex value.
+    /// </summary>
+    /// <param name="hex">The hex of the color.</param>
+    /// <returns>Returns the Color received from the hex value.</returns>
+    public static Color FromHex(string hex)
+    {
+        hex = hex.Replace("#", "");
+        int r = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+        int g = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+        int b = int.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+        return new Color(r, g, b);
+    }
     #endregion Helper Methods
 }
