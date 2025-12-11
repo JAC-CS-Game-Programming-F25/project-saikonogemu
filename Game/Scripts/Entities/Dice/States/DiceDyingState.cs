@@ -58,6 +58,8 @@ public class DiceDyingState : State
             Dice.IsDead = true;
 
         base.Update(gameTime);
+
+        Dice.Hitbox.Velocity = Vector2.Zero;
     }
 
     /// <summary>

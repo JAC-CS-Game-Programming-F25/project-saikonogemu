@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Game.Scripts.Entities.Dice.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -7,24 +6,13 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Game.Scripts.Entities.Dice;
 
-public class TargetDice: Dice
+/// <summary>
+/// Creates a new TargetDice entity instance.
+/// </summary>
+/// <param name="content">The content manager used by the scene to load in content.</param>
+/// <param name="diceDefinition">All the dice specific parameters.</param>
+public class TargetDice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : NPCDice(content, diceDefinition)
 {
-    #region Constructors
-    /// <summary>
-    /// Creates a new TargetDice entity instance.
-    /// </summary>
-    /// <param name="content">The content manager used by the scene to load in content.</param>
-    /// <param name="diceDefinition">All the dice specific parameters.</param>
-    public TargetDice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition)
-    {
-        // Adds the player neutral state.
-        AddState("DiceLivingState", new DiceLivingState(), new Dictionary<string, object> { ["dice"] = this });
-
-        // Adds the player phase state.
-        AddState("DiceDyingState", new DiceDyingState());
-    }
-    #endregion Constructors
-
     #region Update and Draw
 
     /// <summary>

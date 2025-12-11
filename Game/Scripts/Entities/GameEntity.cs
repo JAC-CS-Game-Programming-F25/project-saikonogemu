@@ -126,7 +126,7 @@ public abstract class GameEntity
 
         // Physics.
         Hitbox.Velocity = Utils.GetValue(entityDefinition, "velocity", Vector2.Zero);
-        Speed = Utils.GetValue(entityDefinition, "speed", 100) * Scale.X;
+        Speed = Utils.GetValue(entityDefinition, "speed", 100f) * Scale.X;
 
         // Lively Things.
         TotalHealth = Utils.GetValue(entityDefinition, "entityTotalHealth", 1);

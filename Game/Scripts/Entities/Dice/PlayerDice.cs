@@ -9,6 +9,8 @@ namespace Game.Scripts.Entities.Dice;
 
 public class PlayerDice : Dice
 {
+    public const float SPEED = 100f;
+
     #region Constructors
     /// <summary>
     /// Creates a new PlayerDice entity instance.

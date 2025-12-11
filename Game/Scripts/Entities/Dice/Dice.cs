@@ -238,7 +238,6 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
         if (selectDelta != Vector2.Zero)
         {
             selectDelta = Vector2.Normalize(selectDelta) * Speed;
-            Console.WriteLine(selectDelta);
         }
 
         // Modifies the die's velocity.

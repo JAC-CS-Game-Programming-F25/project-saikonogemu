@@ -20,7 +20,7 @@ public class GameScene : Scene
     #region Constants
     private const float GAME_SCALE = 3.0f;
     // FIXME: Change to match song length??? MAYBE?
-    private const float BACKGROUND_CHANGE_DURATION = 20000f;
+    private const float BACKGROUND_CHANGE_DURATION = 20000f; 
     #endregion Constants
 
     #region  Fields
@@ -86,6 +86,11 @@ public class GameScene : Scene
         // Sets the screenBounds based on the player's screen.
         _screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
+        // Adds collidable tiles to the Physics.
+        PhysicsManager.Instance.TileColliders = _tilemap.GetNearbyColliders(
+          new RectangleFloat(0, 0, _tilemap.Columns * _tilemap.TileWidth, _tilemap.Rows * _tilemap.TileHeight)
+        );
+
         #region Initialize Dice
         // Initializes the player.
         InitializePlayer();
@@ -134,12 +139,6 @@ public class GameScene : Scene
 
         // Moves the camera.
         HandleCameraMovement();
-        
-        // Adds collidable tiles to the Physics.
-        // Only gets seeable tiles :D.
-        PhysicsManager.Instance.TileColliders = _tilemap.GetNearbyColliders(
-            _camera.GetBounds(_screenBounds.Width, _screenBounds.Height)
-        );
     }
 
     public override void Draw(GameTime gameTime)
@@ -191,7 +190,7 @@ public class GameScene : Scene
         _bannedSpawnTiles = GenerateBannedTiles(playerLocationIndex);
 
         // TODO: Make player health translate level to level
-        _dice.Add(CreateDice(DiceTypes.Player, 6, playerLocationIndex));
+        _dice.Add(CreateDice(DiceTypes.Player, 6, playerLocationIndex, PlayerDice.SPEED));
     }
 
     /// <summary>
@@ -207,7 +206,7 @@ public class GameScene : Scene
             int bannedIndex = targetLocationIndex.Item2 * _tilemap.Columns + targetLocationIndex.Item1;
             _bannedSpawnTiles.Add(bannedIndex);
 
-            _dice.Add(CreateDice(DiceTypes.Target, targetHealth, targetLocationIndex));
+            _dice.Add(CreateDice(DiceTypes.Target, targetHealth, targetLocationIndex, NPCDice.SPEED));
         }
     }
 
@@ -224,7 +223,7 @@ public class GameScene : Scene
             int bannedIndex = enemyLocationIndex.Item2 * _tilemap.Columns + enemyLocationIndex.Item1;
             _bannedSpawnTiles.Add(bannedIndex);
 
-            _dice.Add(CreateDice(DiceTypes.Enemy, enemyHealth, enemyLocationIndex));
+            _dice.Add(CreateDice(DiceTypes.Enemy, enemyHealth, enemyLocationIndex, NPCDice.SPEED));
         }
     }
 
@@ -234,7 +233,7 @@ public class GameScene : Scene
     /// <param name="diceType">The type of the dice <see cref="DiceTypes"/>.</param>
     /// <param name="location">The location to spawn the dice (ValueTuple).</param>
     /// <returns>The new dice created.</returns>
-    private Dice CreateDice(DiceTypes diceType, int diceHealth, ValueTuple<float, float> location)
+    private Dice CreateDice(DiceTypes diceType, int diceHealth, ValueTuple<float, float> location, float speed = 100f)
     {
         string diceTextureName = diceType switch {
             DiceTypes.Player => "player_dice",
@@ -254,6 +253,7 @@ public class GameScene : Scene
                 ["positionOffset"] = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET),
                 ["sizeOffset"] = new Vector2(-10, -10),
                 ["scale"] = new Vector2(GAME_SCALE, GAME_SCALE),
+                ["speed"] = speed,
                 ["entityTotalHealth"] = diceHealth
             }
         );
