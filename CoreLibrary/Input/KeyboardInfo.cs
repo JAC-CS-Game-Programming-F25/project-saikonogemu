@@ -93,5 +93,42 @@ public class KeyboardInfo
     public bool WasKeyJustReleased(Keys key) =>
         CurrentState.IsKeyUp(key) && PreviousState.IsKeyDown(key);
 
+    /// <summary>
+    /// True if any key is currently held down.
+    /// </summary>
+    public bool AnyKeyDown =>
+        CurrentState.GetPressedKeys().Length > 0;
+
+    /// <summary>
+    /// True if any key was pressed this frame (transition from Up → Down).
+    /// </summary>
+    public bool AnyKeyJustPressed
+    {
+        get
+        {
+            var current = CurrentState.GetPressedKeys();
+            foreach (var key in current)
+                if (PreviousState.IsKeyUp(key))
+                    return true;
+
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// True if any key was released this frame (transition from Down → Up).
+    /// </summary>
+    public bool AnyKeyJustReleased
+    {
+        get
+        {
+            var previous = PreviousState.GetPressedKeys();
+            foreach (var key in previous)
+                if (CurrentState.IsKeyUp(key))
+                    return true;
+
+            return false;
+        }
+    }
     #endregion Public Methods
 }

@@ -10,7 +10,7 @@ In this combat round marathon you will traverse 9 distinct levels in order to ac
 
 Players begin in Level 1 with the ability to move Die around the lush Dietopia plains by using `ARROW KEYS`. The goal is for them to liberate all the Controlled. In simpler terms, they must collide with the Green Dice in order to reduce their dots to 0, "liberating" them from existence. Players must avoid the Corrupted, the Red Dice, while navigating through the level. Colliding with a Corrupted will strip a dot away, but also weaken the Corrupted itself, making it lose a dot, since you will absorb some of its Corrupted essence.
 
-Level 2 is where Die makes his first step towards ascension and learns the ability to manipulate time around him. This allows the player to use the new dash ability by hitting the `Z` key, allowing for a burst of motion in a direction. Players will be able to test out this new dash ability in the much larger Dietopia pits, while chasing a larger selection of Controlled.
+Level 2 is where Die makes his first step towards ascension and learns the ability to manipulate time around him. This allows the player to use the new dash ability by hitting the `Z` key, allowing for a burst of motion in a direction. The dash can be cancelled by clicking any key. Players will be able to test out this new dash ability in the much larger Dietopia pits, while chasing a larger selection of Controlled.
 
 With Die becoming more unstable, he is now able to phase as of Level 3, the Dietopia rock deposits. Phasing allows the player to go "through" anything inside the bounds of the map by clicking the `X` key. Unfortunately, Die's unstable state causes him to lose his touch of phasing rather quickly, also requiring a period of time to recharge. Due to new developments, security has been increased and more Corrupted are patrolling.
 
@@ -41,6 +41,7 @@ Finalizing the increase of difficulty is the Final 3. Levels 7, 8, 9, is where D
 19. The player must complete the run in 1 sitting.
 20. Reaching 0 lives results in losing the game.
 21. Completing level 9 results in winning the game.
+22. The player can cancel any dash by clicking a new key.
 
 ### 🤖 State Diagram
 

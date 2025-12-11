@@ -222,7 +222,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     /// <summary>
     /// Resets the speed to it's directional equivalent.
     /// </summary>
-    private void FlattenSpeed()
+    public void FlattenSpeed()
     {
         Vector2 selectDelta = Vector2.Zero;
 

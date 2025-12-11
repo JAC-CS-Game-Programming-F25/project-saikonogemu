@@ -19,6 +19,8 @@ using System;
 using CoreLibrary.Physics;
 using Microsoft.Xna.Framework;
 
+#nullable enable
+
 namespace CoreLibrary
 {
     /// <summary>
@@ -58,8 +60,11 @@ namespace CoreLibrary
         {
             get
             {
+                float tx = (float)Math.Floor(Translation.X);
+                float ty = (float)Math.Floor(Translation.Y);
+
                 // Scale is applied before translation (correct order for 2D).
-                return Matrix.CreateScale(Scale) * Matrix.CreateTranslation(-Translation.X, -Translation.Y, 0);
+                return Matrix.CreateScale(Scale) * Matrix.CreateTranslation(-tx, -ty, 0);
             }
         }
 

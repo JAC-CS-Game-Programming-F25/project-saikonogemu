@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using CoreLibrary;
 using CoreLibrary.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Pleasing;
 
 #nullable enable
@@ -15,7 +17,7 @@ public class PlayerDashState : PlayerLivingState
 {
     #region Constants
     const int DashPower = 3;
-    const float DECELERATION = 10f; 
+    const float DECELERATION = 20f; 
     private const float GHOST_SPAWN_INTERVAL = 0.2f;
     private const float GHOST_INITIAL_OPACITY = 1f;
     private const float GHOST_FADE_DURATION = 1000f;
@@ -26,11 +28,6 @@ public class PlayerDashState : PlayerLivingState
     private float _ghostSpawnTimer = 0f;
 
     public bool IsDashing {get; private set;}
-
-    /// <summary>
-    /// This is a shadow clone of the player dice to do the fade illusion.
-    /// </summary>
-    private PlayerDice? GhostDice {get; set;}
     #endregion Properties
 
     #region Lifecycle Methods   
@@ -83,6 +80,7 @@ public class PlayerDashState : PlayerLivingState
         {
             HandleGhostGeneration(gameTime);
             HandleDashDeceleration();
+            HandleCancelDash();
             return;
         }
 
@@ -109,6 +107,18 @@ public class PlayerDashState : PlayerLivingState
     #endregion Lifecycle Methods
 
     #region Dash Methods
+    /// <summary>
+    /// Checks to see if dash is being canceled. Canceled if it is.
+    /// </summary>
+    private void HandleCancelDash()
+    {
+        if (Core.Input.Keyboard.AnyKeyJustPressed)
+        {
+            Dice!.FlattenSpeed();
+            EndDash();
+        }
+    }
+
     /// <summary>
     /// Generates ghosts based on a timer.
     /// </summary>
@@ -154,12 +164,20 @@ public class PlayerDashState : PlayerLivingState
         // Check to see if the dash is over.
         if (Math.Abs(Dice!.Hitbox.Velocity.X) <= Dice!.Speed && Math.Abs(Dice!.Hitbox.Velocity.Y) <= Dice!.Speed)
         {
-            IsDashing = false;
-
-            // Updates the textures of the dice.
-            Dice.UpdateTexture("Images/Atlas/player_ascension_dice_atlas.xml");
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}" + Dice.GetAnimationTypeWithoutDice());
+            EndDash();
         }
+    }
+
+    /// <summary>
+    /// Called when it's time to end the dash.
+    /// </summary>
+    private void EndDash()
+    {
+        IsDashing = false;
+
+        // Updates the textures of the dice.
+        Dice!.UpdateTexture("Images/Atlas/player_ascension_dice_atlas.xml");
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}" + Dice.GetAnimationTypeWithoutDice());
     }
 
     /// <summary>
