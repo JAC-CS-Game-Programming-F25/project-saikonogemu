@@ -1,5 +1,7 @@
 
+using System;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using CoreLibrary.Utils;
@@ -14,9 +16,9 @@ namespace Game.Scripts.Levels;
 /// <param name="type">The level type (or id). E.g. Level1.</param>
 /// <param name="color">The color associated with the level, used when rendering backgrounds.</param>
 /// <param name="tilemapPath">The path to the tilemap info.</param>
-/// <param name="numberOfTargets">The amount of targets in this level.</param>
-/// <param name="numberOfEnemies">The amount of enemies in this level.</param>
-public record Level(LevelType type, Color color, string tilemapPath, int numberOfTargets, int numberOfEnemies)
+/// <param name="targets">The targets in this level. Note list stores target's health, the length is the number of targets.</param>
+/// <param name="enemies">The enemies in this level. Note list stores enemy's health, the length is the number of enemies.</param>
+public record Level(LevelType type, Color color, string tilemapPath, int[] targets, int[] enemies)
 {
     /// <summary>
     /// Creates a Level based on a xml file.
@@ -47,13 +49,29 @@ public record Level(LevelType type, Color color, string tilemapPath, int numberO
             // Level's tilemap path.
             string tilemapPath = levelElement.Attribute("tilemapPath").Value;
 
-            // The number of targets in this Level.
-            int numberOfTargets = int.Parse(levelElement.Attribute("numberOfTargets").Value);
+            // Targets in level.
+            XElement targetsElement = levelElement.Element("Targets");
+            // The LINQ from Web was so helpful :D.
+            int[] targets = targetsElement != null
+            // If is true.
+            ? targetsElement.Elements("Target")
+                .Select(t => int.Parse(t.Attribute("health").Value))
+                .ToArray()
+            // If is false.
+            : Array.Empty<int>();
 
-            // The number of enemies in this Level.
-            int numberOfEnemies = int.Parse(levelElement.Attribute("numberOfEnemies").Value);
+            // Enemies in level.
+            XElement enemiesElement = levelElement.Element("Enemies");
+            // More LINQ from Web to get the enemies.
+            int[] enemies = enemiesElement != null
+            // If is true.
+            ? enemiesElement.Elements("Enemy")
+                .Select(e => int.Parse(e.Attribute("health").Value))
+                .ToArray()
+            // If is false.
+            : Array.Empty<int>();
 
-            return new Level(levelType, color, tilemapPath, numberOfTargets, numberOfEnemies);
+            return new Level(levelType, color, tilemapPath, targets, enemies);
         }
     }
 }

@@ -176,6 +176,30 @@ public class Tilemap
     }
 
     /// <summary>
+    /// Gets the id of the tile from this tilemap at the specified index.
+    /// </summary>
+    /// <param name="index">The index of the tile in this tilemap.</param>
+    /// <param name="layerNumber"> The layer that this tile is on. </param>
+    /// <returns>The id of the tile from this tilemap at the specified index.</returns>
+    public int GetTileId(int index, int layerNumber)
+    {
+        return _layeredTiles[layerNumber][index] ?? 0;
+    }
+
+    /// <summary>
+    /// Gets the id of the tile from this tilemap at the specified index.
+    /// </summary>
+    /// <param name="column">The column of the tile in this tilemap.</param>
+    /// <param name="row">The row of the tile in this tilemap.</param>
+    /// <param name="layerNumber"> The layer that this tile is on. </param>
+    /// <returns>The id of the tile from this tilemap at the specified index.</returns>
+    public int GetTileId(int column, int row, int layerNumber)
+    {
+        int index = row * Columns + column;
+        return GetTileId(index, layerNumber);
+    }
+
+    /// <summary>
     /// Gets whether the tile at the given index is collidable.
     /// </summary>
     /// <param name="index">The index of the tile in this tilemap.</param>

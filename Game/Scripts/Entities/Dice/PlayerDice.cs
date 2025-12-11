@@ -1,8 +1,4 @@
-
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using Game.Scripts.Entities.Dice.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -13,11 +9,6 @@ namespace Game.Scripts.Entities.Dice;
 
 public class PlayerDice : Dice
 {
-    #region Backing Fields
-    private ContentManager _content;
-    Dictionary<string, object>? _diceDefinition;
-    #endregion Backing Fields
-
     #region Constructors
     /// <summary>
     /// Creates a new PlayerDice entity instance.
@@ -26,9 +17,6 @@ public class PlayerDice : Dice
     /// <param name="diceDefinition">All the dice specific parameters.</param>
     public PlayerDice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition)
     {
-        _content = content;
-        _diceDefinition = diceDefinition;
-
         // Adds the player neutral state.
         AddState("PlayerNeutralState", new PlayerNeutralState(), new Dictionary<string, object> { ["dice"] = this });
 

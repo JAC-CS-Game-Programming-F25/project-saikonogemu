@@ -5,6 +5,16 @@
   levelNumber="1"
   color="#0f5f1d"
   tilemapPath="Images/Levels/XML/level1.xml"
-  numberOfTargets="4"
-  numberOfEnemies="2"
-/>
+>
+  <Targets>
+    <Target health="2"/>
+    <Target health="3"/>
+    <Target health="4"/>
+    <Target health="5"/>
+  </Targets>
+
+  <Enemies>
+    <Enemy health="1"/>
+    <Enemy health="6"/>
+  </Enemies>
+</Level>

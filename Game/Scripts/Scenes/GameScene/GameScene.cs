@@ -18,6 +18,7 @@ namespace Game.Scripts.Scenes.GameScene;
 public class GameScene : Scene
 {
     #region Constants
+    private const float GAME_SCALE = 3.0f;
     // FIXME: Change to match song length??? MAYBE?
     private const float BACKGROUND_CHANGE_DURATION = 20000f;
     #endregion Constants
@@ -30,20 +31,29 @@ public class GameScene : Scene
     // These are always exact numbers.
     private Rectangle _screenBounds;
 
-    // The bounds of the room.
-    private Rectangle _roomBounds;
-
     // The tilemap of the scene.
     private Tilemap _tilemap;
 
     // List of dice present in the level.
-    private List<Dice> _dice = new List<Dice>();
+    private List<Dice> _dice = [];    
 
-    private Vector2? _oldPlayerPosition = null;
+    // List of tiles around the player that future dice cannot spawn on.
+    private List<int> _bannedSpawnTiles = [];
+
+    // The previous position of the player. Needed for camera tracking.
+    private Vector2 _oldPlayerPosition;
     #endregion Fields
 
     #region Properties
+    /// <summary>
+    /// The current level this game scene is for.
+    /// </summary>
     public Level CurrentLevel {get; private set;}
+
+    /// <summary>
+    /// Whether to show debug utils.
+    /// </summary>
+    public bool DebugMode {get; set;} = true;
     #endregion Properties
 
     #region Scene Lifecycle
@@ -76,75 +86,57 @@ public class GameScene : Scene
         // Sets the screenBounds based on the player's screen.
         _screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-        _camera.Translation =  new Vector2(-(_screenBounds.Width - _roomBounds.Width) / 2, -(_screenBounds.Height - _roomBounds.Height) / 2);
+        #region Initialize Dice
+        // Initializes the player.
+        InitializePlayer();
+
+        // Initializes the Targets.
+        InitializeTargets();
+
+        // Initializes the Enemies.
+        InitializeEnemies();
+        #endregion Initialize Dice
+
+        // Set camera after player and screenBounds are made.
+        Vector2 playerPosition = _dice[0].Hitbox.Collider.Centre;
+        Vector2 screenCenter = new(_screenBounds.Width / 2f, _screenBounds.Height / 2f);
+        _camera.Translation = -(screenCenter - playerPosition);
+
+        // Get the initial player position.
+        _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
+
+        // Adds the states to the state machine.
+        StateMachine.Add("PlayState", new PlayState(), new Dictionary<string, object> { ["dice"] = _dice});
     }
 
     /// <summary>
-    /// LoadContent comes right after the Initialize method.
+    /// LoadContent comes right before the Initialize method.
     /// It's where all the game assets are set up.
     /// </summary>
     public override void LoadContent()
     {
         base.LoadContent();
 
-        // FIXME: Move to Level
-        _tilemap = Tilemap.FromFile(Content, "Images/Levels/XML/level1.xml");
-        _tilemap.Scale = new Vector2(3.0f, 3.0f);
+        // Sets up the map.
+        _tilemap = Tilemap.FromFile(Content, CurrentLevel.tilemapPath);
+        _tilemap.Scale = new Vector2(GAME_SCALE, GAME_SCALE);
 
-        // FIXME: Move to level
-        _roomBounds = new Rectangle(
-            0,
-            0,
-            _tilemap.Columns * (int)_tilemap.TileWidth,
-            _tilemap.Rows * (int)_tilemap.TileHeight
-        );
-
-        // FIXME: Change to use Level.Color
-        BackgroundColor = Color.Green;
+        // Sets up the color of the level.
+        BackgroundColor = CurrentLevel.color;
         TweenBackground(BACKGROUND_CHANGE_DURATION, Color.Black);
 
-        // TODO: Initialize player, initialize enemies, initialize targets. Use dice factory. Pass in dice to PlayState.
-
-
         // TODO: Start game scene song here.
-
-
-        // FIXME: delete this when it comes time
-        int centerRow = _tilemap.Rows / 2;
-        int centerColumn = _tilemap.Columns / 2;
-
-        _dice.Add(
-            new PlayerDice(Content, 
-            new Dictionary<string, object> 
-            {
-                ["texture"] = "Images/Atlas/player_dice_atlas.xml",
-                ["animationName"] = "player_dice_dot6_idle_animation",
-                ["position"] = new Vector2(centerColumn * _tilemap.TileWidth, centerRow * _tilemap.TileHeight),
-                ["positionOffset"] = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET),
-                ["sizeOffset"] = new Vector2(-10, -10),
-                ["scale"] = new Vector2(3.0f, 3.0f),
-                ["entityTotalHealth"] = 6
-            }
-        ));
-
-        // Adds the states to the state machine.
-        StateMachine.Add("PlayState", new PlayState(), new Dictionary<string, object> { ["dice"] = _dice});
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
 
-        if (_oldPlayerPosition != null)
-        {
-            Vector2 newPosition = _camera.Translation += _dice[0].Hitbox.Collider.Centre - (Vector2)_oldPlayerPosition;
-
-            _camera.Translation = newPosition;
-        }
-
-        _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
+        // Moves the camera.
+        HandleCameraMovement();
         
         // Adds collidable tiles to the Physics.
+        // Only gets seeable tiles :D.
         PhysicsManager.Instance.TileColliders = _tilemap.GetNearbyColliders(
             _camera.GetBounds(_screenBounds.Width, _screenBounds.Height)
         );
@@ -171,14 +163,151 @@ public class GameScene : Scene
         // Draws the Border layer afterwards
         _tilemap.DrawLayer(Core.SpriteBatch, 1);
 
-        // TODO: ADD debug mode
-        if (PhysicsManager.Instance.TileColliders != null)
-        {
+        // TODO: Activate debug mode in playstate.
+        if (PhysicsManager.Instance.TileColliders != null && DebugMode)
             Utils.DrawColliders();
-        }
 
         // Ends the drawing.
         Core.SpriteBatch.End();
     }
     #endregion Scene Lifecycle
+
+    #region Methods
+    /// <summary>
+    /// Handles the movement of the camera.
+    /// </summary>
+    private void HandleCameraMovement()
+    {
+        _camera.Translation = _camera.Translation += _dice[0].Hitbox.Collider.Centre - _oldPlayerPosition;
+        _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
+    }
+
+    /// <summary>
+    /// Responsible to initializing the player and for generating banned tiles.
+    /// </summary>
+    private void InitializePlayer()
+    {
+        ValueTuple<int, int> playerLocationIndex = CalculateSpawnIndex();
+        _bannedSpawnTiles = GenerateBannedTiles(playerLocationIndex);
+
+        // TODO: Make player health translate level to level
+        _dice.Add(CreateDice(DiceTypes.Player, 6, playerLocationIndex));
+    }
+
+    /// <summary>
+    /// Responsible to initializing the targets.
+    /// </summary>
+    private void InitializeTargets()
+    {
+        foreach(int targetHealth in CurrentLevel.targets)
+        {
+            ValueTuple<int, int> targetLocationIndex = CalculateSpawnIndex();
+            _dice.Add(CreateDice(DiceTypes.Target, targetHealth, targetLocationIndex));
+        }
+    }
+
+    /// <summary>
+    /// Responsible to initializing the targets.
+    /// </summary>
+    private void InitializeEnemies()
+    {
+        foreach(int enemyHealth in CurrentLevel.enemies)
+        {
+            ValueTuple<int, int> enemyLocationIndex = CalculateSpawnIndex();
+            _dice.Add(CreateDice(DiceTypes.Enemy, enemyHealth, enemyLocationIndex));
+        }
+    }
+
+    /// <summary>
+    /// Creates a dice at a location by using the <see cref="DiceFactory"/>.
+    /// </summary>
+    /// <param name="diceType">The type of the dice <see cref="DiceTypes"/>.</param>
+    /// <param name="location">The location to spawn the dice (ValueTuple).</param>
+    /// <returns>The new dice created.</returns>
+    private Dice CreateDice(DiceTypes diceType, int diceHealth, ValueTuple<float, float> location)
+    {
+        string diceTextureName = diceType switch {
+            DiceTypes.Player => "player_dice",
+            DiceTypes.Target => "target_dice",
+            DiceTypes.Enemy => "enemy_dice",
+            _ => "invalid_dice_texture",
+        };
+
+        return DiceFactory.CreateDice(
+            diceType,
+            Content, 
+            new Dictionary<string, object> 
+            {
+                ["texture"] = $"Images/Atlas/{diceTextureName}_atlas.xml",
+                ["animationName"] = $"{diceTextureName}_dot{diceHealth}_idle_animation",
+                ["position"] = new Vector2(location.Item1 * _tilemap.TileWidth, location.Item2 * _tilemap.TileHeight),
+                ["positionOffset"] = new Vector2(Dice.NORMAL_OFFSET, Dice.NORMAL_OFFSET),
+                ["sizeOffset"] = new Vector2(-10, -10),
+                ["scale"] = new Vector2(GAME_SCALE, GAME_SCALE),
+                ["entityTotalHealth"] = diceHealth
+            }
+        );
+    }
+
+    /// <summary>
+    /// Generates a list of tiles.
+    /// </summary>
+    /// <param name="location">The location to ban tiles around.</param>
+    private List<int> GenerateBannedTiles(ValueTuple<int, int> location)
+    {
+        // We calculate the column and row.
+        int column = location.Item1;
+        int row = location.Item2;
+
+        // Now we generate a perimeter of banned tiles. It's an array of tuples
+        ValueTuple<int, int>[] bannedTileZone =
+        [
+            (-2, -2), (-1, -2), (0, -2), (+1, -2), (+2, -2),
+            (-2, -1), (-1, -1), (0, -1), (+1, -1), (+2, -1),
+            (-2,  0), (-1,  0), (0,  0), (+1,  0), (+2,  0),
+            (-2, -1), (-1, +1), (0, +1), (+1, +1), (+2, +1),
+            (-2, +2), (-1, +2), (0, +2), (+1, +2), (+2, +2),
+        ];
+
+        List<int> bannedTiles = [];
+
+        // For each coordinate we ban that index for future dice.
+        foreach (ValueTuple<int, int> tuple in bannedTileZone)
+        {
+            int bannedColumn = column + tuple.Item1;
+            int bannedRow = row + tuple.Item2;
+
+            int bannedIndex = bannedRow * _tilemap.Columns + bannedColumn;
+            bannedTiles.Add(bannedIndex);
+        }
+
+        return bannedTiles;
+    }
+
+    /// <summary>
+    /// Generates a valid spawnable index for a dice.
+    /// </summary>
+    /// <returns>Returns the spawn index for the dice.</returns>
+    private ValueTuple<int, int> CalculateSpawnIndex()
+    {
+        // Start a random generator.
+        Random random = new Random();
+
+        int randomIndex;
+
+        do
+        {
+            // Gets a random index.
+            randomIndex = random.Next(0, _tilemap.Count);
+
+            // Loops until the index is a spawnable location for the dice.
+        } while(_tilemap.IsCollidable(randomIndex) || _tilemap.GetTileId(randomIndex, 0) == 0 || _bannedSpawnTiles.Contains(randomIndex));
+        
+        int column = randomIndex % _tilemap.Columns;
+        int row = randomIndex / _tilemap.Columns;
+
+        // Once the index is valid.
+        return (column, row);
+    }
+    #endregion Methods
 }
