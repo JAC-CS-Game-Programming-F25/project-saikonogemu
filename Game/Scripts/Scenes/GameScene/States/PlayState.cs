@@ -51,10 +51,46 @@ public class PlayState : State
     {
         base.Update(gameTime);
 
-        // TODO: PlayState: Updates NPC movements. Keyboard inputs. Gamepad inputs. Update physics manager.
-        foreach (Dice die in _dice)
+        for (int i = 0; i < _dice!.Count; i ++)
         {
-            die.Update(gameTime);
+            if (_dice[i].IsDead)
+            {
+                _dice[i].Delete();
+                _dice.RemoveAt(i);
+                continue;
+            }
+
+            // Check for entity-entity collision for knockback.
+            // We make sure to not double check.
+            for (int j = i + 1; j < _dice!.Count; j ++)
+            {
+                if (_dice[i].IsDying)
+                    break;
+                else if (_dice[j].IsDying)
+                    continue;
+
+                // Check and handle collision.
+                bool didCollide = _dice[i].DidCollideWithOtherDice(_dice[j]);
+
+                if (didCollide)
+                {
+                    if (_dice[i] is PlayerDice)
+                    {
+                        // Perform life loss.
+                        if (_dice[j] is EnemyDice)
+                            _dice[i].LoseLife();
+
+                        _dice[j].LoseLife();
+                    }
+
+                    // Perform knockback.
+                    _dice[i].Knockback();
+                    _dice[j].Knockback();
+                }
+            }
+
+            // Update dice.
+            _dice[i].Update(gameTime);
         }
     }
 

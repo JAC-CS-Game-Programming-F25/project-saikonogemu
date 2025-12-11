@@ -36,7 +36,7 @@ public class PlayerPhaseState : PlayerLivingState
 
         // Updates the textures.
         Dice.UpdateTexture("Images/Atlas/player_ascension_dice_atlas.xml");
-        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}" + Dice.GetAnimationTypeWithoutDice());
 
         // Don't want to accidentally cancer the iframes.
         Dice.DiceOpacity = 0.99f;

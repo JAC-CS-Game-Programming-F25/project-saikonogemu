@@ -128,5 +128,14 @@ public class AnimatedSprite : Sprite
         clone.Animation = Animation.Clone();
         return clone;
     }
+
+    /// <summary>
+    /// Checks whether the animation is done.
+    /// </summary>
+    /// <returns>Returns whether the animation is done.</returns>
+    public bool IsDone()
+    {
+        return CurrentCycle >= _totalCycles;
+    }
     #endregion Public Methods
 }

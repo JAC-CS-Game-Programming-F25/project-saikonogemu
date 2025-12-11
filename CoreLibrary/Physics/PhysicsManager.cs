@@ -155,6 +155,12 @@ public sealed class PhysicsManager
     public void AddRigidbody(Rigidbody rigidbody) => _rigidBodies.Add(rigidbody);
 
     /// <summary>
+    /// Removes a rigidbody to the physics simulation.
+    /// </summary>
+    /// <param name="rigidbody">The rigidbody to remove.</param>
+    public void RemoveRigidbody(Rigidbody rigidbody) => _rigidBodies?.Remove(rigidbody);
+
+    /// <summary>
     /// Creates and registers a rigidbody based on a <see cref="Sprite"/>.
     /// </summary>
     /// <param name="sprite">The sprite defining collider size (bounding box).</param>

@@ -89,9 +89,14 @@ public abstract class GameEntity
     public float Speed { get; set; }
 
     /// <summary>
+    /// Gets whether the entity is dying.
+    /// </summary>
+    public bool IsDying { get; set; }
+
+    /// <summary>
     /// Gets whether the entity is dead.
     /// </summary>
-    public bool IsDead { get; set; } = false;
+    public bool IsDead { get; set; }
     #endregion Properties
 
     #region Constructors

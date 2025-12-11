@@ -18,7 +18,7 @@ public class DiceLivingState : State
     /// The player instance used in the states.
     /// </summary>
     protected Dice? Dice { get; private set; }
-    #endregion
+    #endregion Properties
 
     #region Lifecycle Methods
     /// <summary>

@@ -47,7 +47,7 @@ public class PlayerDashState : PlayerLivingState
 
         // Updates the textures.
         Dice.UpdateTexture("Images/Atlas/player_dash_dice_atlas.xml");
-        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}" + Dice.GetAnimationTypeWithoutDice());
 
         // Boosts the velocity!
         Dice.Hitbox.Velocity *= DashPower;
@@ -148,8 +148,8 @@ public class PlayerDashState : PlayerLivingState
     private void HandleDashDeceleration()
     {
         // Progressively get to dice's speed.
-        ClampAxisTowardsSpeed(ref Dice!.Hitbox.Velocity.X);
-        ClampAxisTowardsSpeed(ref Dice!.Hitbox.Velocity.Y);
+        Dice!.ClampAxisTowardsSpeed(ref Dice!.Hitbox.Velocity.X, DECELERATION);
+        Dice!.ClampAxisTowardsSpeed(ref Dice!.Hitbox.Velocity.Y, DECELERATION);
 
         // Check to see if the dash is over.
         if (Math.Abs(Dice!.Hitbox.Velocity.X) <= Dice!.Speed && Math.Abs(Dice!.Hitbox.Velocity.Y) <= Dice!.Speed)
@@ -158,26 +158,8 @@ public class PlayerDashState : PlayerLivingState
 
             // Updates the textures of the dice.
             Dice.UpdateTexture("Images/Atlas/player_ascension_dice_atlas.xml");
-            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+            Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}" + Dice.GetAnimationTypeWithoutDice());
         }
-    }
-
-    /// <summary>
-    /// "Clamps" the velocity of a specific axis towards the dice's speed.
-    /// </summary>
-    /// <param name="axisVelocity">The velocity of the axis to clamp.</param>
-    private void ClampAxisTowardsSpeed(ref float axisVelocity)
-    {
-        // If the axis' velocity is greater than the dice's speed.
-        if (Math.Abs(axisVelocity) > Dice!.Speed)
-        {
-            // Move towards the dice speed.
-            axisVelocity -= Math.Sign(axisVelocity) * DECELERATION;
-
-            // If we overshoot we adjust the velocity back to the dice's speed.
-            if (Math.Abs(axisVelocity) < Dice!.Speed)
-                axisVelocity = Math.Sign(axisVelocity) * Dice!.Speed;
-    }
     }
 
     /// <summary>

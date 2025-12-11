@@ -106,6 +106,5 @@ public class CollisionManifold
                 entity.Top += overlapBottom;
         }
     }
-
     #endregion Public Methods
 }

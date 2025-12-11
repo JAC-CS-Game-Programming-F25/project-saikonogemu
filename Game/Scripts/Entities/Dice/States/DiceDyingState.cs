@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using CoreLibrary;
+using CoreLibrary.Utils;
 using Microsoft.Xna.Framework;
 
 #nullable enable
@@ -11,6 +13,13 @@ namespace Game.Scripts.Entities.Dice.States;
 /// </summary>
 public class DiceDyingState : State
 {
+    #region Properties
+    /// <summary>
+    /// The player instance used in the states.
+    /// </summary>
+    protected Dice? Dice { get; private set; }
+    #endregion Properties
+
     #region Lifecycle Methods
     /// <summary>
     /// Called when entering this State.
@@ -19,6 +28,16 @@ public class DiceDyingState : State
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
         base.Enter(parameters);
+
+        Dice = Utils.GetValue(parameters, "dice", Dice);
+
+        if (Dice is null)
+            throw new ArgumentNullException("dice is null in PlayerLivingState.");
+
+        Dice.IsDying = true;
+
+        // We want it to run once.
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_death_animation", 1);
     }
 
     /// <summary>
@@ -35,6 +54,9 @@ public class DiceDyingState : State
     /// <param name="gameTime">The GameTime of the game.</param>
     public override void Update(GameTime gameTime)
     {
+        if (Dice!.CurrentAnimation.IsDone())
+            Dice.IsDead = true;
+
         base.Update(gameTime);
     }
 

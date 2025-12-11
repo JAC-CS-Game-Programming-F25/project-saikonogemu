@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using CoreLibrary.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Pleasing;
@@ -35,14 +36,17 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
 {
     #region Properties
     // This is calculated by doing pixels/scale.
+    public const float COLLISION_POWER = 2.5f;
     public const float NORMAL_OFFSET = 1.67f;
     public const float DIAGONAL_OFFSET = 3.33f;
+    public const float DECELERATION = 20f; 
     public DiceDirections DiceDirection {get; set;} = DiceDirections.Idle;
-    public float DiceOpacity {get; set; } = 1.0f;
+    public float DiceOpacity {get; set;} = 1.0f;
+    public bool IsHavingKnockback {get; set;}
 
     #endregion Properties
 
-    #region Update and Draw
+    #region Update and DrawLoseLife
 
     /// <summary>
     /// Updates this scene.
@@ -50,6 +54,12 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
     public override void Update(GameTime gameTime)
     {
+        if (IsHavingKnockback)
+        {
+            HandleCollisionDeceleration();
+            return;
+        }
+
         base.Update(gameTime);
         CurrentAnimation.Scale = Scale;
     }
@@ -73,12 +83,24 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     /// </summary>
     public void LoseLife()
     {
-        Health--;
+        Health -= 1;
 
         if (Health <= 0)
-        {
             Death();
-        }
+        else
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}" + GetAnimationTypeWithoutDice());
+
+        CurrentAnimation.Scale = Scale;
+    }
+
+    /// <summary>
+    /// Performs knockback on dice.
+    /// </summary>
+    public void Knockback()
+    {
+        IsHavingKnockback = true;
+        FlattenSpeed();
+        Hitbox.Velocity *= -COLLISION_POWER;
     }
 
     /// <summary>
@@ -86,11 +108,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     /// </summary>
     public void Death()
     {
-        // FIXME: Move to DiceDyingState.
-        IsDead = true;
-
-        // We want it to run once.
-        UpdateAnimation(GetDiceTypeTexture() + $"_death_animation", 1);
+        ChangeState("DiceDyingState", new Dictionary<string, object> { ["dice"] = this });
     }
 
     /// <summary>
@@ -120,7 +138,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     {
         // Get the end of the animation name.
         // e.g. player_dice_atlas.xml
-        Match match = Regex.Match(CurrentAnimationName, @"(?<=dice).*$");
+        Match match = Regex.Match(CurrentAnimationName, @"(?<=dice_dot\d).*$");
 
         // If there was a match.
         if (match.Success)
@@ -157,6 +175,86 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
         opacityProp.AddFrame(duration, targetOpacity, ease);
 
         return timeline;
+    }
+
+    /// <summary>
+    /// Check to see if collision with other dice is true.
+    /// </summary>
+    /// <param name="otherDice">The other dice to check collision with.</param>
+    /// <returns> Whether the dice collided.</returns>
+    public bool DidCollideWithOtherDice(Dice otherDice)
+    {
+        return Hitbox.Collider.Intersects(otherDice.Hitbox.Collider);
+    }
+
+    /// <summary>
+    /// Makes the dash slowly end by adjusting the dice's velocity.
+    /// </summary>
+    private void HandleCollisionDeceleration()
+    {
+        // Progressively get to dice's speed.
+        ClampAxisTowardsSpeed(ref Hitbox.Velocity.X, DECELERATION);
+        ClampAxisTowardsSpeed(ref Hitbox.Velocity.Y, DECELERATION);
+
+        // Check to see if the dash is over.
+        if (Math.Abs(Hitbox.Velocity.X) <= Speed && Math.Abs(Hitbox.Velocity.Y) <= Speed)
+            IsHavingKnockback = false;
+    }
+
+    /// <summary>
+    /// "Clamps" the velocity of a specific axis towards the dice's speed.
+    /// </summary>
+    /// <param name="axisVelocity">The velocity of the axis to clamp.</param>
+    public void ClampAxisTowardsSpeed(ref float axisVelocity, float deceleration)
+    {
+        // If the axis' velocity is greater than the dice's speed.
+        if (Math.Abs(axisVelocity) > Speed)
+        {
+            // Move towards the dice speed.
+            axisVelocity -= Math.Sign(axisVelocity) * deceleration;
+
+            // If we overshoot we adjust the velocity back to the dice's speed.
+            if (Math.Abs(axisVelocity) < Speed)
+                axisVelocity = Math.Sign(axisVelocity) * Speed;
+        }
+    }
+
+    /// <summary>
+    /// Resets the speed to it's directional equivalent.
+    /// </summary>
+    private void FlattenSpeed()
+    {
+        Vector2 selectDelta = Vector2.Zero;
+
+        if (DiceDirection is DiceDirections.Up or DiceDirections.UpLeft or DiceDirections.UpRight) selectDelta.Y -= 1;
+
+        if (DiceDirection is DiceDirections.Down or DiceDirections.DownLeft or DiceDirections.DownRight) selectDelta.Y += 1;
+
+        if (DiceDirection is DiceDirections.Left or DiceDirections.UpLeft or DiceDirections.DownLeft) selectDelta.X -= 1;
+
+        if (DiceDirection is DiceDirections.Right or DiceDirections.UpRight or DiceDirections.DownRight) selectDelta.X += 1;
+
+        // We normalize if it's possible (this makes diagonals the same speed as horizontals/verticals).
+        if (selectDelta != Vector2.Zero)
+        {
+            selectDelta = Vector2.Normalize(selectDelta) * Speed;
+            Console.WriteLine(selectDelta);
+        }
+
+        // Modifies the die's velocity.
+        Hitbox.Velocity = selectDelta;
+    }
+
+    /// <summary>
+    /// Formally Deletes the Dice.
+    /// </summary>
+    public void Delete()
+    {
+        // Removes hanging thread.
+        if (Hitbox != null)
+        {
+            PhysicsManager.Instance.RemoveRigidbody(Hitbox);
+        }
     }
     #endregion Methods
 }

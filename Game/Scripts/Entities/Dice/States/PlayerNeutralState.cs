@@ -24,7 +24,7 @@ public class PlayerNeutralState : PlayerLivingState
 
         // Updates the textures of the dice.
         Dice!.UpdateTexture("Images/Atlas/player_dice_atlas.xml");
-        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + Dice.GetAnimationTypeWithoutDice());
+        Dice.UpdateAnimation(Dice.GetDiceTypeTexture() + $"_dot{Dice.Health}" + Dice.GetAnimationTypeWithoutDice());
     }
 
     /// <summary>

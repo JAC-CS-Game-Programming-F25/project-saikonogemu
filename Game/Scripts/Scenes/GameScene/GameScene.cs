@@ -202,6 +202,11 @@ public class GameScene : Scene
         foreach(int targetHealth in CurrentLevel.targets)
         {
             ValueTuple<int, int> targetLocationIndex = CalculateSpawnIndex();
+
+            // So they don't spawn on top of each other xD.
+            int bannedIndex = targetLocationIndex.Item2 * _tilemap.Columns + targetLocationIndex.Item1;
+            _bannedSpawnTiles.Add(bannedIndex);
+
             _dice.Add(CreateDice(DiceTypes.Target, targetHealth, targetLocationIndex));
         }
     }
@@ -214,6 +219,11 @@ public class GameScene : Scene
         foreach(int enemyHealth in CurrentLevel.enemies)
         {
             ValueTuple<int, int> enemyLocationIndex = CalculateSpawnIndex();
+
+            // So they don't spawn on top of each other xD.
+            int bannedIndex = enemyLocationIndex.Item2 * _tilemap.Columns + enemyLocationIndex.Item1;
+            _bannedSpawnTiles.Add(bannedIndex);
+
             _dice.Add(CreateDice(DiceTypes.Enemy, enemyHealth, enemyLocationIndex));
         }
     }
