@@ -22,6 +22,9 @@ public class Game1 : Core
         // Runs Initialize in Core class, then run LoadContent
         base.Initialize();
 
+        // Init the camera.
+        Camera camera = new();
+
         // Start the game with the title scene.
         // TODO:  Change to be title screen.
         ChangeScene(new GameScene(LevelType.Level1));

@@ -24,9 +24,6 @@ public class GameScene : Scene
     #endregion Constants
 
     #region  Fields
-    // The camera for the scene (what the player sees)
-    private Camera _camera = new();
-
     // The bounds of the screen (the physical bounds of the player's screen (e.g. 1920x1080)).
     // These are always exact numbers.
     private Rectangle _screenBounds;
@@ -39,6 +36,9 @@ public class GameScene : Scene
 
     // List of tiles around the player that future dice cannot spawn on.
     private List<int> _bannedSpawnTiles = [];
+
+    // This is ONLY used once, if it's used after initialization there's a problem.
+    private int _initialPlayerHealth;
 
     // The previous position of the player. Needed for camera tracking.
     private Vector2 _oldPlayerPosition;
@@ -62,10 +62,11 @@ public class GameScene : Scene
     /// The very start of the core processor of the game.
     /// </summary>
     /// <param name="levelType">The level that this game scene is running.</param>
-    public GameScene(LevelType levelType) : base()
+    public GameScene(LevelType levelType, int initialPlayerHealth = 6) : base()
     {
         // Loads the info for the current level.
         CurrentLevel = Level.FromFile(Content, $"Data/Levels/level{(int)levelType}_data.xml");
+        _initialPlayerHealth = initialPlayerHealth;
     }
 
     /// <summary>
@@ -105,7 +106,7 @@ public class GameScene : Scene
         // Set camera after player and screenBounds are made.
         Vector2 playerPosition = _dice[0].Hitbox.Collider.Centre;
         Vector2 screenCenter = new(_screenBounds.Width / 2f, _screenBounds.Height / 2f);
-        _camera.Translation = -(screenCenter - playerPosition);
+        Camera.Instance.Translation = -(screenCenter - playerPosition);
 
         // Get the initial player position.
         _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
@@ -139,6 +140,8 @@ public class GameScene : Scene
 
         // Moves the camera.
         HandleCameraMovement();
+
+        CheckForLevelProgression();
     }
 
     public override void Draw(GameTime gameTime)
@@ -147,7 +150,7 @@ public class GameScene : Scene
 
         // PointClamp makes it so that the nearest pixel is selected without anti-aliasing, etc.
         // If you don't know what a samplerState is, see https://docs.monogame.net/articles/getting_to_know/whatis/graphics/WhatIs_Sampler.html
-        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.TransformationMatrix);
+        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.Instance.TransformationMatrix);
 
         // Draws the tilemap floor.
         _tilemap.DrawLayer(Core.SpriteBatch, 0);
@@ -173,11 +176,35 @@ public class GameScene : Scene
 
     #region Methods
     /// <summary>
+    /// Checks and implements level progression if needed.
+    /// </summary>
+    private void CheckForLevelProgression()
+    {
+        int totalNumberOfTargets = 0;
+
+        foreach(Dice dice in _dice)
+            if (dice is TargetDice)
+                totalNumberOfTargets ++;
+
+        if (totalNumberOfTargets == 0)
+        {
+            if (CurrentLevel.type == LevelType.Level9)
+            {
+                // TODO: IMplement you win screen!
+            }
+            else
+            {
+                Core.ChangeScene(new GameScene((LevelType)((int)CurrentLevel.type + 1), _dice[0].Health));
+            }
+        }
+    }
+
+    /// <summary>
     /// Handles the movement of the camera.
     /// </summary>
     private void HandleCameraMovement()
     {
-        _camera.Translation = _camera.Translation += _dice[0].Hitbox.Collider.Centre - _oldPlayerPosition;
+        Camera.Instance.Translation = Camera.Instance.Translation += _dice[0].Hitbox.Collider.Centre - _oldPlayerPosition;
         _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
     }
 
@@ -189,8 +216,7 @@ public class GameScene : Scene
         ValueTuple<int, int> playerLocationIndex = CalculateSpawnIndex();
         _bannedSpawnTiles = GenerateBannedTiles(playerLocationIndex);
 
-        // TODO: Make player health translate level to level
-        _dice.Add(CreateDice(DiceTypes.Player, 6, playerLocationIndex, PlayerDice.SPEED));
+        _dice.Add(CreateDice(DiceTypes.Player, _initialPlayerHealth, playerLocationIndex, PlayerDice.SPEED));
     }
 
     /// <summary>

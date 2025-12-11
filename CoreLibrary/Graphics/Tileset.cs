@@ -13,6 +13,8 @@
  *  © 2025 FarLostBrand. All rights reserved.
  ***************************************************************/
 
+using System;
+
 namespace CoreLibrary.Graphics;
 
 /// <summary>
@@ -99,7 +101,7 @@ public class Tileset
     /// </summary>
     /// <param name="index">The index of the tile to retrieve.</param>
     /// <returns>The texture region representing the tile at the given index.</returns>
-    public TextureRegion GetTile(int index) => _tiles[index];
+    public TextureRegion GetTile(int index) => _tiles[index]; 
 
     /// <summary>
     /// Gets the texture region for the tile at the specified column and row.

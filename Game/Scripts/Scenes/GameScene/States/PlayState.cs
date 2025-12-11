@@ -51,8 +51,6 @@ public class PlayState : State
     {
         base.Update(gameTime);
 
-        // TODO: Add no Target left check.
-
         for (int i = 0; i < _dice!.Count; i ++)
         {
             if (_dice[i].IsDead)

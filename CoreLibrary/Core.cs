@@ -161,6 +161,8 @@ public class Core : Game
 
         Graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
         Graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+        Graphics.SynchronizeWithVerticalRetrace = true;
+        IsFixedTimeStep = false;
 
         Graphics.ApplyChanges();
 

@@ -36,7 +36,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
 {
     #region Properties
     // This is calculated by doing pixels/scale.
-    public const float COLLISION_POWER = 2.5f;
+    public const float COLLISION_POWER = 2.0f;
     public const float NORMAL_OFFSET = 1.67f;
     public const float DIAGONAL_OFFSET = 3.33f;
     public const float DECELERATION = 20f; 

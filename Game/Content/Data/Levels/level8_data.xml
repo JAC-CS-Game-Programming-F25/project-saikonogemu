@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:ns="Microsoft.Xna.Framework">
-  <Asset Type="Object">
-  </Asset>
-</XnaContent>
+
+<!--Contains all the info about the level-->
+<Level
+  levelNumber="8"
+  color="#0f0d0e"
+  tilemapPath="Images/Levels/XML/level8.xml"
+  hasDash="true"
+  hasPhase="true"
+>
+  <Targets>
+    <Target health="1"/>
+  </Targets>
+
+  <Enemies>
+    <Enemy health="6"/>
+  </Enemies>
+</Level>
