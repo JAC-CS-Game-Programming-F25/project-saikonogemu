@@ -16,9 +16,11 @@ namespace Game.Scripts.Levels;
 /// <param name="type">The level type (or id). E.g. Level1.</param>
 /// <param name="color">The color associated with the level, used when rendering backgrounds.</param>
 /// <param name="tilemapPath">The path to the tilemap info.</param>
+/// <param name="hasDash"> Whether the player has it's dash this level.</param>
+/// <param name="hasPhase"> Whether the player has it's phase this level.</param>
 /// <param name="targets">The targets in this level. Note list stores target's health, the length is the number of targets.</param>
 /// <param name="enemies">The enemies in this level. Note list stores enemy's health, the length is the number of enemies.</param>
-public record Level(LevelType type, Color color, string tilemapPath, int[] targets, int[] enemies)
+public record Level(LevelType type, Color color, string tilemapPath, bool hasDash, bool hasPhase, int[] targets, int[] enemies)
 {
     /// <summary>
     /// Creates a Level based on a xml file.
@@ -49,6 +51,12 @@ public record Level(LevelType type, Color color, string tilemapPath, int[] targe
             // Level's tilemap path.
             string tilemapPath = levelElement.Attribute("tilemapPath").Value;
 
+            // Player's dash.
+            bool hasDash = bool.Parse(levelElement.Attribute("hasDash").Value);
+
+            // Player's phase.
+            bool hasPhase = bool.Parse(levelElement.Attribute("hasPhase").Value);
+
             // Targets in level.
             XElement targetsElement = levelElement.Element("Targets");
             // The LINQ from Web was so helpful :D.
@@ -71,7 +79,7 @@ public record Level(LevelType type, Color color, string tilemapPath, int[] targe
             // If is false.
             : Array.Empty<int>();
 
-            return new Level(levelType, color, tilemapPath, targets, enemies);
+            return new Level(levelType, color, tilemapPath, hasDash, hasPhase, targets, enemies);
         }
     }
 }

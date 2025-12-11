@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -11,6 +12,12 @@ public class PlayerDice : Dice
 {
     public const float SPEED = 100f;
 
+    #region Properties
+    public bool CanDash {get; private set;}
+
+    public bool CanPhase {get; private set;}
+    #endregion Properties
+
     #region Constructors
     /// <summary>
     /// Creates a new PlayerDice entity instance.
@@ -19,6 +26,10 @@ public class PlayerDice : Dice
     /// <param name="diceDefinition">All the dice specific parameters.</param>
     public PlayerDice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : base(content, diceDefinition)
     {
+        CanDash = Utils.GetValue(diceDefinition, "hasDash", false);
+
+        CanPhase = Utils.GetValue(diceDefinition, "hasPhase", false);
+
         // Adds the player neutral state.
         AddState("PlayerNeutralState", new PlayerNeutralState(), new Dictionary<string, object> { ["dice"] = this });
 

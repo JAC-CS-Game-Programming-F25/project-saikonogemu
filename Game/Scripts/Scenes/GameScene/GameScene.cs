@@ -254,7 +254,9 @@ public class GameScene : Scene
                 ["sizeOffset"] = new Vector2(-10, -10),
                 ["scale"] = new Vector2(GAME_SCALE, GAME_SCALE),
                 ["speed"] = speed,
-                ["entityTotalHealth"] = diceHealth
+                ["entityTotalHealth"] = diceHealth,
+                ["hasDash"] = CurrentLevel.hasDash,
+                ["hasPhase"] = CurrentLevel.hasPhase,
             }
         );
     }
