@@ -17,7 +17,6 @@ public class TitleScene : Scene
     #region Backing Fields
     private const string TITLE_TEXT = "Die";
     private const string SUBTITLE_TEXT = "The Rolling Dice Game";
-    private const string PRESS_ENTER_TEXT = "Press Enter To Start";
 
     // The font to use to render normal text.
     private SpriteFont _font;
@@ -108,6 +107,8 @@ public class TitleScene : Scene
     /// </summary>
     public override void LoadContent()
     {
+        base.LoadContent();
+
         // Load the font for the standard text.
         _font = Core.Content.Load<SpriteFont>("Fonts/peaberrybase_font");
 
@@ -123,6 +124,9 @@ public class TitleScene : Scene
 
     public override void Update(GameTime gameTime)
     {
+        if (IsFinishedExiting)
+            Core.ChangeScene(new GameScene(LevelType.Level1));
+
         // Update the offsets for the background pattern wrapping so that it
         // scrolls down and to the right.
         float offset = _scrollSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -135,6 +139,8 @@ public class TitleScene : Scene
         _backgroundOffset.Y %= _backgroundPattern.Height;
 
         GumService.Default.Update(gameTime);
+
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)
@@ -172,7 +178,9 @@ public class TitleScene : Scene
             Core.SpriteBatch.End();
         }
 
-    GumService.Default.Draw();
+        GumService.Default.Draw();
+
+        AfterDraw(gameTime);
     }
     #endregion Lifecycle Methods
 
@@ -221,7 +229,7 @@ public class TitleScene : Scene
         Core.Audio.PlaySoundEffect(Core.UISoundEffect);
 
         // Change to the game scene to start the game.
-        Core.ChangeScene(new GameScene(LevelType.Level1));
+        ExitScene();
     }
 
     /// <summary>

@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Pleasing;
 
 namespace CoreLibrary.Scenes;
@@ -174,6 +175,8 @@ public abstract class Scene : IDisposable
         if (IsFading)
            return;
 
+        HandleInput();
+
         // Updates the StateMachine.
         StateMachine?.Update(gameTime);
     }
@@ -218,7 +221,10 @@ public abstract class Scene : IDisposable
         Core.SpriteBatch.End();
 
         if (FadeOpacity <= 0f || FadeOpacity >= 0.99f)
+        {
             IsFading = false;
+        }
+           
     }
 
     #endregion Update and Draw
@@ -354,6 +360,41 @@ public abstract class Scene : IDisposable
 
         fadeProp.AddFrame(0f, start);
         fadeProp.AddFrame(duration, end);            
+    }
+
+    /// <summary>
+    /// Handles input.
+    /// </summary>
+    public void HandleInput()
+    {
+        // TODO: This is buggy! Fix!
+        // if (Core.Input.Keyboard.WasKeyJustPressed(Keys.F11))
+        // {
+        //     ToggleFullScreen();
+        // }
+    }
+
+    /// <summary>
+    /// Toggles fullscreen by doing what is necessary.
+    /// </summary>
+    private void ToggleFullScreen()
+    {
+        Core.Graphics.ToggleFullScreen();
+
+        Core.Graphics.ApplyChanges();
+
+        if (Core.Graphics.IsFullScreen)
+        {
+            Core.Graphics.PreferredBackBufferWidth = Core.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+            Core.Graphics.PreferredBackBufferHeight = Core.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+        }
+        else
+        {
+            Core.Graphics.PreferredBackBufferWidth = Core.SettingsManager.Graphics.Width;
+            Core.Graphics.PreferredBackBufferHeight = Core.SettingsManager.Graphics.Height;
+        }
+
+        Core.Graphics.ApplyChanges();
     }
     #endregion Public Methods
 }

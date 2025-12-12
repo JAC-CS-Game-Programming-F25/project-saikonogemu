@@ -7,13 +7,13 @@ public class GraphicsSettings
     /// The resolution width of the game.
     /// Default is 512.
     /// </summary>
-    public int Width { get; set; } = 512;
+    public int Width { get; set; } = 1920;
 
     /// <summary>
     /// The resolution height of the game.
     /// Default is 256.
     /// </summary>
-    public int Height { get; set; } = 256;
+    public int Height { get; set; } = 1080;
 
     /// <summary>
     /// Whether the game is fullscreen.

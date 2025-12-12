@@ -65,11 +65,9 @@ public class SettingsManager
     /// </summary>
     public void Load()
     {
-        Console.WriteLine("back" + _settingsFile);
         // If the file doesn't exist, save the defaults and exit.
         if (!File.Exists(_settingsFile))
         {
-            Console.WriteLine(_settingsFile);
             Save();
             return;
         }
