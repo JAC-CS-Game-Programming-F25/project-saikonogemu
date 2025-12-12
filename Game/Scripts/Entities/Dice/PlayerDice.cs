@@ -54,6 +54,9 @@ public class PlayerDice : Dice
     /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
     public override void Update(GameTime gameTime)
     {
+        if (IsFrozen)
+            return;
+
         base.Update(gameTime);
     }
 

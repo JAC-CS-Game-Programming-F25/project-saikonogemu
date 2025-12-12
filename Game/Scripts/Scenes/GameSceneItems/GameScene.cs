@@ -8,12 +8,12 @@ using CoreLibrary.Scenes;
 using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice;
 using Game.Scripts.Levels;
-using Game.Scripts.Scenes.GameScene.States;
+using Game.Scripts.Scenes.GameSceneItems.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pleasing;
 
-namespace Game.Scripts.Scenes.GameScene;
+namespace Game.Scripts.Scenes.GameSceneItems;
 
 public class GameScene : Scene
 {
@@ -42,6 +42,9 @@ public class GameScene : Scene
 
     // The previous position of the player. Needed for camera tracking.
     private Vector2 _oldPlayerPosition;
+
+    // The speed of the fade to grayscale effect.
+    public const float FADE_SPEED = 0.02f;
     #endregion Fields
 
     #region Properties
@@ -50,10 +53,6 @@ public class GameScene : Scene
     /// </summary>
     public Level CurrentLevel {get; private set;}
 
-    /// <summary>
-    /// Whether to show debug utils.
-    /// </summary>
-    public bool DebugMode {get; set;} = true;
     #endregion Properties
 
     #region Scene Lifecycle
@@ -112,7 +111,8 @@ public class GameScene : Scene
         _oldPlayerPosition = _dice[0].Hitbox.Collider.Centre;
 
         // Adds the states to the state machine.
-        StateMachine.Add("PlayState", new PlayState(), new Dictionary<string, object> { ["dice"] = _dice});
+        StateMachine.Add("PlayState", new PlayState(), new Dictionary<string, object> { ["dice"] = _dice, ["gameScene"] = this});
+        StateMachine.Add("PauseState", new PauseState());
     }
 
     /// <summary>
@@ -167,11 +167,13 @@ public class GameScene : Scene
         _tilemap.DrawLayer(Core.SpriteBatch, 1);
 
         // TODO: Activate debug mode in playstate.
-        if (PhysicsManager.Instance.TileColliders != null && DebugMode)
+        if (Core.DebugMode)
             Utils.DrawColliders();
 
         // Ends the drawing.
         Core.SpriteBatch.End();
+
+        DrawStateMachine(gameTime);
 
         AfterDraw(gameTime);
     }

@@ -186,7 +186,14 @@ public abstract class Scene : IDisposable
     {
         // Clears the canvas back to the backgroundColor;
         Core.GraphicsDevice.Clear(BackgroundColor);
+    }
 
+    /// <summary>
+    /// Draws this scene's statemachine.
+    /// </summary>
+    /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
+    public virtual void DrawStateMachine(GameTime gameTime)
+    {
         // Draws the StateMachine.
         StateMachine?.Draw(gameTime);
     }
@@ -205,11 +212,7 @@ public abstract class Scene : IDisposable
         {
             float alpha = MathHelper.Clamp(FadeOpacity, 0f, 1f);
 
-            Core.SpriteBatch.Draw(
-                FadeTexture,
-                destinationRectangle: new Rectangle(0, 0, Core.GraphicsDevice.Viewport.Width, Core.GraphicsDevice.Viewport.Height),
-                color: Color.Black * alpha
-            );
+            DrawScreenCover(alpha);
         }
 
         Core.SpriteBatch.End();
@@ -267,6 +270,19 @@ public abstract class Scene : IDisposable
     #endregion Disposal
 
     #region Public Methods
+    /// <summary>
+    /// Draws a rectangle to cover the entire screen.
+    /// </summary>
+    /// <param name="alpha">The opacity of the rectangle.</param>
+    public void DrawScreenCover(float alpha)
+    {
+        Core.SpriteBatch.Draw(
+            FadeTexture,
+            destinationRectangle: new Rectangle(0, 0, Core.GraphicsDevice.Viewport.Width, Core.GraphicsDevice.Viewport.Height),
+            color: Color.Black * alpha
+        );
+    }
+
     /// <summary>
     /// Tweens the color of the background.
     /// </summary>

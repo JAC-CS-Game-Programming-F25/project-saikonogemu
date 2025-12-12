@@ -40,6 +40,9 @@ public class PlayerLivingState : DiceLivingState
     /// <param name="gameTime">The GameTime of the game.</param>
     public override void Update(GameTime gameTime)
     {
+        if (Dice!.IsFrozen)
+            return;
+
         base.Update(gameTime);
 
         CheckKeyboardInput();

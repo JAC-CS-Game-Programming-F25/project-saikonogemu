@@ -23,6 +23,7 @@ using CoreLibrary.Input;
 using CoreLibrary.Audio;
 using CoreLibrary.Scenes;
 using CoreLibrary.Physics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace CoreLibrary;
 
@@ -89,6 +90,21 @@ public class Core : Game
     /// </summary>
     public static bool ExitOnEscape { get; set; }
 
+    /// <summary>
+    /// Whether to show debug utils.
+    /// </summary>
+    public static bool DebugMode {get; set;}
+
+    /// <summary>
+    /// Gets the setting manager.
+    /// </summary>
+    public static SettingsManager SettingsManager {get; private set;}
+
+    /// <summary>
+    /// The sound effect the UI makes when you move the selection.
+    /// </summary>
+    public static SoundEffect UISoundEffect;
+
     #endregion Properties
 
     #region Constructors
@@ -98,10 +114,7 @@ public class Core : Game
     /// Configures the game window, graphics, and basic runtime properties.
     /// </summary>
     /// <param name="title">The title to display in the title bar of the game window.</param>
-    /// <param name="width">The initial width, in pixels, of the game window.</param>
-    /// <param name="height">The initial height, in pixels, of the game window.</param>
-    /// <param name="fullScreen">Indicates if the game should start in fullscreen mode.</param>
-    public Core(string title, int width, int height, bool fullScreen)
+    public Core(string title)
     {
         // Ensure that multiple cores are not created.
         if (s_instance != null)
@@ -112,13 +125,16 @@ public class Core : Game
         // Store reference to engine for global member access.
         s_instance = this;
 
+        SettingsManager = new SettingsManager();
+        SettingsManager.Load();
+
         // Create a new graphics device manager.
         Graphics = new GraphicsDeviceManager(this);
 
         // Set the graphics defaults.
-        Graphics.PreferredBackBufferWidth = width;
-        Graphics.PreferredBackBufferHeight = height;
-        Graphics.IsFullScreen = fullScreen;
+        Graphics.PreferredBackBufferWidth = SettingsManager.Graphics.Width;
+        Graphics.PreferredBackBufferHeight = SettingsManager.Graphics.Height;
+        Graphics.IsFullScreen = SettingsManager.Graphics.Fullscreen;
 
         // TODO: Add full screen toggle. Graphics.ToggleFullScreen()
 
@@ -171,6 +187,8 @@ public class Core : Game
 
         // Create a new audio controller.
         Audio = new AudioController();
+        Audio.SongVolume = SettingsManager.Audio.MusicVolume;
+        Audio.SoundEffectVolume = SettingsManager.Audio.SfxVolume;
 
         // Initialize the physics system.
         Physics = PhysicsManager.Instance;
@@ -181,6 +199,14 @@ public class Core : Game
     /// </summary>
     protected override void UnloadContent()
     {
+        // Saves all the settings.
+        SettingsManager.Audio.MusicVolume = Audio.SongVolume;
+        SettingsManager.Audio.SfxVolume = Audio.SoundEffectVolume;
+        SettingsManager.Graphics.Fullscreen = Graphics.IsFullScreen;
+        SettingsManager.Graphics.Width = Graphics.PreferredBackBufferWidth;
+        SettingsManager.Graphics.Height = Graphics.PreferredBackBufferHeight;
+        SettingsManager.Save();
+
         // Dispose of the audio controller.
         Audio.Dispose();
 

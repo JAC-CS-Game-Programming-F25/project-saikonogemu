@@ -43,6 +43,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     public DiceDirections DiceDirection {get; set;} = DiceDirections.Idle;
     public float DiceOpacity {get; set;} = 1.0f;
     public bool IsHavingKnockback {get; set;}
+    public bool IsFrozen {get; set;}
 
     #endregion Properties
 

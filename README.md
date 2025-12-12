@@ -192,11 +192,13 @@ For fonts, I'm using a copyright free font (has a license permitting the use of 
 
 I've not decided if I will be making all the music or not. Sound Effects will be made by me. This section will be updated appropriately.
 
-#### 📚 Libraries
+#### 📚 Libraries/Frameworks
 
-I'm using the [Monogame](https://docs.monogame.net/articles/index.html) library to help with general game stuff, such as running the game, dealing with graphics, and providing data types such as Vector2.
+I'm using the [Monogame](https://docs.monogame.net/articles/index.html) framework to help with general game stuff, such as running the game, dealing with graphics, and providing data types such as Vector2.
 
 I'm also using [Pleasing](https://github.com/franknorton/Pleasing) for tweening and easing, since it would take way too long to implement a fully in-depth one needed for this game.
+
+Finally, I use [GUM](https://docs.flatredball.com/gum/code/monogame) for everything UI.
 
 #### 📝 Documentation
 

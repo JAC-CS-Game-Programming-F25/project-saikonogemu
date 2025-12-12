@@ -4,8 +4,9 @@ using CoreLibrary;
 using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
-namespace Game.Scripts.Scenes.GameScene.States;
+namespace Game.Scripts.Scenes.GameSceneItems.States;
 
 #nullable enable
 
@@ -15,6 +16,7 @@ namespace Game.Scripts.Scenes.GameScene.States;
 public class PlayState : State
 {
     #region Fields
+    private GameScene? _gameScene;
     private List<Dice>? _dice;
     #endregion Fields
 
@@ -27,11 +29,12 @@ public class PlayState : State
     {
         base.Enter();
 
+        _gameScene = Utils.GetValue(parameters, "gameScene", _gameScene);
         _dice = Utils.GetValue(parameters, "dice", new List<Dice>());
 
-        if (_dice is null)
+        if (_dice is null || _gameScene is null)
         {
-            throw new ArgumentNullException("Passed dice in PlayState shouldn't be null.");
+            throw new ArgumentNullException("Passed dice or gamescene in PlayState shouldn't be null.");
         }
     }
 
@@ -41,6 +44,12 @@ public class PlayState : State
     public override void Exit()
     {
         base.Exit();
+
+        foreach (Dice dice in _dice!)
+        {
+            dice.Hitbox.Velocity = Vector2.Zero;
+            dice.IsFrozen = true;
+        }
     }
 
     /// <summary>
@@ -50,6 +59,8 @@ public class PlayState : State
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        HandleGameKeyInputs();
 
         for (int i = 0; i < _dice!.Count; i ++)
         {
@@ -105,5 +116,48 @@ public class PlayState : State
         base.Draw(gameTime);
     }
     #endregion Lifecycle Methods
+
+    #region Methods
+    /// <summary>
+    /// Handles key inputs while in this state.
+    /// </summary>
+    private void HandleGameKeyInputs()
+    {
+        // If the R key is down, restart game.
+        if (Core.Input.Keyboard.WasKeyJustPressed(Keys.R)) 
+            Restart();
+        
+        else if (Core.Input.Keyboard.WasKeyJustPressed(Keys.F1))
+            ToggleDebugMode();
+
+        // If the ESC key is down, pause game.
+        else if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Escape))
+            Pause(); 
+    }
+
+    /// <summary>
+    /// Restarts game scene.
+    /// </summary>
+    private void Restart()
+    {
+        Core.ChangeScene(new GameScene(Levels.LevelType.Level1, 6));
+    }
+
+    /// <summary>
+    /// Toggles the debug mode for the game.
+    /// </summary>
+    private void ToggleDebugMode()
+    {
+        Core.DebugMode = !Core.DebugMode;
+    }
+
+    /// <summary>
+    /// Opens Pause state.
+    /// </summary>
+    private void Pause()
+    {
+        _gameScene!.ChangeState("PauseState", new Dictionary<string, object> { ["dice"] = _dice!, ["gameScene"] = _gameScene });
+    }
+    #endregion Methods
 }
 
