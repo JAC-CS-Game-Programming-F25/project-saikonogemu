@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Pleasing;
 
 namespace CoreLibrary.Scenes;
@@ -31,8 +32,12 @@ namespace CoreLibrary.Scenes;
 /// </summary>
 public abstract class Scene : IDisposable
 {
-    #region Properties
+    #region Backing Fields
+    public const float SCENE_FADE_DURATION = 1000f;
 
+    #endregion Backing Fields
+
+    #region Properties
     /// <summary>
     /// Gets the ContentManager used for loading scene-specific assets.
     /// </summary>
@@ -55,6 +60,32 @@ public abstract class Scene : IDisposable
     /// The background color of the scene.
     /// </summary>
     public Color BackgroundColor { get; set; } = Color.Black;
+
+    /// <summary>
+    /// Whether the Scene is fading.
+    /// </summary>
+    public bool IsFading {get; protected set;}
+
+    /// <summary>
+    /// The current fade opacity of the fade.
+    /// </summary>
+    public float FadeOpacity {get; set;} = 1f;
+
+    /// <summary>
+    /// Whether the current scene is exiting.
+    /// </summary>
+    public bool IsExiting { get; private set;}
+
+    /// <summary>
+    /// Whether the current scene is finished exiting.
+    /// </summary>
+    public bool IsFinishedExiting { get; private set;}
+
+    /// <summary>
+    /// The texture used to do the fading.
+    /// </summary>
+    public static Texture2D? FadeTexture {get; private set;}
+
     #endregion Properties
 
     #region Constructors
@@ -70,6 +101,9 @@ public abstract class Scene : IDisposable
             // Set the root directory for content to match the game's root directory.
             RootDirectory = Core.Content.RootDirectory
         };
+
+        FadeOpacity = 1f;
+        Fade(SCENE_FADE_DURATION, fadeToBlack: false);
     }
 
     // Finalizer, called when object is cleaned up by the garbage collector.
@@ -94,7 +128,23 @@ public abstract class Scene : IDisposable
     /// <summary>
     /// Override to provide logic to load content for the scene.
     /// </summary>
-    public virtual void LoadContent() { }
+    public virtual void LoadContent()
+    {
+        if (FadeTexture == null)
+        {
+            FadeTexture = new Texture2D(Core.GraphicsDevice, 1, 1);
+            FadeTexture.SetData([Color.White]);
+        }
+    }
+
+    /// <summary>
+    /// Performs end of scene operations.
+    /// </summary>
+    public void ExitScene()
+    {
+        IsExiting = true;
+        Fade(SCENE_FADE_DURATION, true);
+    }
 
     /// <summary>
     /// Unloads scene-specific content.
@@ -117,6 +167,13 @@ public abstract class Scene : IDisposable
         // Update all tweens.
         Tweening.Update(gameTime);
 
+        if (IsExiting)
+            if (!IsFading)
+                IsFinishedExiting = true;
+
+        if (IsFading)
+           return;
+
         // Updates the StateMachine.
         StateMachine?.Update(gameTime);
     }
@@ -132,6 +189,33 @@ public abstract class Scene : IDisposable
 
         // Draws the StateMachine.
         StateMachine?.Draw(gameTime);
+    }
+
+    /// <summary>
+    /// Draws after the child.
+    /// </summary>
+    /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
+    public virtual void AfterDraw(GameTime gameTime)
+    {
+        // No camera!
+        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        // Do the fade if needed.
+        if (FadeOpacity > 0f)
+        {
+            float alpha = MathHelper.Clamp(FadeOpacity, 0f, 1f);
+
+            Core.SpriteBatch.Draw(
+                FadeTexture,
+                destinationRectangle: new Rectangle(0, 0, Core.GraphicsDevice.Viewport.Width, Core.GraphicsDevice.Viewport.Height),
+                color: Color.Black * alpha
+            );
+        }
+
+        Core.SpriteBatch.End();
+
+        if (FadeOpacity <= 0f || FadeOpacity >= 0.99f)
+            IsFading = false;
     }
 
     #endregion Update and Draw
@@ -184,7 +268,7 @@ public abstract class Scene : IDisposable
 
     #region Public Methods
     /// <summary>
-    /// Tweens the opacity of the background.
+    /// Tweens the color of the background.
     /// </summary>
     /// <param name="duration">How long the tweening should take.</param>
     /// <param name="targetOpacity">The target finishing opacity.</param>
@@ -209,6 +293,51 @@ public abstract class Scene : IDisposable
         colorProp.AddFrame(duration, targetColor, ease);
 
         return timeline;
+    }
+
+    /// <summary>
+    /// Tweens the opacity of the background.
+    /// </summary>
+    /// <param name="duration">How long the tweening should take.</param>
+    /// <param name="targetOpacity">The target finishing opacity.</param>
+    /// <param name="easing">The easing we want to use, Linear is the default.</param>
+    /// <returns>The tweening timeline so we can stop/repeat the tween.</returns>
+    public TweenTimeline TweenBackgroundOpacity(float duration, float targetOpacity, EasingFunction? easing = null)
+    {
+        // Clamp 0 to 1 into 0 to 255 for Color alpha.
+        byte targetAlpha = (byte)(MathHelper.Clamp(targetOpacity, 0f, 1f) * 255);
+
+        // Create a copy of the current background color with new alpha.
+        Color targetColor = new Color(
+            BackgroundColor.R,
+            BackgroundColor.G,
+            BackgroundColor.B,
+            targetAlpha
+        );
+
+        return TweenBackground(duration, targetColor, easing);
+    }
+
+    /// <summary>
+    /// Creates a Scene fade effect.
+    /// </summary>
+    /// <param name="duration">How long the effect is.</param>
+    /// <param name="fadeToBlack">Whether to fade to black.</param>
+    public void Fade(float duration, bool fadeToBlack)
+    {
+        // We set is Fading to true.
+        IsFading = true;
+
+        // Creates a tweening timeline (makes it so we can repeat/stop it).
+        TweenTimeline timeline = Tweening.NewTimeline();
+
+        TweenableProperty<float> fadeProp = timeline.AddFloat(this, nameof(FadeOpacity));
+
+        float start = FadeOpacity;
+        float end = fadeToBlack ? 1f : 0f;
+
+        fadeProp.AddFrame(0f, start);
+        fadeProp.AddFrame(duration, end);            
     }
     #endregion Public Methods
 }

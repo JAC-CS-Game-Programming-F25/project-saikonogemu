@@ -16,6 +16,8 @@ public class PlayerDice : Dice
     public bool CanDash {get; private set;}
 
     public bool CanPhase {get; private set;}
+
+    public bool IsPhasing {get; set;}
     #endregion Properties
 
     #region Constructors

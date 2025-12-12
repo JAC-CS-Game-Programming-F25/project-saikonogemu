@@ -76,6 +76,9 @@ public class PlayState : State
                 {
                     if (_dice[i] is PlayerDice)
                     {
+                        if((_dice[i] as PlayerDice)!.IsPhasing)
+                            continue;                       
+
                         // Perform life loss.
                         if (_dice[j] is EnemyDice)
                             _dice[i].LoseLife();

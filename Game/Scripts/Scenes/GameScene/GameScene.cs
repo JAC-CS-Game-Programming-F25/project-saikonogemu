@@ -136,12 +136,12 @@ public class GameScene : Scene
 
     public override void Update(GameTime gameTime)
     {
+        CheckForLevelProgression();
+
         base.Update(gameTime);
 
         // Moves the camera.
         HandleCameraMovement();
-
-        CheckForLevelProgression();
     }
 
     public override void Draw(GameTime gameTime)
@@ -159,6 +159,7 @@ public class GameScene : Scene
         // Depending on the state it will be rendered differently, that is handled in the state itself.
         foreach (Dice die in _dice)
         {
+            die.CurrentAnimation.Scale = die.Scale;
             die.Draw(gameTime);
         }
 
@@ -171,6 +172,8 @@ public class GameScene : Scene
 
         // Ends the drawing.
         Core.SpriteBatch.End();
+
+        AfterDraw(gameTime);
     }
     #endregion Scene Lifecycle
 
@@ -188,14 +191,26 @@ public class GameScene : Scene
 
         if (totalNumberOfTargets == 0)
         {
-            if (CurrentLevel.type == LevelType.Level9)
-            {
-                // TODO: IMplement you win screen!
-            }
-            else
-            {
-                Core.ChangeScene(new GameScene((LevelType)((int)CurrentLevel.type + 1), _dice[0].Health));
-            }
+            foreach (Dice dice in _dice)
+                dice.Hitbox.Velocity = Vector2.Zero;
+
+            if (!IsExiting)
+                ExitScene();
+
+            if (IsFinishedExiting)
+                ChangeLevel();
+        }
+    }
+
+    private void ChangeLevel()
+    {
+        if (CurrentLevel.type == LevelType.Level9)
+        {
+            // TODO: IMplement you win screen!
+        }
+        else
+        {
+            Core.ChangeScene(new GameScene((LevelType)((int)CurrentLevel.type + 1), _dice[0].Health));
         }
     }
 

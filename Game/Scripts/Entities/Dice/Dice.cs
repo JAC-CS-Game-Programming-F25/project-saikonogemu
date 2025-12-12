@@ -61,7 +61,6 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
         }
 
         base.Update(gameTime);
-        CurrentAnimation.Scale = Scale;
     }
 
     /// <summary>
@@ -89,8 +88,6 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
             Death();
         else
             UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}" + GetAnimationTypeWithoutDice());
-
-        CurrentAnimation.Scale = Scale;
     }
 
     /// <summary>

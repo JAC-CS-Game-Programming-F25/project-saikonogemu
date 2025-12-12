@@ -49,7 +49,7 @@ public class PlayerPhaseState : PlayerLivingState
     /// </summary>
     public override void Exit()
     {
-        // TODO: Remove collision immortality.
+        (Dice as PlayerDice)!.IsPhasing = false;
 
         base.Exit();
     }
@@ -84,7 +84,7 @@ public class PlayerPhaseState : PlayerLivingState
     /// </summary>
     private void StartIFrames()
     {
-        //TODO: Add collision immortality.
+        (Dice as PlayerDice)!.IsPhasing = true;
         Dice!.TweenOpacity(ABILITY_DURATION, 1f);
     }
 
