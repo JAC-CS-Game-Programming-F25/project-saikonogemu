@@ -3,7 +3,11 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using CoreLibrary;
+using CoreLibrary.Graphics;
+using CoreLibrary.UI;
 using Gum.Forms.Controls;
+using Gum.Wireframe;
+using Microsoft.Xna.Framework.Audio;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
 
@@ -13,11 +17,11 @@ public class SettingsManager
     private readonly string _settingsFile;
     private readonly string _settingsDir;
     [JsonIgnore]
-    private Button _optionsBackButton;
+    private AnimatedButton _optionsBackButton;
     [JsonIgnore]
     private Panel _callingPanel;
     [JsonIgnore]
-    private Button _callingButton;
+    private AnimatedButton _callingButton;
     #endregion Fields
 
     #region Properties
@@ -98,22 +102,28 @@ public class SettingsManager
     /// <summary>
     /// Creates a UI Panel that shows all the settings
     /// </summary>
-    public void CreateOptionsPanel()
+    public void CreateOptionsPanel(TextureAtlas atlas)
     {
         OptionsPanel = new Panel();
-        OptionsPanel.Dock(Gum.Wireframe.Dock.Fill);
+        OptionsPanel.Dock(Dock.Fill);
         OptionsPanel.IsVisible = false;
         OptionsPanel.AddToRoot();
 
-        var optionsText = new TextRuntime();
+        TextRuntime optionsText = new TextRuntime();
         optionsText.X = 10;
-        optionsText.Y = 10;
+        optionsText.Y = 20;
         optionsText.Text = "OPTIONS";
+        optionsText.UseCustomFont = true;
+        optionsText.FontScale = 1.5f;
+        optionsText.CustomFontFile = @"fonts/WhitePeaberry.fnt";
+        optionsText.Anchor(Anchor.Top);
         OptionsPanel.AddChild(optionsText);
 
-        var musicSlider = new Slider();
-        musicSlider.Anchor(Gum.Wireframe.Anchor.Top);
-        musicSlider.Visual.Y = 30f;
+        OptionsSlider musicSlider = new OptionsSlider(atlas);
+        musicSlider.Name = "MusicSlider";
+        musicSlider.Text = "MUSIC";
+        musicSlider.Anchor(Anchor.Top);
+        musicSlider.Visual.Y = 40f;
         musicSlider.Minimum = 0;
         musicSlider.Maximum = 1;
         musicSlider.Value = Core.Audio.SongVolume;
@@ -123,9 +133,11 @@ public class SettingsManager
         musicSlider.ValueChangeCompleted += HandleMusicSliderValueChangeCompleted;
         OptionsPanel.AddChild(musicSlider);
 
-        var sfxSlider = new Slider();
-        sfxSlider.Anchor(Gum.Wireframe.Anchor.Top);
-        sfxSlider.Visual.Y = 93;
+        OptionsSlider sfxSlider = new OptionsSlider(atlas);
+        sfxSlider.Name = "SfxSlider";
+        sfxSlider.Text = "SFX";
+        sfxSlider.Anchor(Anchor.Top);
+        sfxSlider.Visual.Y = 103;
         sfxSlider.Minimum = 0;
         sfxSlider.Maximum = 1;
         sfxSlider.Value = Core.Audio.SoundEffectVolume;
@@ -135,9 +147,9 @@ public class SettingsManager
         sfxSlider.ValueChangeCompleted += HandleSfxSliderChangeCompleted;
         OptionsPanel.AddChild(sfxSlider);
 
-        _optionsBackButton = new Button();
+        _optionsBackButton = new AnimatedButton(atlas);
         _optionsBackButton.Text = "BACK";
-        _optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
+        _optionsBackButton.Anchor(Anchor.BottomRight);
         _optionsBackButton.X = -28f;
         _optionsBackButton.Y = -10f;
         _optionsBackButton.Click += HandleOptionsButtonBack;
@@ -147,7 +159,7 @@ public class SettingsManager
     /// <summary>
     /// Enables the option panel.
     /// </summary>
-    public void ActivateOptionsPanel(Panel callingPanel, Button callingButton)
+    public void ActivateOptionsPanel(Panel callingPanel, AnimatedButton callingButton)
     {
         _callingPanel = callingPanel;
         _callingButton = callingButton;

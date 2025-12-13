@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>Images/UI/ui_elements</Texture>
+    <Regions>
+        <Region name="unfocused_button" x="0" y="0" width="65" height="14" />
+        <Region name="focused_button1" x="0" y="14" width="65" height="14" />
+        <Region name="focused_button2" x="0" y="28" width="65" height="14" />
+        <Region name="panel_background" x="65" y="16" width="15" height="15" />
+        <Region name="slider_off_background" x="80" y="16" width="11" height="10" />
+        <Region name="slider_middle_background" x="96" y="0" width="3" height="3" />
+        <Region name="slider_max_background" x="92" y="16" width="11" height="10" />
+    </Regions>
+    <Animations>
+        <Animation name="focused_button_animation" delay="300">
+            <Frame region="focused_button1" />
+            <Frame region="focused_button2" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

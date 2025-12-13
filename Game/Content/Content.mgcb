@@ -88,6 +88,16 @@
 #begin Data/Levels/level9_data.xml
 /copy:Data/Levels/level9_data.xml
 
+#begin Fonts/die_font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/die_font.spritefont
+
+#begin Fonts/Die.ttf
+/copy:Fonts/Die.ttf
+
 #begin Fonts/peaberrybase_font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -97,6 +107,21 @@
 
 #begin Fonts/PeaberryBase.ttf
 /copy:Fonts/PeaberryBase.ttf
+
+#begin Fonts/WhitePeaberry.fnt
+/copy:Fonts/WhitePeaberry.fnt
+
+#begin Fonts/WhitePeaberry.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Fonts/WhitePeaberry.png
 
 #begin Images/Atlas/enemy_dice_atlas.xml
 /copy:Images/Atlas/enemy_dice_atlas.xml
@@ -112,6 +137,9 @@
 
 #begin Images/Atlas/target_dice_atlas.xml
 /copy:Images/Atlas/target_dice_atlas.xml
+
+#begin Images/Atlas/ui_atlas.xml
+/copy:Images/Atlas/ui_atlas.xml
 
 #begin Images/Dice/enemy_dice.png
 /importer:TextureImporter
@@ -211,4 +239,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Tiles/level_tiles.png
+
+#begin Images/UI/ui_elements.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/UI/ui_elements.png
 

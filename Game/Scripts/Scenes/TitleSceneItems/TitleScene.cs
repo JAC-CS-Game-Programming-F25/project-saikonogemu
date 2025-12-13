@@ -6,15 +6,22 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Game.Scripts.Scenes.GameSceneItems;
 using Microsoft.Xna.Framework.Audio;
+using Gum.Forms;
 using Gum.Forms.Controls;
 using System;
 using MonoGameGum;
+using CoreLibrary.Graphics;
+using CoreLibrary.UI;
 
 namespace Game.Scripts.Scenes.TitleSceneItems;
 
 public class TitleScene : Scene
 {
     #region Backing Fields
+    private const float TITLE_OFFSET_MULTIPLIER = 0.25f;
+    private const float SUBTITLE_OFFSET_MULTIPLIER = 1.25f;
+    private const float TITLE_SCALE = 4f;
+    private const float SHADOW_OFFSET = 5f;
     private const string TITLE_TEXT = "Die";
     private const string SUBTITLE_TEXT = "The Rolling Dice Game";
 
@@ -52,7 +59,10 @@ public class TitleScene : Scene
     // The buttons for the title screen panel.
     private Panel _titleScreenButtonsPanel;
 
-    private Button _optionsButton;
+
+    private AnimatedButton _optionsButton;
+
+    private TextureAtlas _atlas;
     #endregion Backing Fields
 
     #region Lifecycle Methods
@@ -70,15 +80,20 @@ public class TitleScene : Scene
         // can close the game by pressing the escape key.
         Core.ExitOnEscape = true;
 
-        // Set the position and origin for the Title text.
-        Vector2 size = _titleFont.MeasureString(TITLE_TEXT);
-        _titleTextPosition = new Vector2(640, 100);
-        _titleTextOrigin = size * 0.5f;
+        // Dimensions.
+        int screenWidth  = Core.GraphicsDevice.Viewport.Width;
+        int screenHeight = Core.GraphicsDevice.Viewport.Height;
 
-        // Set the position and origin for the Subtitle text.
-        size = _titleFont.MeasureString(SUBTITLE_TEXT);
-        _subtitleTextPos = new Vector2(757, 207);
-        _subtitleTextOrigin = size * 0.5f;
+        // Title.
+        Vector2 titleSize = _titleFont.MeasureString(TITLE_TEXT);
+        _titleTextPosition = new Vector2(screenWidth / 2f, screenHeight * TITLE_OFFSET_MULTIPLIER);
+        _titleTextOrigin = titleSize / 2f;
+
+        // Subtitle.
+        Vector2 subtitleSize = _titleFont.MeasureString(SUBTITLE_TEXT);
+        _subtitleTextPos = new Vector2(screenWidth / 2f, (_titleTextPosition.Y + titleSize.Y) * SUBTITLE_OFFSET_MULTIPLIER);
+        _subtitleTextOrigin = subtitleSize / 2f;
+
 
         // Initialize the offset of the background pattern at zero.
         _backgroundOffset = Vector2.Zero;
@@ -97,7 +112,7 @@ public class TitleScene : Scene
         GumService.Default.Root.Children.Clear();
 
         CreateTitlePanel();
-        Core.SettingsManager.CreateOptionsPanel();
+        Core.SettingsManager.CreateOptionsPanel(_atlas);
     }
 
 
@@ -113,13 +128,14 @@ public class TitleScene : Scene
         _font = Core.Content.Load<SpriteFont>("Fonts/peaberrybase_font");
 
         // Load the font for the title text.
-        // FIXME: Change to Die Font
-        _titleFont = Content.Load<SpriteFont>("Fonts/peaberrybase_font");
+        _titleFont = Content.Load<SpriteFont>("Fonts/die_font");
 
         // Load the background pattern texture.
         _backgroundPattern = Content.Load<Texture2D>("Images/Tiles/level_tiles");
 
         Core.UISoundEffect = Core.Content.Load<SoundEffect>("Audio/SFX/click");
+
+        _atlas = TextureAtlas.FromFile(Core.Content, "Images/Atlas/ui_atlas.xml");
     }
 
     public override void Update(GameTime gameTime)
@@ -162,17 +178,17 @@ public class TitleScene : Scene
 
             // Draw the Title text slightly offset from it is original position and
             // with a transparent color to give it a drop shadow
-            Core.SpriteBatch.DrawString(_titleFont, TITLE_TEXT, _titleTextPosition + new Vector2(10, 10), dropShadowColor, 0.0f, _titleTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            Core.SpriteBatch.DrawString(_titleFont, TITLE_TEXT, _titleTextPosition + new Vector2(SHADOW_OFFSET, SHADOW_OFFSET), dropShadowColor, 0.0f, _titleTextOrigin, TITLE_SCALE, SpriteEffects.None, 1.0f);
 
             // Draw the Title text on top of that at its original position
-            Core.SpriteBatch.DrawString(_titleFont, TITLE_TEXT, _titleTextPosition, Color.White, 0.0f, _titleTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            Core.SpriteBatch.DrawString(_titleFont, TITLE_TEXT, _titleTextPosition, Color.White, 0.0f, _titleTextOrigin, TITLE_SCALE, SpriteEffects.None, 1.0f);
 
             // Draw the Subtitle text slightly offset from it is original position and
             // with a transparent color to give it a drop shadow
-            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _subtitleTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPos + new Vector2(SHADOW_OFFSET, SHADOW_OFFSET), dropShadowColor, 0.0f, _subtitleTextOrigin, TITLE_SCALE - 1, SpriteEffects.None, 1.0f);
 
             // Draw the Subtitle text on top of that at its original position
-            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPos, Color.White, 0.0f, _subtitleTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPos, Color.White, 0.0f, _subtitleTextOrigin, TITLE_SCALE - 1, SpriteEffects.None, 1.0f);
 
             // Always end the sprite batch when finished.
             Core.SpriteBatch.End();
@@ -185,6 +201,7 @@ public class TitleScene : Scene
     #endregion Lifecycle Methods
 
     #region Methods
+
     /// <summary>
     /// Used to create the title panel and it's contents.
     /// </summary>
@@ -195,24 +212,31 @@ public class TitleScene : Scene
         _titleScreenButtonsPanel.Dock(Gum.Wireframe.Dock.Fill);
         _titleScreenButtonsPanel.AddToRoot();
 
-        // All start button things.
-        var startButton = new Button();
-        startButton.Anchor(Gum.Wireframe.Anchor.BottomLeft);
-        startButton.Visual.X = 50;
-        startButton.Visual.Y = -12;
-        startButton.Visual.Width = 70;
-        startButton.Text = "Start";
-        startButton.Click += HandleStartClicked;
-        _titleScreenButtonsPanel.AddChild(startButton);
+        const float BUTTON_HEIGHT = 10f;
+        const float BUTTON_WIDTH = 70f;
+        const float BUTTON_SPACING = 40f;
 
         // All options button things.
-        _optionsButton = new Button();
-        _optionsButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-        _optionsButton.Visual.X = -50;
-        _optionsButton.Visual.Y = -12;
-        _optionsButton.Visual.Width = 70;
+        _optionsButton = new AnimatedButton(_atlas);
+        _optionsButton.Anchor(Gum.Wireframe.Anchor.Bottom);
+        _optionsButton.Visual.X = 0;
+        _optionsButton.Visual.Y = -BUTTON_SPACING;
+        _optionsButton.Visual.Height = BUTTON_HEIGHT;
+        _optionsButton.Visual.Width = BUTTON_WIDTH;
         _optionsButton.Text = "Options";
         _optionsButton.Click += HandleOptionsClicked;
+
+        // All start button things.
+        AnimatedButton startButton = new AnimatedButton(_atlas);
+        startButton.Anchor(Gum.Wireframe.Anchor.Bottom);
+        startButton.Visual.X = 0;
+        startButton.Visual.Y = - (BUTTON_HEIGHT + BUTTON_SPACING - _optionsButton.Visual.Y);
+        startButton.Visual.Height = BUTTON_HEIGHT;
+        startButton.Visual.Width = BUTTON_WIDTH;
+        startButton.Text = "Start";
+        startButton.Click += HandleStartClicked;
+
+        _titleScreenButtonsPanel.AddChild(startButton);
         _titleScreenButtonsPanel.AddChild(_optionsButton);
 
         startButton.IsFocused = true;
