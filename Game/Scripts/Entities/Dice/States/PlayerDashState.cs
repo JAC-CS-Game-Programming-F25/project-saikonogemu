@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CoreLibrary;
 using CoreLibrary.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using Pleasing;
 
@@ -49,6 +50,24 @@ public class PlayerDashState : PlayerLivingState
         // Boosts the velocity!
         Dice.Hitbox.Velocity *= DashPower;
         IsDashing = true;
+
+        // Audio.
+        int sfxNumber = new Random().Next(0, 3);
+
+        switch (sfxNumber)
+        {
+            case 0:
+                Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/dash1"));
+            break;
+
+            case 1:
+                Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/dash2"));
+            break;
+
+            case 2:
+                Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/dash3"));
+            break;
+        }
     }
 
     /// <summary>

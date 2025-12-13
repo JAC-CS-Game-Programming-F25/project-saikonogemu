@@ -184,13 +184,14 @@ All images are personally made. Below are the dice spritesheets I made for this 
 #### ✏️ Fonts
 
 For fonts, I'm using a copyright free font (has a license permitting the use of this font for any means, in any capacity) found on itch.io.
-// TODO: Add custom DIE font here.
 
 [PeaberryBase](https://emhuo.itch.io/peaberry-pixel-font)
 
+I'm also using a custom font I made! The Die font!
+
 #### 🔊 Sounds
 
-I've not decided if I will be making all the music or not. Sound Effects will be made by me. This section will be updated appropriately.
+I've not decided if I will be making all the music or not. Sound Effects are made by me.
 
 #### 📚 Libraries/Frameworks
 

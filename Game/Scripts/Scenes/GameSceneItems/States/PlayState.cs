@@ -4,6 +4,7 @@ using CoreLibrary;
 using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace Game.Scripts.Scenes.GameSceneItems.States;

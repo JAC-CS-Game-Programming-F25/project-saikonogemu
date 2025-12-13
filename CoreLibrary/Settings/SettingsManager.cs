@@ -28,17 +28,17 @@ public class SettingsManager
     /// <summary>
     /// The graphics settings instance.
     /// </summary>
-    public GraphicsSettings Graphics { get; private set; } = new GraphicsSettings();
+    public GraphicsSettings Graphics { get; set; } = new GraphicsSettings();
 
     /// <summary>
     /// The audio settings instance.
     /// </summary>
-    public AudioSettings Audio { get; private set; } = new AudioSettings();
+    public AudioSettings Audio { get; set; } = new AudioSettings();
 
     /// <summary>
     /// The game settings instance.
     /// </summary>
-    public GameplaySettings Gameplay { get; private set; } = new GameplaySettings();
+    public GameplaySettings Gameplay { get; set; } = new GameplaySettings();
 
     /// <summary>
     /// The UI panel for the settings.

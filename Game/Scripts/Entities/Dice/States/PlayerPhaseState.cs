@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using CoreLibrary;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Pleasing;
 
 #nullable enable
@@ -14,7 +16,7 @@ public class PlayerPhaseState : PlayerLivingState
 {
     #region Constants
     private const float ACTIVATION_DELAY = 200f;
-    private const float ABILITY_DURATION = 1000f;
+    private const float ABILITY_DURATION = 2000f;
     private const float COOLDOWN = 2.5f;
     #endregion Constants
 
@@ -42,6 +44,8 @@ public class PlayerPhaseState : PlayerLivingState
         Dice.DiceOpacity = 0.99f;
 
         Dice.TweenOpacity(ACTIVATION_DELAY, 0f);
+
+        Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/phase"));
     }
 
     /// <summary>
@@ -49,8 +53,6 @@ public class PlayerPhaseState : PlayerLivingState
     /// </summary>
     public override void Exit()
     {
-        (Dice as PlayerDice)!.IsPhasing = false;
-
         base.Exit();
     }
 
@@ -94,6 +96,7 @@ public class PlayerPhaseState : PlayerLivingState
     /// <param name="gameTime">The gameTime of the Game.</param>
     private void HandleAbilityCooldown(GameTime gameTime)
     {
+        (Dice as PlayerDice)!.IsPhasing = false;
         _abilityCooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         if (_abilityCooldownTimer >= COOLDOWN)

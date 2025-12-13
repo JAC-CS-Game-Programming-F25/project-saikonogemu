@@ -191,6 +191,7 @@ public class Core : Game
 
         // Create a new audio controller.
         Audio = new AudioController();
+
         Audio.SongVolume = SettingsManager.Audio.MusicVolume;
         Audio.SoundEffectVolume = SettingsManager.Audio.SfxVolume;
 

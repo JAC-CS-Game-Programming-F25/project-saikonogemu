@@ -35,11 +35,11 @@ public class PauseState : State
     private List<Dice>? _dice;
     private bool _isExiting;
     public float CurrentPauseOpacity {get; set;}
-    private Panel _pausePanel;
-    private AnimatedButton _resumeButton;
-    private SoundEffect _uiSoundEffect;
-    private SoundEffect _panelOpenSoung;
-    private TextureAtlas _atlas;
+    private Panel? _pausePanel;
+    private AnimatedButton? _resumeButton;
+    private SoundEffect? _uiSoundEffect;
+    private SoundEffect? _panelOpenSong;
+    private TextureAtlas? _atlas;
 
     #endregion Fields
 
@@ -54,7 +54,7 @@ public class PauseState : State
 
         _gameScene = Utils.GetValue(parameters, "gameScene", _gameScene);
         _dice = Utils.GetValue(parameters, "dice", new List<Dice>());
-        _panelOpenSoung = Core.Content.Load<SoundEffect>("Audio/SFX/menu");
+        _panelOpenSong = Core.Content.Load<SoundEffect>("Audio/SFX/menu");
         _uiSoundEffect = Core.Content.Load<SoundEffect>("Audio/SFX/click");
         _atlas = TextureAtlas.FromFile(Core.Content, "Images/Atlas/ui_atlas.xml");
         Core.Instance.IsMouseVisible = true;
@@ -66,10 +66,10 @@ public class PauseState : State
 
         Fade(PAUSE_FADE_DURATION, true);
         InitializeUI();
-        _pausePanel.IsVisible = true;
-        _resumeButton.IsFocused = true;
+        _pausePanel!.IsVisible = true;
+        _resumeButton!.IsFocused = true;
 
-        Core.Audio.PlaySoundEffect(_panelOpenSoung);
+        Core.Audio.PlaySoundEffect(_panelOpenSong);
     }
 
     private void InitializeUI()
@@ -199,7 +199,7 @@ public class PauseState : State
         _pausePanel.IsVisible = false;
         _pausePanel.AddToRoot();
 
-        TextureRegion backgroundRegion = _atlas.GetRegion("panel_background");
+        TextureRegion backgroundRegion = _atlas!.GetRegion("panel_background");
 
         NineSliceRuntime background = new NineSliceRuntime();
         background.Dock(Dock.Fill);
@@ -245,7 +245,7 @@ public class PauseState : State
         Core.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Make the pause panel invisible to resume the game.
-        _pausePanel.IsVisible = false;
+        _pausePanel!.IsVisible = false;
         StartResume();
     }
 

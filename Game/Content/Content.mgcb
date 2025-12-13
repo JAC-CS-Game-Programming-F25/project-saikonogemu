@@ -19,11 +19,23 @@
 /processorParam:Quality=Best
 /build:Audio/SFX/click.wav
 
-#begin Audio/SFX/dash.wav
+#begin Audio/SFX/dash1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Audio/SFX/dash.wav
+/build:Audio/SFX/dash1.wav
+
+#begin Audio/SFX/dash2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/dash2.wav
+
+#begin Audio/SFX/dash3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/dash3.wav
 
 #begin Audio/SFX/death.wav
 /importer:WavImporter

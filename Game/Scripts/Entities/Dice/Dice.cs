@@ -17,8 +17,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using CoreLibrary;
 using CoreLibrary.Physics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Pleasing;
 
@@ -83,6 +85,26 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     /// </summary>
     public void LoseLife()
     {
+        // FIXME: ADD I FRAMES FOR LIKE 1 SECOND. Make him blonde.
+
+        // Audio.
+        int sfxNumber = new Random().Next(0, 3);
+
+        switch (sfxNumber)
+        {
+            case 0:
+                Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/hit1"));
+            break;
+
+            case 1:
+                Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/hit2"));
+            break;
+
+            case 2:
+                Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/hit3"));
+            break;
+        }
+
         Health -= 1;
 
         if (Health <= 0)

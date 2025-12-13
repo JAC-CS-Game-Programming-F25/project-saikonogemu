@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CoreLibrary;
 using CoreLibrary.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 #nullable enable
 
@@ -28,6 +29,8 @@ public class DiceDyingState : State
     public override void Enter(Dictionary<string, object>? parameters = null)
     {
         base.Enter(parameters);
+
+        Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/death"));
 
         Dice = Utils.GetValue(parameters, "dice", Dice);
 
