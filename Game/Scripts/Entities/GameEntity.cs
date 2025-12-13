@@ -61,7 +61,7 @@ public abstract class GameEntity
     /// <summary>
     /// Gets the hitbox of the game entity.
     /// </summary>
-    public Rigidbody Hitbox { get; protected set; }
+    public Rigidbody Hitbox { get; set; }
 
     /// <summary>
     /// Gets the total health of the entity.

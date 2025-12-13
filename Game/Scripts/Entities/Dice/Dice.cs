@@ -36,16 +36,22 @@ namespace Game.Scripts.Entities.Dice;
 /// <param name="diceDefinition">All the dice specific parameters.</param>
 public class Dice(ContentManager content, Dictionary<string, object>? diceDefinition = null) : GameEntity(content, diceDefinition)
 {
+    #region Backing Fields
+    private float _iFramesTimer = 0f;
+    #endregion Backing Fields
+
     #region Properties
     // This is calculated by doing pixels/scale.
     public const float COLLISION_POWER = 2.0f;
     public const float NORMAL_OFFSET = 1.67f;
     public const float DIAGONAL_OFFSET = 3.33f;
     public const float DECELERATION = 20f; 
+    private const float IFRAMES_DURATION = 1.0f;
     public DiceDirections DiceDirection {get; set;} = DiceDirections.Idle;
     public float DiceOpacity {get; set;} = 1.0f;
     public bool IsHavingKnockback {get; set;}
     public bool IsFrozen {get; set;}
+    public bool IsLosingLife {get; set;}
 
     #endregion Properties
 
@@ -62,6 +68,9 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
             HandleCollisionDeceleration();
             return;
         }
+
+        if (IsLosingLife)
+            HandleIFrames(gameTime);
 
         base.Update(gameTime);
     }
@@ -85,8 +94,21 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     /// </summary>
     public void LoseLife()
     {
-        // FIXME: ADD I FRAMES FOR LIKE 1 SECOND. Make him blonde.
+        if (IsLosingLife) return;
 
+        Health -= 1;
+
+        if (Health <= 0)
+        {
+            // Prevents over shooting.
+            Health = 0;
+            Death();
+        }
+        else
+        {
+            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}" + GetAnimationTypeWithoutDice());
+            IsLosingLife = true;
+        }
         // Audio.
         int sfxNumber = new Random().Next(0, 3);
 
@@ -104,13 +126,6 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
                 Core.Audio.PlaySoundEffect(Core.Content.Load<SoundEffect>("Audio/SFX/hit3"));
             break;
         }
-
-        Health -= 1;
-
-        if (Health <= 0)
-            Death();
-        else
-            UpdateAnimation(GetDiceTypeTexture() + $"_dot{Health}" + GetAnimationTypeWithoutDice());
     }
 
     /// <summary>
@@ -273,6 +288,24 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
         if (Hitbox != null)
         {
             PhysicsManager.Instance.RemoveRigidbody(Hitbox);
+        }
+    }
+
+    /// <summary>
+    /// Handles the iframes when hit.
+    /// </summary>
+    /// <param name="gameTime">The gameTime of the Game.</param>
+    private void HandleIFrames(GameTime gameTime)
+    {
+        _iFramesTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        DiceOpacity = DiceOpacity == 1.0f ? 0.5f : 1.0f;
+
+        if (_iFramesTimer >= IFRAMES_DURATION)
+        {
+            _iFramesTimer = 0;
+            IsLosingLife = false;
+            DiceOpacity = 1.0f;
         }
     }
     #endregion Methods

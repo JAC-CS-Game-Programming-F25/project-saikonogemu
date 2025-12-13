@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using CoreLibrary;
+using CoreLibrary.Physics;
+using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -9,7 +12,12 @@ namespace Game.Scripts.Entities.Dice;
 
 public class NPCDice: Dice
 {
+    public const float VISION_RANGE = 200;
     public const float SPEED = 75f;
+
+    #region Properties
+    public RectangleFloat Vision {get; set;} = new RectangleFloat();
+    #endregion Properties
 
     #region Constructors
     /// <summary>
@@ -24,6 +32,8 @@ public class NPCDice: Dice
 
         // Adds the player phase state.
         AddState("DiceDyingState", new DiceDyingState());
+
+        Vision = new RectangleFloat(Hitbox.Collider.Position - new Vector2(VISION_RANGE / 2, VISION_RANGE / 2), Hitbox.Collider.Width + VISION_RANGE, Hitbox.Collider.Height + VISION_RANGE);
     }
     #endregion Constructors
 
@@ -38,6 +48,9 @@ public class NPCDice: Dice
         if (IsFrozen)
             return;
 
+        // Update vision (struct).
+        Vision = new RectangleFloat(Hitbox.Collider.Position - new Vector2(VISION_RANGE / 2, VISION_RANGE / 2), Vision.Width, Vision.Height);
+
         base.Update(gameTime);
     }
 
@@ -48,6 +61,9 @@ public class NPCDice: Dice
     public override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
+
+        if (Core.DebugMode)
+            Utils.DrawRectangle(Vision, Color.AliceBlue);
     }
 
     #endregion Update and Draw

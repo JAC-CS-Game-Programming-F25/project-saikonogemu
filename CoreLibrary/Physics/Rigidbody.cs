@@ -121,5 +121,84 @@ public class Rigidbody
         clone.Collider = Collider.Clone();
         return clone;
     }
+
+    /// <summary>
+    /// Cancels the velocity along the normal.
+    /// </summary>
+    public void CancelVelocityAlongNormal()
+    {
+        if (LastCollisionNormal == Vector2.Zero)
+            return;
+
+        Velocity -= Vector2.Dot(Velocity, LastCollisionNormal) * LastCollisionNormal;
+    }
+
+    /// <summary>
+    /// Resolves AABB collision between 2 entities.
+    /// </summary>
+    /// <param name="a">The first entity's rigidbody.</param>
+    /// <param name="b">The second entity's rigidbody.</param>
+    /// <returns>Whether they intersected.</returns>
+    public static bool ResolveAABBCollision(Rigidbody a, Rigidbody b)
+    {
+        RectangleFloat A = a.Collider;
+        RectangleFloat B = b.Collider;
+
+        if (!a.Collider.Intersects(b.Collider))
+        {
+            a.LastCollisionNormal = Vector2.Zero;
+            b.LastCollisionNormal = Vector2.Zero;
+            return false;
+        }
+
+        // Calculate overlap on both axes.
+        float overlapLeft = A.Right - B.Left;
+        float overlapRight = B.Right - A.Left;
+        float overlapTop = A.Bottom - B.Top;
+        float overlapBottom = B.Bottom - A.Top;
+
+        // Find minimal overlap.
+        float minX = Math.Min(overlapLeft, overlapRight);
+        float minY = Math.Min(overlapTop, overlapBottom);
+
+        Vector2 separation;
+        Vector2 normal;
+
+        if (minX < minY)
+        {
+            // Resolve on X.
+            float push = overlapLeft < overlapRight ? -minX : minX;
+            separation = new Vector2(push, 0);
+            normal = new Vector2(Math.Sign(push), 0);
+        }
+        else
+        {
+            // Resolve on Y.
+            float push = overlapTop < overlapBottom ? -minY : minY;
+            separation = new Vector2(0, push);
+            normal = new Vector2(0, Math.Sign(push));
+        }
+
+        // Split separation.
+        if (a.Dynamic && b.Dynamic)
+        {
+            separation *= 0.5f;
+            a.Position += separation;
+            b.Position -= separation;
+        }
+        else if (a.Dynamic)
+        {
+            a.Position += separation;
+        }
+        else if (b.Dynamic)
+        {
+            b.Position -= separation;
+        }
+
+        a.LastCollisionNormal = normal;
+        b.LastCollisionNormal = -normal;
+
+        return true;
+    }
     #endregion Public Methods
 }

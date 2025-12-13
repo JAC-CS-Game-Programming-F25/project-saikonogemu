@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CoreLibrary;
+using CoreLibrary.Physics;
 using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice;
 using Microsoft.Xna.Framework;
@@ -63,7 +64,7 @@ public class PlayState : State
 
         HandleGameKeyInputs();
 
-        for (int i = 0; i < _dice!.Count; i ++)
+        for (int i = _dice!.Count - 1; i >= 0; i--)
         {
             if (_dice[i].IsDead)
             {
@@ -74,33 +75,42 @@ public class PlayState : State
 
             // Check for entity-entity collision for knockback.
             // We make sure to not double check.
-            for (int j = i + 1; j < _dice!.Count; j ++)
+            for (int j = i - 1; j >= 0; j--)
             {
                 if (_dice[i].IsDying)
                     break;
                 else if (_dice[j].IsDying)
                     continue;
 
-                // Check and handle collision.
-                bool didCollide = _dice[i].DidCollideWithOtherDice(_dice[j]);
+                bool didCollide = Rigidbody.ResolveAABBCollision(_dice[i].Hitbox, _dice[j].Hitbox);
 
-                if (didCollide)
+                if (!didCollide)
+                    continue;
+
+                // Stop inward motion.
+                _dice[i].Hitbox.CancelVelocityAlongNormal();
+                _dice[j].Hitbox.CancelVelocityAlongNormal();
+
+                Dice a = _dice[i];
+                Dice b = _dice[j];
+
+                PlayerDice? player = a as PlayerDice ?? b as PlayerDice;
+                Dice? other = player == a ? b : player == b ? a : null;
+
+                if (player != null && other != null)
                 {
-                    if (_dice[i] is PlayerDice)
+                    if (!player.IsPhasing)
                     {
-                        if((_dice[i] as PlayerDice)!.IsPhasing)
-                            continue;                       
+                        if (other is EnemyDice)
+                            player.LoseLife();
 
-                        // Perform life loss.
-                        if (_dice[j] is EnemyDice)
-                            _dice[i].LoseLife();
-
-                        _dice[j].LoseLife();
+                        other.LoseLife();
                     }
-
-                    // Perform knockback.
-                    _dice[i].Knockback();
                 }
+
+                // Apply knockback.
+                a.Knockback();
+                b.Knockback();
             }
 
             // Update dice.

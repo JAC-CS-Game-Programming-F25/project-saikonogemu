@@ -10,6 +10,21 @@ namespace CoreLibrary.Utils;
 
 public static class Utils
 {
+    private static Texture2D? _pixel;
+
+    private static Texture2D Pixel
+    {
+        get
+        {
+            if (_pixel == null)
+            {
+                _pixel = new Texture2D(Core.GraphicsDevice, 1, 1);
+                _pixel.SetData([Color.White]);
+            }
+            return _pixel;
+        }
+    }
+
     #region Helper Methods   
     /// <summary>
     /// Gets the potentially null value from a potentially null dictionary.
@@ -34,44 +49,51 @@ public static class Utils
     {
         const int OUTLINE_SIZE = 5;
 
-        Texture2D _debugRed = new Texture2D(Core.GraphicsDevice, 1, 1);
-            _debugRed.SetData([Color.Red]);
-
-        foreach (var r in PhysicsManager.Instance.TileColliders)
+        foreach (RectangleFloat r in PhysicsManager.Instance.TileColliders)
         {
             // Fill.
-            Rectangle drawRect = new Rectangle(
-                (int)Math.Floor(r.Left),
-                (int)Math.Floor(r.Top),
-                (int)Math.Ceiling(r.Width),
-                (int)Math.Ceiling(r.Height)
-            );
+            Rectangle drawRect = new Rectangle((int)Math.Floor(r.Left), (int)Math.Floor(r.Top), (int)Math.Ceiling(r.Width), (int)Math.Ceiling(r.Height));
 
             // Outline.
-            Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, OUTLINE_SIZE), Color.Red);
-            Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Bottom - OUTLINE_SIZE, drawRect.Width, OUTLINE_SIZE), Color.Red);
-            Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Left, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Red);
-            Core.SpriteBatch.Draw(_debugRed, new Rectangle(drawRect.Right - OUTLINE_SIZE, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Red);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, OUTLINE_SIZE), Color.Red);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Bottom - OUTLINE_SIZE, drawRect.Width, OUTLINE_SIZE), Color.Red);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Red);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Right - OUTLINE_SIZE, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Red);
         }
 
-        Texture2D _debugOrange = new Texture2D(Core.GraphicsDevice, 1, 1);
-        _debugOrange.SetData([Color.Orange]);
-
-        foreach (var r in PhysicsManager.Instance.RigidBodies)
+        foreach (Rigidbody r in PhysicsManager.Instance.RigidBodies)
         {
-            Rectangle drawRect = new Rectangle(
-                (int)Math.Floor(r.Collider.Left),
-                (int)Math.Floor(r.Collider.Top),
-                (int)Math.Ceiling(r.Collider.Width),
-                (int)Math.Ceiling(r.Collider.Height)
-            );
+            Rectangle drawRect = new Rectangle((int)Math.Floor(r.Collider.Left), (int)Math.Floor(r.Collider.Top), (int)Math.Ceiling(r.Collider.Width), (int)Math.Ceiling(r.Collider.Height));
 
             // Outline.
-            Core.SpriteBatch.Draw(_debugOrange, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, OUTLINE_SIZE), Color.Orange);
-            Core.SpriteBatch.Draw(_debugOrange, new Rectangle(drawRect.Left, drawRect.Bottom - OUTLINE_SIZE, drawRect.Width, OUTLINE_SIZE), Color.Orange);
-            Core.SpriteBatch.Draw(_debugOrange, new Rectangle(drawRect.Left, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Orange);
-            Core.SpriteBatch.Draw(_debugOrange, new Rectangle(drawRect.Right - OUTLINE_SIZE, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Orange);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, OUTLINE_SIZE), Color.Orange);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Bottom - OUTLINE_SIZE, drawRect.Width, OUTLINE_SIZE), Color.Orange);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Orange);
+            Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Right - OUTLINE_SIZE, drawRect.Top, OUTLINE_SIZE, drawRect.Height), Color.Orange);
         }
+    }
+
+    /// <summary>
+    /// Draws the outlines of the provided rectangle.
+    /// </summary>
+    /// <param name="rect">The rectangle to draw.</param>
+    /// <param name="color">The color of the draw.</param>
+    /// <param name="outlineSize">The size of the outline, default is 5.</param>
+    public static void DrawRectangle(RectangleFloat rect, Color color, int outlineSize = 5)
+    {
+        Rectangle drawRect = new Rectangle((int)Math.Floor(rect.Left), (int)Math.Floor(rect.Top), (int)Math.Ceiling(rect.Width), (int)Math.Ceiling(rect.Height));
+
+        // Top.
+        Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Top, drawRect.Width, outlineSize), color);
+
+        // Bottom.
+        Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Bottom - outlineSize, drawRect.Width, outlineSize), color);
+
+        // Left.
+        Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Left, drawRect.Top, outlineSize, drawRect.Height), color);
+
+        // Right.
+        Core.SpriteBatch.Draw(Pixel, new Rectangle(drawRect.Right - outlineSize, drawRect.Top, outlineSize, drawRect.Height), color);
     }
 
     /// <summary>

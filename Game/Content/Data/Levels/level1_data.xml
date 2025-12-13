@@ -10,9 +10,9 @@
 >
   <Targets>
     <Target health="2"/>
-    <!-- <Target health="3"/>
+    <Target health="3"/>
     <Target health="4"/>
-    <Target health="5"/> -->
+    <Target health="5"/>
   </Targets>
 
   <Enemies>
