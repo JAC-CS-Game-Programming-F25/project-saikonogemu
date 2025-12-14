@@ -65,7 +65,10 @@ public class GameScene : Scene
     {
         // Loads the info for the current level.
         CurrentLevel = Level.FromFile(Content, $"Data/Levels/level{(int)levelType}_data.xml");
-        _initialPlayerHealth = initialPlayerHealth;
+        _initialPlayerHealth = initialPlayerHealth + CurrentLevel.extraLife;
+
+        if (_initialPlayerHealth > 6)
+            _initialPlayerHealth = 6;
     }
 
     /// <summary>
