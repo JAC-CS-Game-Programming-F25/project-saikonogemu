@@ -191,7 +191,7 @@ I'm also using a custom font I made! The Die font!
 
 #### 🔊 Sounds
 
-I've not decided if I will be making all the music or not. Sound Effects are made by me.
+All music and sound effects are made by me.
 
 #### 📚 Libraries/Frameworks
 
