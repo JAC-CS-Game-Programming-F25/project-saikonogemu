@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd "$(dirname $BASH_SOURCE)/../Resources"
-if [[ $(uname -p) == 'arm' ]]; then
-  ./../MacOS/arm64/DiceTheRollingDiceGame
-else
-  ./../MacOS/amd64/DiceTheRollingDiceGame
-fi
