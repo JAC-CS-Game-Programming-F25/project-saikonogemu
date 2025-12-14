@@ -2,6 +2,8 @@
 
 <!--Contains all the info about the level-->
 <Level
+  header="Level 3"
+  message="Phase Unlocked (X)"
   levelNumber="3"
   color="#2a3039"
   tilemapPath="Images/Levels/XML/level3.xml"

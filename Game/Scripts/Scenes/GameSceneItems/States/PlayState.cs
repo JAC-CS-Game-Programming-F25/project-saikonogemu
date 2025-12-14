@@ -68,8 +68,13 @@ public class PlayState : State
         {
             if (_dice[i].IsDead)
             {
-                _dice[i].Delete();
-                _dice.RemoveAt(i);
+                if (_dice[i] is PlayerDice)
+                    _gameScene!.IsPlayerDead = true;
+                else
+                {
+                    _dice[i].Delete();
+                    _dice.RemoveAt(i);
+                }
                 continue;
             }
 

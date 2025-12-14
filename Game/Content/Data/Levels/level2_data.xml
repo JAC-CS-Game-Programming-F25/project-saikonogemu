@@ -2,6 +2,8 @@
 
 <!--Contains all the info about the level-->
 <Level
+  header="Level 2"
+  message="Dash Unlocked (Z)"
   levelNumber="2"
   color="#161213"
   tilemapPath="Images/Levels/XML/level2.xml"
@@ -11,9 +13,27 @@
 >
   <Targets>
     <Target health="1"/>
+    <Target health="2"/>
+    <Target health="1"/>
+    <Target health="2"/>
+    <Target health="1"/>
+    <Target health="2"/>
+    <Target health="1"/>
+    <Target health="2"/>
+    <Target health="1"/>
+    <Target health="2"/>
   </Targets>
 
   <Enemies>
+    <Enemy health="3"/>
     <Enemy health="6"/>
+    <Enemy health="4"/>
+    <Enemy health="6"/>
+    <Enemy health="5"/>
+    <Enemy health="1"/>
+    <Enemy health="2"/>
+    <Enemy health="1"/>
+    <Enemy health="2"/>
+    <Enemy health="1"/>
   </Enemies>
 </Level>

@@ -8,6 +8,7 @@ using CoreLibrary.Scenes;
 using CoreLibrary.Utils;
 using Game.Scripts.Entities.Dice;
 using Game.Scripts.Levels;
+using Game.Scripts.Scenes.EndingScenes;
 using Game.Scripts.Scenes.GameSceneItems.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,34 @@ namespace Game.Scripts.Scenes.GameSceneItems;
 
 public class GameScene : Scene
 {
+    #region Greeting
+    private const float HEADER_OFFSET_MULTIPLIER = 0.45f;
+    private const float MESSAGE_OFFSET_MULTIPLIER = 1.25f;
+    private const float HEADER_SCALE = 6f;
+    private const float SHADOW_OFFSET = 5f;
+
+    // The position to draw the message text at.
+    private Vector2 _messageTextPosition;
+
+    // The origin to set for the message text.
+    private Vector2 _messageTextOrigin;
+
+    // The font used to render the header text.
+    private SpriteFont _headerFont;
+
+    // The position to draw the header text at.
+    private Vector2 _headerTextPosition;
+
+    // The origin to set for the header text.
+    private Vector2 _headerTextOrigin;
+
+    private const float AFTER_FADE_DURATION = 2.0f;
+    private float? _disappearingTimer;
+
+    private bool _isMessage;
+    private bool _showText = true;
+    #endregion Greeting
+
     #region Constants
     private const float GAME_SCALE = 3.0f;
     // FIXME: Change to match song length??? MAYBE?
@@ -53,6 +82,8 @@ public class GameScene : Scene
     /// </summary>
     public Level CurrentLevel {get; private set;}
 
+    public bool IsPlayerDead {get; set;}
+
     #endregion Properties
 
     #region Scene Lifecycle
@@ -85,6 +116,27 @@ public class GameScene : Scene
 
         // Sets the mouse as not visible.
         Core.Instance.IsMouseVisible = false;
+
+        #region Greeting Setup
+        // Dimensions.
+        int screenWidth  = Core.GraphicsDevice.Viewport.Width;
+        int screenHeight = Core.GraphicsDevice.Viewport.Height;
+
+        // Header.
+        Vector2 headerSize = _headerFont.MeasureString(CurrentLevel.header);
+        _headerTextPosition = new Vector2(screenWidth / 2f, screenHeight / 2f * HEADER_OFFSET_MULTIPLIER);
+        _headerTextOrigin = headerSize / 2f;
+
+        if (CurrentLevel.message != null)
+        {
+            _isMessage = true;
+
+            // Message.
+            Vector2 messageSize = _headerFont.MeasureString(CurrentLevel.message);
+            _messageTextPosition = new Vector2(screenWidth / 2f, (_headerTextPosition.Y + headerSize.Y) * MESSAGE_OFFSET_MULTIPLIER);
+            _messageTextOrigin = messageSize / 2f;
+        }
+        #endregion Greeting Setup
 
         // Sets the screenBounds based on the player's screen.
         _screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
@@ -134,12 +186,18 @@ public class GameScene : Scene
         BackgroundColor = CurrentLevel.color;
         TweenBackground(BACKGROUND_CHANGE_DURATION, Color.Black);
 
+        _headerFont = Content.Load<SpriteFont>("Fonts/peaberrybase_font");
+
         // TODO: Start game scene song here.
     }
 
     public override void Update(GameTime gameTime)
     {
+        CheckForGameOver();
         CheckForLevelProgression();
+
+        if (_disappearingTimer != null)
+            _disappearingTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         base.Update(gameTime);
 
@@ -169,7 +227,6 @@ public class GameScene : Scene
         // Draws the Border layer afterwards
         _tilemap.DrawLayer(Core.SpriteBatch, 1);
 
-        // TODO: Activate debug mode in playstate.
         if (Core.DebugMode)
             Utils.DrawColliders();
 
@@ -179,10 +236,60 @@ public class GameScene : Scene
         DrawStateMachine(gameTime);
 
         AfterDraw(gameTime);
+
+        if (_showText)
+        {
+            if (!IsFading && _disappearingTimer is null)
+                _disappearingTimer = AFTER_FADE_DURATION;
+
+            if (_disappearingTimer < 0.0f && _disappearingTimer != null)
+                _showText = false;
+
+            // Begin the sprite batch to prepare for rendering.
+            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+            // The color to use for the drop shadow text.
+            Color dropShadowColor = CurrentLevel.color * 0.5f;
+
+            // Draw the Header text slightly offset from it is original position and
+            // with a transparent color to give it a drop shadow
+            Core.SpriteBatch.DrawString(_headerFont, CurrentLevel.header, _headerTextPosition + new Vector2(SHADOW_OFFSET, SHADOW_OFFSET), dropShadowColor, 0.0f, _headerTextOrigin, HEADER_SCALE, SpriteEffects.None, 1.0f);
+
+            // Draw the Header text on top of that at its original position
+            Core.SpriteBatch.DrawString(_headerFont, CurrentLevel.header, _headerTextPosition, Color.White, 0.0f, _headerTextOrigin, HEADER_SCALE, SpriteEffects.None, 1.0f);
+
+            if (_isMessage)
+            {
+                // Draw the Message text slightly offset from it is original position and
+                // with a transparent color to give it a drop shadow
+                Core.SpriteBatch.DrawString(_headerFont, CurrentLevel.message, _messageTextPosition + new Vector2(SHADOW_OFFSET, SHADOW_OFFSET), dropShadowColor, 0.0f, _messageTextOrigin, HEADER_SCALE - 2, SpriteEffects.None, 1.0f);
+
+                // Draw the Message text on top of that at its original position
+                Core.SpriteBatch.DrawString(_headerFont, CurrentLevel.message, _messageTextPosition, Color.White, 0.0f, _messageTextOrigin, HEADER_SCALE - 2, SpriteEffects.None, 1.0f);                
+            }
+
+            // Always end the sprite batch when finished.
+            Core.SpriteBatch.End();
+        }
     }
     #endregion Scene Lifecycle
 
     #region Methods
+    /// <summary>
+    /// Check ran to see if the game is over.
+    /// </summary>
+    private void CheckForGameOver()
+    {
+        if (IsPlayerDead)
+        {
+            if (!IsExiting)
+                ExitScene();
+
+            if (IsFinishedExiting)
+                ChangeToGameOver();
+        }
+    }
+
     /// <summary>
     /// Checks and implements level progression if needed.
     /// </summary>
@@ -207,11 +314,22 @@ public class GameScene : Scene
         }
     }
 
+    /// <summary>
+    /// Handles your death.
+    /// </summary>
+    private void ChangeToGameOver()
+    {
+        Core.ChangeScene(new GameOverScene());
+    }
+
+    /// <summary>
+    /// Handles the change to a new level if possible.
+    /// </summary>
     private void ChangeLevel()
     {
         if (CurrentLevel.type == LevelType.Level9)
         {
-            // TODO: IMplement you win screen!
+            Core.ChangeScene(new VictoryScene(_dice[0].Health));
         }
         else
         {

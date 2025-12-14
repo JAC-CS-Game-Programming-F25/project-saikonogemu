@@ -25,9 +25,6 @@ public class TitleScene : Scene
     private const string TITLE_TEXT = "Die";
     private const string SUBTITLE_TEXT = "The Rolling Dice Game";
 
-    // The font to use to render normal text.
-    private SpriteFont _font;
-
     // The font used to render the title text.
     private SpriteFont _titleFont;
 
@@ -38,7 +35,7 @@ public class TitleScene : Scene
     private Vector2 _titleTextOrigin;
 
     // The position to draw the subtitle text at.
-    private Vector2 _subtitleTextPos;
+    private Vector2 _subtitleTextPosition;
 
     // The origin to set for the subtitle text.
     private Vector2 _subtitleTextOrigin;
@@ -91,7 +88,7 @@ public class TitleScene : Scene
 
         // Subtitle.
         Vector2 subtitleSize = _titleFont.MeasureString(SUBTITLE_TEXT);
-        _subtitleTextPos = new Vector2(screenWidth / 2f, (_titleTextPosition.Y + titleSize.Y) * SUBTITLE_OFFSET_MULTIPLIER);
+        _subtitleTextPosition = new Vector2(screenWidth / 2f, (_titleTextPosition.Y + titleSize.Y) * SUBTITLE_OFFSET_MULTIPLIER);
         _subtitleTextOrigin = subtitleSize / 2f;
 
 
@@ -123,9 +120,6 @@ public class TitleScene : Scene
     public override void LoadContent()
     {
         base.LoadContent();
-
-        // Load the font for the standard text.
-        _font = Core.Content.Load<SpriteFont>("Fonts/peaberrybase_font");
 
         // Load the font for the title text.
         _titleFont = Content.Load<SpriteFont>("Fonts/die_font");
@@ -185,10 +179,10 @@ public class TitleScene : Scene
 
             // Draw the Subtitle text slightly offset from it is original position and
             // with a transparent color to give it a drop shadow
-            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPos + new Vector2(SHADOW_OFFSET, SHADOW_OFFSET), dropShadowColor, 0.0f, _subtitleTextOrigin, TITLE_SCALE - 1, SpriteEffects.None, 1.0f);
+            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPosition + new Vector2(SHADOW_OFFSET, SHADOW_OFFSET), dropShadowColor, 0.0f, _subtitleTextOrigin, TITLE_SCALE - 1, SpriteEffects.None, 1.0f);
 
             // Draw the Subtitle text on top of that at its original position
-            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPos, Color.White, 0.0f, _subtitleTextOrigin, TITLE_SCALE - 1, SpriteEffects.None, 1.0f);
+            Core.SpriteBatch.DrawString(_titleFont, SUBTITLE_TEXT, _subtitleTextPosition, Color.White, 0.0f, _subtitleTextOrigin, TITLE_SCALE - 1, SpriteEffects.None, 1.0f);
 
             // Always end the sprite batch when finished.
             Core.SpriteBatch.End();

@@ -2,6 +2,8 @@
 
 <!--Contains all the info about the level-->
 <Level
+  header="Level 9"
+  message="Extra Life"
   levelNumber="9"
   color="#ffffff"
   tilemapPath="Images/Levels/XML/level9.xml"

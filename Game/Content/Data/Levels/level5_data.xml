@@ -2,6 +2,8 @@
 
 <!--Contains all the info about the level-->
 <Level
+  header="Level 5"
+  message=""
   levelNumber="5"
   color="#2e394b"
   tilemapPath="Images/Levels/XML/level5.xml"
