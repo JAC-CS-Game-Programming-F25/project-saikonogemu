@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoreLibrary;
 using CoreLibrary.Physics;
 using CoreLibrary.Utils;
@@ -12,11 +14,14 @@ namespace Game.Scripts.Entities.Dice;
 
 public class NPCDice: Dice
 {
-    public const float VISION_RANGE = 200;
     public const float SPEED = 75f;
+    public const float DIRECTION_SWAP_COOLDOWN = 0.5f;
+    private float _directionSwapTimer = 0f;
 
     #region Properties
     public RectangleFloat Vision {get; set;} = new RectangleFloat();
+    public DiceDirections NewDiceDirection {get; set;}
+    public bool IsTrackingPlayer {get; set;}
     #endregion Properties
 
     #region Constructors
@@ -33,7 +38,9 @@ public class NPCDice: Dice
         // Adds the player phase state.
         AddState("DiceDyingState", new DiceDyingState());
 
-        Vision = new RectangleFloat(Hitbox.Collider.Position - new Vector2(VISION_RANGE / 2, VISION_RANGE / 2), Hitbox.Collider.Width + VISION_RANGE, Hitbox.Collider.Height + VISION_RANGE);
+        Vision = new RectangleFloat(Hitbox.Collider.Position, Hitbox.Collider.Width, Hitbox.Collider.Height);
+
+        _directionSwapTimer = DIRECTION_SWAP_COOLDOWN;
     }
     #endregion Constructors
 
@@ -48,8 +55,7 @@ public class NPCDice: Dice
         if (IsFrozen)
             return;
 
-        // Update vision (struct).
-        Vision = new RectangleFloat(Hitbox.Collider.Position - new Vector2(VISION_RANGE / 2, VISION_RANGE / 2), Vision.Width, Vision.Height);
+        _directionSwapTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         base.Update(gameTime);
     }
@@ -67,4 +73,41 @@ public class NPCDice: Dice
     }
 
     #endregion Update and Draw
+
+    #region Methods
+    /// <summary>
+    /// Resets the timer.
+    /// </summary>
+    public void ResetTimer()
+    {
+        _directionSwapTimer = DIRECTION_SWAP_COOLDOWN;
+    }
+
+    /// <summary>
+    /// Checks whether now is a valid time to swap directions.
+    /// </summary>
+    /// <returns>Whether it's a valid time.</returns>
+    public bool IsValidDirectionSwapTime()
+    {
+        return _directionSwapTimer <= 0;
+    }
+
+    /// <summary>
+    /// Handles NPC to NPC collision.
+    /// </summary>
+    public void HandleNPCCollision()
+    {
+        if(!IsValidDirectionSwapTime())
+            return;
+
+        NewDiceDirection = OppositeDiceDirection(DiceDirection);
+        Knockback();
+        ResetTimer();
+    }
+
+    /// <summary>
+    /// Function to be overridden by children.
+    /// </summary>
+    public virtual void HandlePlayerVisionCollision(PlayerDice player) { }
+    #endregion Methods
 }

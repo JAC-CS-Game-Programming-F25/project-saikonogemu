@@ -308,5 +308,24 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
             DiceOpacity = 1.0f;
         }
     }
+
+    /// <summary>
+    /// Get the opposite direction side based on the passed collision side.
+    /// Uses a fancy switch state function suggested by vs code.
+    /// </summary>
+    /// <param name="side">The side to get the opposite of.</param>
+    /// <returns>The opposite side.</returns>
+    public static DiceDirections OppositeDiceDirection(DiceDirections side) => side switch
+    {
+        DiceDirections.Right => DiceDirections.Left,
+        DiceDirections.Left => DiceDirections.Right,
+        DiceDirections.Up => DiceDirections.Down,
+        DiceDirections.Down => DiceDirections.Up,
+        DiceDirections.UpRight => DiceDirections.DownLeft,
+        DiceDirections.UpLeft => DiceDirections.DownRight,
+        DiceDirections.DownRight => DiceDirections.UpLeft,
+        DiceDirections.DownLeft => DiceDirections.UpRight,
+        _ => DiceDirections.Idle
+    };
     #endregion Methods
 }

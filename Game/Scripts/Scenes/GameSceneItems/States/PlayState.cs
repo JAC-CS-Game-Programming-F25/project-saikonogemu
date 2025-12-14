@@ -77,25 +77,41 @@ public class PlayState : State
             // We make sure to not double check.
             for (int j = i - 1; j >= 0; j--)
             {
-                if (_dice[i].IsDying)
-                    break;
-                else if (_dice[j].IsDying)
-                    continue;
-
-                bool didCollide = Rigidbody.ResolveAABBCollision(_dice[i].Hitbox, _dice[j].Hitbox);
-
-                if (!didCollide)
-                    continue;
-
-                // Stop inward motion.
-                _dice[i].Hitbox.CancelVelocityAlongNormal();
-                _dice[j].Hitbox.CancelVelocityAlongNormal();
-
                 Dice a = _dice[i];
                 Dice b = _dice[j];
 
                 PlayerDice? player = a as PlayerDice ?? b as PlayerDice;
                 Dice? other = player == a ? b : player == b ? a : null;
+
+                if (a.IsDying)
+                    break;
+                else if (b.IsDying)
+                    continue;
+
+                if (a is NPCDice aNPCDice && player is not null)
+                {
+                    aNPCDice.HandlePlayerVisionCollision(player);
+                } else if (b is NPCDice bNPCDice && player is not null)
+                {
+                    bNPCDice.HandlePlayerVisionCollision(player);
+                }
+
+                bool didCollide = Rigidbody.ResolveAABBCollision(a.Hitbox, b.Hitbox);
+
+                if (!didCollide)
+                    continue;
+
+                // Stop inward motion.
+                a.Hitbox.CancelVelocityAlongNormal();
+                b.Hitbox.CancelVelocityAlongNormal();
+
+                if (a is NPCDice diceA && b is NPCDice diceB)
+                {
+                    // Swaps their directions so they aren't annoying.
+                    // And adds knockback so they don't perma swap.
+                    diceA.HandleNPCCollision();
+                    diceB.HandleNPCCollision();
+                }
 
                 if (player != null && other != null)
                 {

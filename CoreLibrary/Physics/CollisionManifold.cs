@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using CoreLibrary.Graphics;
 using CoreLibrary.Physics;
+using Microsoft.Xna.Framework;
 
 /// <summary>
 /// Deals with collisions from dynamic rectangles.

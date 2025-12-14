@@ -130,7 +130,13 @@ public class Rigidbody
         if (LastCollisionNormal == Vector2.Zero)
             return;
 
-        Velocity -= Vector2.Dot(Velocity, LastCollisionNormal) * LastCollisionNormal;
+        float dotProduct = Vector2.Dot(Velocity, LastCollisionNormal);
+
+        // Makes it so velocity is not destroyed when on walls and such.
+        if (dotProduct < 0f)
+        {
+            Velocity -= dotProduct * LastCollisionNormal;
+        }
     }
 
     /// <summary>
@@ -157,27 +163,40 @@ public class Rigidbody
         float overlapTop = A.Bottom - B.Top;
         float overlapBottom = B.Bottom - A.Top;
 
-        // Find minimal overlap.
+        const float POSITION_BUFFER = 0.01f;
+        const float CORRECTION_STRENGTH = 0.8f;  
+
         float minX = Math.Min(overlapLeft, overlapRight);
         float minY = Math.Min(overlapTop, overlapBottom);
+
+        float penetration = Math.Min(minX, minY);
+
+        // If penetration is tiny, ignore it
+        if (penetration <= POSITION_BUFFER)
+        {
+            a.LastCollisionNormal = Vector2.Zero;
+            b.LastCollisionNormal = Vector2.Zero;
+            return false;
+        }
 
         Vector2 separation;
         Vector2 normal;
 
+        float correction = (penetration - POSITION_BUFFER) * CORRECTION_STRENGTH;
+
         if (minX < minY)
         {
-            // Resolve on X.
-            float push = overlapLeft < overlapRight ? -minX : minX;
+            float push = overlapLeft < overlapRight ? -correction : correction;
             separation = new Vector2(push, 0);
             normal = new Vector2(Math.Sign(push), 0);
         }
         else
         {
-            // Resolve on Y.
-            float push = overlapTop < overlapBottom ? -minY : minY;
+            float push = overlapTop < overlapBottom ? -correction : correction;
             separation = new Vector2(0, push);
             normal = new Vector2(0, Math.Sign(push));
         }
+
 
         // Split separation.
         if (a.Dynamic && b.Dynamic)

@@ -7,6 +7,7 @@
   tilemapPath="Images/Levels/XML/level2.xml"
   hasDash="true"
   hasPhase="false"
+  extraHealth="0"
 >
   <Targets>
     <Target health="1"/>
