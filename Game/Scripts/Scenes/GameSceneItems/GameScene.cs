@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using CoreLibrary;
+using CoreLibrary.Audio;
 using CoreLibrary.Graphics;
 using CoreLibrary.Physics;
 using CoreLibrary.Scenes;
@@ -12,6 +13,7 @@ using Game.Scripts.Scenes.EndingScenes;
 using Game.Scripts.Scenes.GameSceneItems.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using Pleasing;
 
 namespace Game.Scripts.Scenes.GameSceneItems;
@@ -40,6 +42,7 @@ public class GameScene : Scene
     private Vector2 _headerTextOrigin;
 
     private const float AFTER_FADE_DURATION = 2.0f;
+
     private float? _disappearingTimer;
 
     private bool _isMessage;
@@ -48,8 +51,7 @@ public class GameScene : Scene
 
     #region Constants
     private const float GAME_SCALE = 3.0f;
-    // FIXME: Change to match song length??? MAYBE?
-    private const float BACKGROUND_CHANGE_DURATION = 20000f; 
+    private const float BACKGROUND_CHANGE_DURATION = 115000f; 
     #endregion Constants
 
     #region  Fields
@@ -188,7 +190,9 @@ public class GameScene : Scene
 
         _headerFont = Content.Load<SpriteFont>("Fonts/peaberrybase_font");
 
-        // TODO: Start game scene song here.
+        // Play song.
+        Song song = Content.Load<Song>($"Audio/Music/{CurrentLevel.songName}");
+        Core.Audio.PlaySong(song);
     }
 
     public override void Update(GameTime gameTime)

@@ -12,6 +12,7 @@ using System;
 using MonoGameGum;
 using CoreLibrary.Graphics;
 using CoreLibrary.UI;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game.Scripts.Scenes.TitleSceneItems;
 
@@ -130,12 +131,15 @@ public class TitleScene : Scene
         Core.UISoundEffect = Core.Content.Load<SoundEffect>("Audio/SFX/click");
 
         _atlas = TextureAtlas.FromFile(Core.Content, "Images/Atlas/ui_atlas.xml");
+
+        Song song = Content.Load<Song>("Audio/Music/WelcomeToDietopia");
+        Core.Audio.PlaySong(song);
     }
 
     public override void Update(GameTime gameTime)
     {
         if (IsFinishedExiting)
-            Core.ChangeScene(new GameScene(LevelType.Level9));
+            Core.ChangeScene(new GameScene(LevelType.Level1));
 
         // Update the offsets for the background pattern wrapping so that it
         // scrolls down and to the right.

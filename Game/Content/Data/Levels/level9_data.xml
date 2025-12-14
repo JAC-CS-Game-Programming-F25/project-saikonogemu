@@ -7,6 +7,7 @@
   levelNumber="9"
   color="#ffffff"
   tilemapPath="Images/Levels/XML/level9.xml"
+  songName="Dream"
   hasDash="true"
   hasPhase="true"
   extraHealth="1"

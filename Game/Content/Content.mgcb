@@ -13,6 +13,66 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/Music/Diecorp.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Diecorp.mp3
+
+#begin Audio/Music/Dietopia.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Dietopia.mp3
+
+#begin Audio/Music/Dream.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Dream.mp3
+
+#begin Audio/Music/Elseworld.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Elseworld.mp3
+
+#begin Audio/Music/EndOfDietopia.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/EndOfDietopia.mp3
+
+#begin Audio/Music/Factory.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Factory.mp3
+
+#begin Audio/Music/Pits.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Pits.mp3
+
+#begin Audio/Music/Rockville.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Rockville.mp3
+
+#begin Audio/Music/Wasteland.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Wasteland.mp3
+
+#begin Audio/Music/WelcomeToDietopia.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/WelcomeToDietopia.mp3
+
 #begin Audio/SFX/click.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

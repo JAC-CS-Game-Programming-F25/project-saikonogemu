@@ -7,6 +7,7 @@
   levelNumber="2"
   color="#161213"
   tilemapPath="Images/Levels/XML/level2.xml"
+  songName="Pits"
   hasDash="true"
   hasPhase="false"
   extraHealth="0"

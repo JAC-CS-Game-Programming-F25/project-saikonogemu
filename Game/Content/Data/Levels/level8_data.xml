@@ -7,6 +7,7 @@
   levelNumber="8"
   color="#0f0d0e"
   tilemapPath="Images/Levels/XML/level8.xml"
+  songName="EndOfDietopia"
   hasDash="true"
   hasPhase="true"
   extraHealth="1"
