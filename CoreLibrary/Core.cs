@@ -136,8 +136,6 @@ public class Core : Game
         Graphics.PreferredBackBufferHeight = SettingsManager.Graphics.Height;
         Graphics.IsFullScreen = SettingsManager.Graphics.Fullscreen;
 
-        // TODO: Add full screen toggle. Graphics.ToggleFullScreen()
-
         // Apply the graphic presentation changes.
         Graphics.ApplyChanges();
 

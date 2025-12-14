@@ -124,7 +124,7 @@ public class TargetDice(ContentManager content, Dictionary<string, object>? dice
     /// <summary>
     /// Handles player in vision by running.
     /// </summary>
-    public override void HandlePlayerVisionCollision(PlayerDice player)
+    public override void HandlePlayerVisionCollision(PlayerDice player, GameTime gameTime)
     {
         if (!IsValidDirectionSwapTime())
             return;

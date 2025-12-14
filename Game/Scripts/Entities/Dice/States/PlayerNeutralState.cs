@@ -62,14 +62,12 @@ public class PlayerNeutralState : PlayerLivingState
     /// </summary>
     private void CheckAbilities()
     {
-        // TODO: make it so that these are tied to settings.
-
-        // If the J or Z keys are down, activate the dash.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.J) && (Math.Abs(Dice!.Hitbox.Velocity.X) > 0 || Math.Abs(Dice!.Hitbox.Velocity.Y) > 0) && (Dice as PlayerDice)!.CanDash) 
+        // If the Z keys are down, activate the dash.
+        if ((Core.Input.Keyboard.IsKeyDown(Keys.Z) || Core.Input.Keyboard.IsKeyDown(Keys.J)) && (Math.Abs(Dice!.Hitbox.Velocity.X) > 0 || Math.Abs(Dice!.Hitbox.Velocity.Y) > 0) && (Dice as PlayerDice)!.CanDash) 
             Dash();
 
-        // If the K or X keys are down, activate phasing.
-        else if (Core.Input.Keyboard.IsKeyDown(Keys.K) && (Dice as PlayerDice)!.CanPhase) Phase();
+        // If the X keys are down, activate phasing.
+        else if ((Core.Input.Keyboard.IsKeyDown(Keys.X) || Core.Input.Keyboard.IsKeyDown(Keys.K)) && (Dice as PlayerDice)!.CanPhase) Phase();
     }
 
     /// <summary>

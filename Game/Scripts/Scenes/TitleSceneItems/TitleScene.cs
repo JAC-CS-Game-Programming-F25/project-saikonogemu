@@ -57,7 +57,6 @@ public class TitleScene : Scene
     // The buttons for the title screen panel.
     private Panel _titleScreenButtonsPanel;
 
-
     private AnimatedButton _optionsButton;
 
     private TextureAtlas _atlas;

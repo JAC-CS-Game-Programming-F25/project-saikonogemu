@@ -114,7 +114,6 @@ public class VictoryScene : Scene
         GumService.Default.Root.Children.Clear();
 
         CreateTitlePanel();
-        Core.SettingsManager.CreateOptionsPanel(_atlas);
     }
 
 
@@ -138,7 +137,6 @@ public class VictoryScene : Scene
 
     public override void Update(GameTime gameTime)
     {
-        // TODO: Make the appropriate scene.
         if (IsFinishedExiting)
             switch (_destinationScreenName)
             {

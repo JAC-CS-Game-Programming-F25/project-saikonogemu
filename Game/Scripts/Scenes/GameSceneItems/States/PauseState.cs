@@ -37,6 +37,8 @@ public class PauseState : State
     public float CurrentPauseOpacity {get; set;}
     private Panel? _pausePanel;
     private AnimatedButton? _resumeButton;
+    private AnimatedButton? _optionsButton;
+
     private SoundEffect? _uiSoundEffect;
     private SoundEffect? _panelOpenSong;
     private TextureAtlas? _atlas;
@@ -77,6 +79,7 @@ public class PauseState : State
         GumService.Default.Root.Children.Clear();
 
         CreatePausePanel();
+        Core.SettingsManager.CreateOptionsPanel(_atlas);
     }
 
     /// <summary>
@@ -194,8 +197,8 @@ public class PauseState : State
         _pausePanel.Anchor(Anchor.Center);
         _pausePanel.Visual.WidthUnits = DimensionUnitType.Absolute;
         _pausePanel.Visual.HeightUnits = DimensionUnitType.Absolute;
-        _pausePanel.Visual.Height = 80;
-        _pausePanel.Visual.Width = 264;
+        _pausePanel.Visual.Height = 200;
+        _pausePanel.Visual.Width = 150;
         _pausePanel.IsVisible = false;
         _pausePanel.AddToRoot();
 
@@ -221,24 +224,38 @@ public class PauseState : State
         textInstance.Anchor(Anchor.Top);
         _pausePanel.AddChild(textInstance);
 
+        float buttonSpacing = 50f;
+
         _resumeButton = new AnimatedButton(_atlas);
         _resumeButton.Text = "RESUME";
-        _resumeButton.Anchor(Anchor.BottomLeft);
-        _resumeButton.Visual.X = 9f;
-        _resumeButton.Visual.Y = -9f;
+        _resumeButton.Anchor(Anchor.Center);
+        _resumeButton.Visual.X = 0f;
+        _resumeButton.Visual.Y = -buttonSpacing;
         _resumeButton.Click += HandleResumeButtonClicked;
         _pausePanel.AddChild(_resumeButton);
 
+        _optionsButton = new AnimatedButton(_atlas);
+        _optionsButton.Text = "OPTIONS";
+        _optionsButton.Anchor(Anchor.Center);
+        _optionsButton.Visual.X = 0f;
+        _optionsButton.Visual.Y = 0f;
+        _optionsButton.Click += HandleOptionsClicked;
+        _pausePanel.AddChild(_optionsButton);
+
         AnimatedButton quitButton = new AnimatedButton(_atlas);
         quitButton.Text = "QUIT";
-        quitButton.Anchor(Anchor.BottomRight);
-        quitButton.Visual.X = -9f;
-        quitButton.Visual.Y = -9f;
+        quitButton.Anchor(Anchor.Center);
+        quitButton.Visual.X = 0f;
+        quitButton.Visual.Y = buttonSpacing;
         quitButton.Click += HandleQuitButtonClicked;
-
         _pausePanel.AddChild(quitButton);
     }
 
+    /// <summary>
+    /// This is called when the resume button is clicked.
+    /// </summary>
+    /// <param name="sender">Who called this.</param>
+    /// <param name="e">Extra event info. This is kind of like WPF.</param>
     private void HandleResumeButtonClicked(object? sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
@@ -249,6 +266,11 @@ public class PauseState : State
         StartResume();
     }
 
+    /// <summary>
+    /// This is called when the quit button is clicked.
+    /// </summary>
+    /// <param name="sender">Who called this.</param>
+    /// <param name="e">Extra event info. This is kind of like WPF.</param>
     private void HandleQuitButtonClicked(object? sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
@@ -256,6 +278,22 @@ public class PauseState : State
 
         // Go back to the title scene.
         Core.ChangeScene(new TitleScene());
+    }
+
+    /// <summary>
+    /// This is called when the options button is clicked.
+    /// </summary>
+    /// <param name="sender">Who called this.</param>
+    /// <param name="e">Extra event info. This is kind of like WPF.</param>
+    private void HandleOptionsClicked(object? sender, EventArgs e)
+    {
+        // A UI interaction occurred, play the sound effect.
+        Core.Audio.PlaySoundEffect(Core.UISoundEffect);
+        
+        // Set the title panel to be invisible.
+        _pausePanel!.IsVisible = false;
+
+        Core.SettingsManager.ActivateOptionsPanel(_pausePanel, _optionsButton);
     }
     #endregion UI Methods
 }

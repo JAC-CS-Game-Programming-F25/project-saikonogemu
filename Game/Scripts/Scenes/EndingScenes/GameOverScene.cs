@@ -92,7 +92,6 @@ public class GameOverScene : Scene
         GumService.Default.Root.Children.Clear();
 
         CreateTitlePanel();
-        Core.SettingsManager.CreateOptionsPanel(_atlas);
     }
 
 
@@ -116,7 +115,6 @@ public class GameOverScene : Scene
 
     public override void Update(GameTime gameTime)
     {
-        // TODO: Make the appropriate scene.
         if (IsFinishedExiting)
             switch (_destinationScreenName)
             {

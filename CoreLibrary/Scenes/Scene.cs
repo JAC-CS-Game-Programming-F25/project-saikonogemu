@@ -175,8 +175,6 @@ public abstract class Scene : IDisposable
         if (IsFading)
            return;
 
-        HandleInput();
-
         // Updates the StateMachine.
         StateMachine?.Update(gameTime);
     }
@@ -360,18 +358,6 @@ public abstract class Scene : IDisposable
 
         fadeProp.AddFrame(0f, start);
         fadeProp.AddFrame(duration, end);            
-    }
-
-    /// <summary>
-    /// Handles input.
-    /// </summary>
-    public void HandleInput()
-    {
-        // TODO: This is buggy! Fix!
-        // if (Core.Input.Keyboard.WasKeyJustPressed(Keys.F11))
-        // {
-        //     ToggleFullScreen();
-        // }
     }
 
     /// <summary>

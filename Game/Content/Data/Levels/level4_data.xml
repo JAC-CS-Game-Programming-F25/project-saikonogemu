@@ -3,7 +3,7 @@
 <!--Contains all the info about the level-->
 <Level
   header="Dietopia Wasteland"
-  message=""
+  message="Press (R) for Quick Restart"
   levelNumber="4"
   color="#b0976c"
   tilemapPath="Images/Levels/XML/level4.xml"

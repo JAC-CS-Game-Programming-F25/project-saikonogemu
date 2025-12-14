@@ -100,10 +100,10 @@ public class PlayState : State
 
                 if (a is NPCDice aNPCDice && player is not null)
                 {
-                    aNPCDice.HandlePlayerVisionCollision(player);
+                    aNPCDice.HandlePlayerVisionCollision(player, gameTime);
                 } else if (b is NPCDice bNPCDice && player is not null)
                 {
-                    bNPCDice.HandlePlayerVisionCollision(player);
+                    bNPCDice.HandlePlayerVisionCollision(player, gameTime);
                 }
 
                 bool didCollide = false;

@@ -108,6 +108,6 @@ public class NPCDice: Dice
     /// <summary>
     /// Function to be overridden by children.
     /// </summary>
-    public virtual void HandlePlayerVisionCollision(PlayerDice player) { }
+    public virtual void HandlePlayerVisionCollision(PlayerDice player, GameTime gameTime) { }
     #endregion Methods
 }

@@ -67,19 +67,17 @@ public class PlayerLivingState : DiceLivingState
     {
         Vector2 selectDelta = Vector2.Zero;
 
-        // TODO: make it so that these are tied to settings.
+        // If the Up keys are down, move the player up on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.Up) || Core.Input.Keyboard.IsKeyDown(Keys.W)) selectDelta.Y -= 1;
 
-        // If the W or Up keys are down, move the player up on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.W)) selectDelta.Y -= 1;
+        // if the Down keys are down, move the player down on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.Down) || Core.Input.Keyboard.IsKeyDown(Keys.S)) selectDelta.Y += 1;
 
-        // if the S or Down keys are down, move the player down on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.S)) selectDelta.Y += 1;
+        // If the Left keys are down, move the player left on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.Left) || Core.Input.Keyboard.IsKeyDown(Keys.A)) selectDelta.X -= 1;
 
-        // If the A or Left keys are down, move the player left on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.A)) selectDelta.X -= 1;
-
-        // If the D or Right keys are down, move the player right on the screen.
-        if (Core.Input.Keyboard.IsKeyDown(Keys.D)) selectDelta.X += 1;
+        // If the Right keys are down, move the player right on the screen.
+        if (Core.Input.Keyboard.IsKeyDown(Keys.Right) || Core.Input.Keyboard.IsKeyDown(Keys.D)) selectDelta.X += 1;
 
         // We normalize if it's possible (this makes diagonals the same speed as horizontals/verticals).
         if (selectDelta != Vector2.Zero)
@@ -90,13 +88,5 @@ public class PlayerLivingState : DiceLivingState
         // Modifies the player's velocity.
         Dice!.Hitbox.Velocity = selectDelta;
     }
-
-    private void CheckGamePadInput()
-    {
-        GamePadInfo gamePadOne = Core.Input.GamePads[(int)PlayerIndex.One];
-
-        // TODO: implement gamepad controls
-    }
-
     #endregion Input Handling
 }

@@ -32,7 +32,6 @@ public class Game1 : Core
         InitializeGum();
 
         // Start the game with the title scene.
-        // TODO:  Change to be title screen.
         ChangeScene(new TitleScene());
     }
 
