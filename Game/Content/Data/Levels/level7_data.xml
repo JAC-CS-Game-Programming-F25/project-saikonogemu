@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 7"
+  header="Balance of Diecorp"
   message="Extra Life"
   levelNumber="7"
   color="#534b54"
@@ -13,9 +13,34 @@
 >
   <Targets>
     <Target health="1"/>
+    <Target health="2"/>
+    <Target health="3"/>
+    <Target health="4"/>
+    <Target health="5"/>
+    <Target health="6"/>
   </Targets>
 
   <Enemies>
     <Enemy health="6"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="4"/>
+    <Enemy health="4"/>
+    <Enemy health="4"/>
+    <Enemy health="3"/>
+    <Enemy health="3"/>
+    <Enemy health="3"/>
+    <Enemy health="3"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
   </Enemies>
 </Level>

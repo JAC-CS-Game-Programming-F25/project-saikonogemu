@@ -164,7 +164,6 @@ public class Rigidbody
         float overlapBottom = B.Bottom - A.Top;
 
         const float POSITION_BUFFER = 0.01f;
-        const float CORRECTION_STRENGTH = 0.8f;  
 
         float minX = Math.Min(overlapLeft, overlapRight);
         float minY = Math.Min(overlapTop, overlapBottom);
@@ -182,9 +181,9 @@ public class Rigidbody
         Vector2 separation;
         Vector2 normal;
 
-        float correction = (penetration - POSITION_BUFFER) * CORRECTION_STRENGTH;
+        float correction = penetration;
 
-        if (minX < minY)
+        if (Math.Abs(a.Velocity.X - b.Velocity.X) > Math.Abs(a.Velocity.Y - b.Velocity.Y))
         {
             float push = overlapLeft < overlapRight ? -correction : correction;
             separation = new Vector2(push, 0);

@@ -135,7 +135,7 @@ public class TitleScene : Scene
     public override void Update(GameTime gameTime)
     {
         if (IsFinishedExiting)
-            Core.ChangeScene(new GameScene(LevelType.Level1));
+            Core.ChangeScene(new GameScene(LevelType.Level9));
 
         // Update the offsets for the background pattern wrapping so that it
         // scrolls down and to the right.

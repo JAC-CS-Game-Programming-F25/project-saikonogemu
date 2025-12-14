@@ -223,7 +223,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
     }
 
     /// <summary>
-    /// Makes the dash slowly end by adjusting the dice's velocity.
+    /// Makes the knockback slowly end by adjusting the dice's velocity.
     /// </summary>
     private void HandleCollisionDeceleration()
     {
@@ -231,7 +231,7 @@ public class Dice(ContentManager content, Dictionary<string, object>? diceDefini
         ClampAxisTowardsSpeed(ref Hitbox.Velocity.X, DECELERATION);
         ClampAxisTowardsSpeed(ref Hitbox.Velocity.Y, DECELERATION);
 
-        // Check to see if the dash is over.
+        // Check to see if the knockback is over.
         if (Math.Abs(Hitbox.Velocity.X) <= Speed && Math.Abs(Hitbox.Velocity.Y) <= Speed)
             IsHavingKnockback = false;
     }

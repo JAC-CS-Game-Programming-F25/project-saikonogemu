@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 4"
+  header="Dietopia Wasteland"
   message=""
   levelNumber="4"
   color="#b0976c"
@@ -12,10 +12,29 @@
   extraHealth="0"
 >
   <Targets>
+    <Target health="3"/>
+    <Target health="2"/>
+    <Target health="2"/>
+    <Target health="1"/>
+    <Target health="1"/>
     <Target health="1"/>
   </Targets>
 
   <Enemies>
-    <Enemy health="6"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
   </Enemies>
 </Level>

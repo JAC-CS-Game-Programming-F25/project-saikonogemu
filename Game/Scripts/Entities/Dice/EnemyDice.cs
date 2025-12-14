@@ -127,6 +127,14 @@ public class EnemyDice(ContentManager content, Dictionary<string, object>? diceD
     /// </summary>
     public override void HandlePlayerVisionCollision(PlayerDice player)
     {
+        // Guarantee loses him.
+        if (player.IsPhasing)
+        {
+            Speed = SPEED * Scale.X;
+            IsTrackingPlayer = false;
+            return;
+        }
+
         if (Vision.Intersects(player.Hitbox.Collider))
         {
             if (IsTrackingPlayer)

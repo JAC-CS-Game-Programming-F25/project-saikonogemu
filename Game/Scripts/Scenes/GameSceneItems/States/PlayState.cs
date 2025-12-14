@@ -64,6 +64,11 @@ public class PlayState : State
 
         HandleGameKeyInputs();
 
+        // Update the dice.
+        foreach (var dice in _dice!)
+            dice.Update(gameTime);
+
+        // Resolve collisions.
         for (int i = _dice!.Count - 1; i >= 0; i--)
         {
             if (_dice[i].IsDead)
@@ -101,7 +106,10 @@ public class PlayState : State
                     bNPCDice.HandlePlayerVisionCollision(player);
                 }
 
-                bool didCollide = Rigidbody.ResolveAABBCollision(a.Hitbox, b.Hitbox);
+                bool didCollide = false;
+
+                if (player is null || !player.IsPhasing)
+                    didCollide = Rigidbody.ResolveAABBCollision(a.Hitbox, b.Hitbox);
 
                 if (!didCollide)
                     continue;
@@ -120,22 +128,21 @@ public class PlayState : State
 
                 if (player != null && other != null)
                 {
+
+                    if (player.IsHavingKnockback)
+                        player.Hitbox.Velocity = Vector2.Zero;
+
                     if (!player.IsPhasing)
                     {
                         if (other is EnemyDice)
                             player.LoseLife();
 
                         other.LoseLife();
+
+                        player.Knockback();
                     }
                 }
-
-                // Apply knockback.
-                a.Knockback();
-                b.Knockback();
             }
-
-            // Update dice.
-            _dice[i].Update(gameTime);
         }
     }
 

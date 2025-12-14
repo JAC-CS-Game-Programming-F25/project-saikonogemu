@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 5"
+  header="Die Factory"
   message=""
   levelNumber="5"
   color="#2e394b"
@@ -12,10 +12,28 @@
   extraHealth="0"
 >
   <Targets>
-    <Target health="1"/>
+    <Target health="5"/>
+    <Target health="5"/>
+    <Target health="5"/>
+    <Target health="5"/>
+    <Target health="5"/>
   </Targets>
 
   <Enemies>
-    <Enemy health="6"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
+    <Enemy health="5"/>
   </Enemies>
 </Level>

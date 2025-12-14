@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 8"
+  header="The End of Dietopia"
   message="Extra Life"
   levelNumber="8"
   color="#0f0d0e"
@@ -13,9 +13,35 @@
 >
   <Targets>
     <Target health="1"/>
+    <Target health="1"/>
+    <Target health="1"/>
+    <Target health="1"/>
+    <Target health="1"/>
+    <Target health="1"/>
+    <Target health="1"/>
+    <Target health="1"/>
+    <Target health="2"/>
+    <Target health="2"/>
+    <Target health="2"/>
+    <Target health="2"/>
+    <Target health="4"/>
+    <Target health="4"/>
   </Targets>
 
   <Enemies>
-    <Enemy health="6"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="2"/>
+    <Enemy health="4"/>
+    <Enemy health="4"/>
   </Enemies>
 </Level>

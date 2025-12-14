@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 3"
+  header="Rockville"
   message="Phase Unlocked (X)"
   levelNumber="3"
   color="#2a3039"
@@ -12,10 +12,20 @@
   extraHealth="0"
 >
   <Targets>
-    <Target health="1"/>
+    <Target health="6"/>
+    <Target health="3"/>
+    <Target health="3"/>
   </Targets>
 
   <Enemies>
     <Enemy health="6"/>
+    <Enemy health="5"/>
+    <Enemy health="6"/>
+    <Enemy health="3"/>
+    <Enemy health="2"/>
+    <Enemy health="3"/>
+    <Enemy health="2"/>
+    <Enemy health="3"/>
+    <Enemy health="2"/>
   </Enemies>
 </Level>

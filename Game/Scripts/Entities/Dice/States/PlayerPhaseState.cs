@@ -15,9 +15,9 @@ namespace Game.Scripts.Entities.Dice.States;
 public class PlayerPhaseState : PlayerLivingState
 {
     #region Constants
-    private const float ACTIVATION_DELAY = 200f;
+    private const float ACTIVATION_DELAY = 50f;
     private const float ABILITY_DURATION = 2000f;
-    private const float COOLDOWN = 2.5f;
+    private const float COOLDOWN = 2f;
     #endregion Constants
 
     #region Backing Fields

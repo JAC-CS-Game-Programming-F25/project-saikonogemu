@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 6"
+  header="Dietopia Elseworld"
   message=""
   levelNumber="6"
   color="#404141"
@@ -12,10 +12,28 @@
   extraHealth="0"
 >
   <Targets>
-    <Target health="1"/>
+    <Target health="4"/>
+    <Target health="4"/>
+    <Target health="4"/>
+    <Target health="4"/>
+    <Target health="4"/>
+    <Target health="3"/>
+    <Target health="3"/>
+    <Target health="3"/>
+    <Target health="3"/>
+    <Target health="3"/>
   </Targets>
 
   <Enemies>
     <Enemy health="6"/>
+    <Enemy health="6"/>
+    <Enemy health="6"/>
+    <Enemy health="6"/>
+    <Enemy health="6"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
+    <Enemy health="1"/>
   </Enemies>
 </Level>

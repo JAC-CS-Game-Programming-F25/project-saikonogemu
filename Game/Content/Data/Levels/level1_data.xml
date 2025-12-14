@@ -2,7 +2,7 @@
 
 <!--Contains all the info about the level-->
 <Level
-  header="Level 1"
+  header="Dietopia"
   message="Move with Arrows"
   levelNumber="1"
   color="#0f5f1d"
